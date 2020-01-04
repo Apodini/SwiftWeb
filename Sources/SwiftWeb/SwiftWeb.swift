@@ -20,8 +20,8 @@ public class SwiftWeb {
                     body {
                         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
                         display: flex;
+                        align-items: stretch;
                         flex-direction: column;
-                        align-items: center;
                         margin: 0;
                         cursor: default;
                         
@@ -29,6 +29,15 @@ public class SwiftWeb {
                         -moz-user-select: none;
                         -ms-user-select: none;
                         user-select: none;
+        
+                        width: 100vw;
+                        height: 100vh;
+                    }
+        
+                    div {
+                        display: flex;
+                        flex-grow: 1;
+                        align-items: stretch;
                     }
                 </style>
             </head>

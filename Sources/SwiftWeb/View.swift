@@ -11,7 +11,7 @@ public protocol View {
 //    associatedtype Body: View
     
     var body: View? { get }
-    var html: HTMLNode { get }
+    var html: HTMLNode { get }    
 }
 
 public extension View {
