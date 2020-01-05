@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct VStack: View {
+public struct VStack: Stack {
     public var body: View? = nil
     let subviews: [View]
     
@@ -18,14 +18,7 @@ public struct VStack: View {
         ])
     }
     
-    public init(@VStackFunctionBuilder buildSubviews: () -> [View]) {
+    public init(@StackFunctionBuilder buildSubviews: () -> [View]) {
         subviews = buildSubviews()
-    }
-}
-
-@_functionBuilder
-public class VStackFunctionBuilder {
-    public static func buildBlock(_ subComponents: View...) -> [View] {
-        return subComponents
     }
 }

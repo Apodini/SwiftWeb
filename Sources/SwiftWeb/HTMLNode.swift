@@ -8,13 +8,13 @@
 import Foundation
 
 public enum HTMLNode {
-    case string(String)
+    case raw(String)
     case div(subNodes: [HTMLNode], style: [CSSKey: String])
     case img(name: String, style: [CSSKey: String])
     
     public func render() -> String {
         switch self {
-        case .string(let string):
+        case .raw(let string):
             return string
         case .div(let subNodes, let style):
             return """
@@ -48,6 +48,11 @@ public enum HTMLNode {
         case flexDirection = "flex-direction"
         case width
         case height
+        case color
+        case justifyContent = "justify-content"
+        case alignItems = "align-items"
+        case fontSize = "font-size"
+        case fontWeight = "font-weight"
         
         public var description: String {
             self.rawValue

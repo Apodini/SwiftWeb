@@ -11,8 +11,14 @@ public struct Frame: View {
     public var body: View? = nil
     public var html: HTMLNode
     
-    init(framedView: View, width: Double? = nil, height: Double? = nil) {
-        html = .div(subNodes: [framedView.html], style: [
+    init(framedView: View? = nil, width: Double? = nil, height: Double? = nil) {
+        var subNodes: [HTMLNode] = []
+            
+        if let framedView = framedView {
+            subNodes = [framedView.html]
+        }
+        
+        html = .div(subNodes: subNodes, style: [
             .width : width?.cssPixelValue ?? "initial",
             .height : height?.cssPixelValue ?? "initial",
             .flexGrow: "0"

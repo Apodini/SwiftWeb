@@ -16,7 +16,7 @@ public protocol View {
 
 public extension View {
     var html: HTMLNode {
-        body?.html ?? .string("")
+        body?.html ?? .raw("")
     }
 }
 
@@ -27,3 +27,4 @@ public extension View {
 //extension View where Body == Never {
 //    public var body: Never { fatalError("no children in \(type(of: self))") }
 //}
+

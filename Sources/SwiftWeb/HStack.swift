@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct HStack: View {
+public struct HStack: Stack {
     public var body: View? = nil
     let subviews: [View]
     
@@ -18,14 +18,23 @@ public struct HStack: View {
         ])
     }
     
-    public init(@HStackFunctionBuilder buildSubviews: () -> [View]) {
-        subviews = buildSubviews()
-    }
-}
-
-@_functionBuilder
-public class HStackFunctionBuilder {
-    public static func buildBlock(_ subComponents: View...) -> [View] {
-        return subComponents
+    public init(spacing: Double? = nil, @StackFunctionBuilder buildSubviews: () -> [View]) {
+        var subviews = buildSubviews()
+        
+        if let spacing = spacing {
+            var spacedViews: [View] = []
+            
+            for view in subviews {
+                if !spacedViews.isEmpty {
+                    spacedViews.append(Frame(width: spacing))
+                }
+                
+                spacedViews.append(view)
+            }
+            
+            subviews = spacedViews
+        }
+        
+        self.subviews = subviews
     }
 }
