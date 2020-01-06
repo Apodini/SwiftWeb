@@ -12,9 +12,17 @@ public struct HStack: Stack {
     let subviews: [View]
     
     public var html: HTMLNode {
-        .div(subNodes: subviews.map(\.html), style: [
+        let subNodes = subviews.map(\.html)
+        
+        // propagate growing parameters to imitate SwiftUI layout behaviour
+        let growingSubNodes = subNodes.map {
+            $0.shouldGrow ? $0.withAddedStyle(key: .alignSelf, value: .center) ?? $0 : $0
+        }
+        
+        return .div(subNodes: growingSubNodes, style: [
             .display: .flex,
             .flexDirection: .row,
+            .flexGrow: subNodes.shouldGrow ? .one : .zero
         ])
     }
     

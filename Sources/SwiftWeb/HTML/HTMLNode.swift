@@ -41,6 +41,21 @@ public enum HTMLNode {
         return "style=\"\(cssString)\""
     }
     
+    func withAddedStyle(key: CSSKey, value: CSSValue) -> HTMLNode? {
+        switch self {
+        case .raw(_):
+            return nil
+        case .div(let subnodes, let style):
+            var newStyle = style
+            newStyle[key] = value
+            return .div(subNodes: subnodes, style: newStyle)
+        case .img(let path, let style):
+            var newStyle = style
+            newStyle[key] = value
+            return .img(path: path, style: newStyle)
+        }
+    }
+    
     public enum CSSKey: String, CustomStringConvertible {
         case backgroundColor = "background-color"
         case flexGrow = "flex-grow"
@@ -69,6 +84,8 @@ public enum HTMLNode {
         case row
         case column
         case center
+        case flexStart
+        case flexEnd
         case stretch
         case int(Int)
         case zero
@@ -93,6 +110,10 @@ public enum HTMLNode {
                 return "\(value)%"
             case .color(let color):
                 return color.cssString
+            case .flexStart:
+                return "flex-start"
+            case .flexEnd:
+                return "flex-end"
             default:
                 return String(describing: self)
             }
@@ -109,7 +130,25 @@ public enum HTMLNode {
         return .div(subNodes: [buildSubnode()], style: style)
     }
     
-    func shouldGrow(inAxis axis: LayoutAxis) -> Bool {
+    // node should grow if it contains a growing subnode
+    var shouldGrow: Bool {
+        switch self {
+        case .div(let subNodes, let style):
+            if style.containsGrowStyle {
+                return true
+            }
+            
+            for node in subNodes {
+                if node.shouldGrow {
+                    return true
+                }
+            }
+        case .img(_, let style):
+            return style.containsGrowStyle
+        default:
+            break
+        }
+        
         return false
     }
 }
@@ -122,5 +161,36 @@ class HTMLNodeFunctionBuilder {
     
     static func buildExpression(_ expression: HTMLNode) -> [HTMLNode] {
       return [expression]
+    }
+}
+
+extension Dictionary where Key == HTMLNode.CSSKey, Value == HTMLNode.CSSValue {
+    var containsGrowStyle: Bool {
+        if let flexGrow = self[.flexGrow] {
+            switch flexGrow {
+            case .one:
+                return true
+            case .int(let value):
+                if value > 0 {
+                    return true
+                }
+            default:
+                break
+            }
+        }
+        
+        return false
+    }
+}
+
+extension Collection where Element == HTMLNode {
+    var shouldGrow: Bool {
+        for node in self {
+            if node.shouldGrow {
+                return true
+            }
+        }
+        
+        return false
     }
 }

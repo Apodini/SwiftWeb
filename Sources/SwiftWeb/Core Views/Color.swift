@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Color: View {
-    static var clear: Self {
+    public static var clear: Self {
         return Self()
     }
     

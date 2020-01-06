@@ -21,7 +21,7 @@ public struct Image: View {
         path = name
     }
 
-    func resizable() -> View {
+    public func resizable() -> View {
         let newHTML: HTMLNode =
             .div {
                 .img(path: path, style: [.width: .percent(100), .height: .percent(100)])

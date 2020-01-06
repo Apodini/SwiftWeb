@@ -9,7 +9,7 @@ import Foundation
 
 public struct TabBar: View {
     public var body: View? {
-        VStack {
+        VStack(alignment: .stretch) {
             HStack(spacing: 136.0) {
                 Spacer()
                 VStack(spacing: 7) {
