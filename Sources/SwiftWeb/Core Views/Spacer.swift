@@ -8,10 +8,10 @@
 import Foundation
 
 public struct Spacer: View {
-    public var body: View? = nil
-    public var html: HTMLNode
+    public let body: View? = nil
+    public let html: HTMLNode
 
     public init() {
-        html = .div(style: [.width: "10000px", .flexShrink: "1"])
+        html = .div(style: [.flexGrow: .int(1)])
     }
 }

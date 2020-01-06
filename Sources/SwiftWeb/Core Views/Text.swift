@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Text: View {
-    public var body: View? = nil
+    public let body: View? = nil
     public let html: HTMLNode
     
     let text: String
@@ -16,8 +16,8 @@ public struct Text: View {
     public init(_ text: String) {
         self.text = text
         self.html =
-            .div(style: [.justifyContent: "center", .alignItems: "center", .flexGrow: "0"]) {
-                .div(style: [.flexGrow: "0"]) {
+            .div(style: [.justifyContent: .center, .alignItems: .center, .flexGrow: .zero]) {
+                .div(style: [.flexGrow: .zero]) {
                     .raw(text)
                 }
             }
@@ -34,8 +34,8 @@ public struct Text: View {
         }
         
         var newStyle = style
-        newStyle[.fontSize] = "\(font.size)px"
-        newStyle[.fontWeight] = "\(font.weight.rawValue)"
+        newStyle[.fontSize] = .px(font.size)
+        newStyle[.fontWeight] = .int(font.weight.rawValue)
 
         return Text(newHTML: .div(subNodes: subNodes, style: newStyle), text: text)
     }

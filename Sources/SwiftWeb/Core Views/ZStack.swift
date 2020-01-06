@@ -15,7 +15,7 @@ public extension View {
         }
         
         var newStyle = style
-        newStyle[.backgroundColor] = backgroundColor.cssValue
+        newStyle[.backgroundColor] = .color(backgroundColor)
 
         return ModifiedView(newHTML: .div(subNodes: subNodes, style: newStyle))
     }

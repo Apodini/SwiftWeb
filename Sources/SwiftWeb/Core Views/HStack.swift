@@ -8,13 +8,13 @@
 import Foundation
 
 public struct HStack: Stack {
-    public var body: View? = nil
+    public let body: View? = nil
     let subviews: [View]
     
     public var html: HTMLNode {
         .div(subNodes: subviews.map(\.html), style: [
-            .display: "flex",
-            .flexDirection: "row",
+            .display: .flex,
+            .flexDirection: .row,
         ])
     }
     

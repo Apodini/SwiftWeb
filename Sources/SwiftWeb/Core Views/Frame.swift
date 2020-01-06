@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Frame: View {
-    public var body: View? = nil
+    public let body: View? = nil
     public var html: HTMLNode
     
     init(framedView: View? = nil, width: Double? = nil, height: Double? = nil) {
@@ -19,9 +19,9 @@ public struct Frame: View {
         }
         
         html = .div(subNodes: subNodes, style: [
-            .width : width?.cssPixelValue ?? "initial",
-            .height : height?.cssPixelValue ?? "initial",
-            .flexGrow: "0"
+            .width : width != nil ? .px(width!) : .initial,
+            .height : height != nil ? .px(height!) : .initial,
+            .flexGrow: .zero
         ])
     }
 }
