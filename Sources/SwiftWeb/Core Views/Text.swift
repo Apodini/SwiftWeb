@@ -15,10 +15,12 @@ public struct Text: View {
     
     public init(_ text: String) {
         self.text = text
-        self.html = .div(
-            subNodes: [.div(subNodes: [.raw(text)], style: [.flexGrow: "0"])],
-            style: [.justifyContent: "center", .alignItems: "center", .flexGrow: "0"]
-        )
+        self.html =
+            .div(style: [.justifyContent: "center", .alignItems: "center", .flexGrow: "0"]) {
+                .div(style: [.flexGrow: "0"]) {
+                    .raw(text)
+                }
+            }
     }
     
     init(newHTML: HTMLNode, text: String) {

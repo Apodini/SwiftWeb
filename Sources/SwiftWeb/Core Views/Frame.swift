@@ -28,6 +28,9 @@ public struct Frame: View {
 
 public extension View {
     func frame(width: Double? = nil, height: Double? = nil) -> View {
+        
+        // todo: make frame inherit grow properties!
+
         return Frame(framedView: self, width: width, height: height)
     }
 }

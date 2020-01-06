@@ -19,8 +19,10 @@ public struct Color: View {
     }
     
     public var html: HTMLNode {
-        .div(subNodes: [], style: [
+        .div(style: [
             .backgroundColor : cssValue,
+            .alignSelf: "stretch",
+            .flexGrow: "1"
         ])
     }
     
@@ -34,5 +36,18 @@ public struct Color: View {
     
     public init(white: Double) {
         self.init(red: white, green: white, blue: white)
+    }
+}
+
+public extension View {
+    func foregroundColor(_ color: Color?) -> View {
+        guard case .div(let subNodes, let style) = html else {
+            return self
+        }
+        
+        var newStyle = style
+        newStyle[.color] = color?.cssValue ?? Color.clearCSSValue
+
+        return ModifiedView(newHTML: .div(subNodes: subNodes, style: newStyle))
     }
 }

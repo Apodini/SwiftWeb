@@ -18,7 +18,7 @@ public struct VStack: Stack {
         ])
     }
     
-    public init(@StackFunctionBuilder buildSubviews: () -> [View]) {
-        subviews = buildSubviews()
+    public init(spacing: Double? = nil, @StackFunctionBuilder buildSubviews: () -> [View]) {
+        self.subviews = Self.insertSpacers(forSpacing: spacing, in: buildSubviews())
     }
 }

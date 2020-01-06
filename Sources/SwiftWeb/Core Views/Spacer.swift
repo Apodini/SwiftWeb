@@ -12,6 +12,6 @@ public struct Spacer: View {
     public var html: HTMLNode
 
     public init() {
-        html = .div(subNodes: [], style: [.flexGrow: "1"])
+        html = .div(style: [.width: "10000px", .flexShrink: "1"])
     }
 }

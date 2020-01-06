@@ -9,8 +9,8 @@ import Foundation
 
 public enum HTMLNode {
     case raw(String)
-    case div(subNodes: [HTMLNode], style: [CSSKey: String])
-    case img(name: String, style: [CSSKey: String])
+    case div(subNodes: [HTMLNode] = [], style: [CSSKey: String] = [:])
+    case img(path: String, style: [CSSKey: String] = [:])
     
     public func render() -> String {
         switch self {
@@ -22,9 +22,9 @@ public enum HTMLNode {
                     \(subNodes.map({ $0.render()}).joined())
                 </div>
             """
-        case .img(let name, let style):
+        case .img(let path, let style):
             return """
-                <img src="/\(name)" \(Self.generateCSSTag(from: style) ?? "")/>
+                <img src="/\(path)" \(Self.generateCSSTag(from: style) ?? "")/>
             """
         }
     }
@@ -53,9 +53,32 @@ public enum HTMLNode {
         case alignItems = "align-items"
         case fontSize = "font-size"
         case fontWeight = "font-weight"
+        case flexBasis = "flex-basis"
+        case flexShrink = "flex-shrink"
+        case alignSelf = "align-self"
         
         public var description: String {
             self.rawValue
         }
+    }
+    
+    // doesn't seem to work
+//    static func div(style: [CSSKey: String], @HTMLNodeFunctionBuilder buildSubnodes: () -> [HTMLNode]) -> Self {
+//        return .div(subNodes: buildSubnodes(), style: style)
+//    }
+    
+    static func div(style: [HTMLNode.CSSKey: String] = [:], buildSubnode: () -> HTMLNode) -> Self {
+        return .div(subNodes: [buildSubnode()], style: style)
+    }
+}
+
+@_functionBuilder
+class HTMLNodeFunctionBuilder {
+    public static func buildBlock(_ subComponents: HTMLNode...) -> [HTMLNode] {
+        return subComponents
+    }
+    
+    static func buildExpression(_ expression: HTMLNode) -> [HTMLNode] {
+      return [expression]
     }
 }
