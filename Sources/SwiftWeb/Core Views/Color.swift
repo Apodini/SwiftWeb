@@ -50,6 +50,15 @@ public struct Color: View {
         color = (red: 0, green: 0, blue: 0, alpha: 0)
         clear = true
     }
+    
+    init(red: Int, green: Int, blue: Int, alpha: Double) {
+        color = (red: red, green: green, blue: blue, alpha: alpha)
+        clear = false
+    }
+    
+    public func opacity(_ alpha: Double) -> Color {
+        return Color(red: color.red, green: color.green, blue: color.blue, alpha: alpha)
+    }
 }
 
 public extension View {

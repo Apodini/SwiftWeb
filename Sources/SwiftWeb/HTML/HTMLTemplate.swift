@@ -36,6 +36,7 @@ class HTMLTemplate {
                     div {
                         display: flex;
                         align-items: center;
+                        overflow: hidden;
                     }
                 </style>
             </head>

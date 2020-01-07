@@ -20,11 +20,18 @@ public extension View {
     }
 }
 
-//extension Never: View {
-//    public var body: Never { fatalError("no children in Never") }
-//}
-//
-//extension View where Body == Never {
-//    public var body: Never { fatalError("no children in \(type(of: self))") }
-//}
-
+public extension View {
+    func cornerRadius(_ radius: Double) -> ModifiedView {
+        return ModifiedView(newHTML: html.withAddedStyle(key: .borderRadius, value: .px(radius)) ?? html)
+    }
+    
+    func shadow(color: Color, radius: Double, x: Double, y: Double) -> ModifiedView {
+        return ModifiedView(newHTML:
+            html.withAddedStyle(key: .boxShadow,
+                                value: .shadow(offsetX: x,
+                                               offsetY: y,
+                                               radius: radius,
+                                               color: color)) ?? html
+        )
+    }
+}

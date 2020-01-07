@@ -7,6 +7,33 @@
 
 import Foundation
 
+public struct ZStack: Stack {
+    public let body: View? = nil
+    
+    public var html: HTMLNode {
+        let subNodes = subviews.map(\.html).map { node -> HTMLNode in
+            .div(style: [
+                    .position: .absolute,
+                    .width: .percent(100),
+                    .height: .percent(100),
+                    .display: .flex,
+                    .flexDirection: .column,
+                    .alignItems: .stretch,
+                ]) {
+                node
+            }
+        }
+        
+        return .div(subNodes: subNodes, style: [.position : .relative, .flexGrow: .one])
+    }
+    
+    var subviews: [View]
+    
+    public init(@StackFunctionBuilder buildSubviews: () -> [View]) {
+        self.subviews = buildSubviews()
+    }
+}
+
 public extension View {
     func background<Background>(_ background: Background) -> some View where Background: View {
         guard let backgroundColor = background as? Color,

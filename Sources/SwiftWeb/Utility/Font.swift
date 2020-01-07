@@ -16,8 +16,8 @@ public struct Font {
     }
     
     public enum Weight: Int {
-        case thin = 100
-        case regular = 200
+        case thin = 150
+        case regular = 250
         case medium = 400
         case bold = 600
     }

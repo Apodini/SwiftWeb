@@ -16,7 +16,7 @@ public struct VStack: Stack {
         .div(subNodes: subviews.map(\.html), style: [
             .display: .flex,
             .flexDirection: .column,
-            .alignItems: horizontalAlignment.cssValue
+            .alignItems: horizontalAlignment.cssValue,
         ])
     }
     

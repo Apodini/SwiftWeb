@@ -73,6 +73,9 @@ public enum HTMLNode {
         case alignSelf = "align-self"
         case marginLeft = "margin-left"
         case paddingLeft = "padding-left"
+        case position
+        case borderRadius = "border-radius"
+        case boxShadow = "box-shadow"
         
         public var description: String {
             self.rawValue
@@ -95,6 +98,9 @@ public enum HTMLNode {
         case percent(Int)
         case color(Color)
         case initial
+        case relative
+        case absolute
+        case shadow(offsetX: Double, offsetY: Double, radius: Double, color: Color)
         
         public var cssString: String {
             switch self {
@@ -116,6 +122,8 @@ public enum HTMLNode {
                 return "flex-start"
             case .flexEnd:
                 return "flex-end"
+            case .shadow(let offsetX, let offsetY, let radius, let color):
+                return "\(offsetX)px \(offsetY)px \(radius)px \(color.cssString)"
             default:
                 return String(describing: self)
             }

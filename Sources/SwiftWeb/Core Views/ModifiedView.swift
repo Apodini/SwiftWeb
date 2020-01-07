@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ModifiedView: View {
-    let body: View? = nil
-    var html: HTMLNode
+public struct ModifiedView: View {
+    public let body: View? = nil
+    public var html: HTMLNode
     
     init(newHTML: HTMLNode) {
         html = newHTML
