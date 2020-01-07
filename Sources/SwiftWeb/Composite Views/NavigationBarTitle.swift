@@ -7,17 +7,16 @@
 
 import Foundation
 
-//struct NavigationBarTitle: View {
-//    var body: View? = nil
-//    var text: String
-//
-//    init(_ text: String) {
-//        self.text = text
-//    }
-//
-//    func renderHTML() -> String {
-//        return """
-//            <div class="navigationBarTitle">\(text)</div>
-//        """
-//    }
-//}
+public struct NavigationBarTitle: View {
+    let title: String
+    
+    public var body: View? {
+        Text(title)
+            .font(.system(size: 35, weight: .bold))
+    }
+    
+    public init(_ title: String) {
+        self.title = title
+    }
+}
+

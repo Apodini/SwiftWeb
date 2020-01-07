@@ -16,7 +16,9 @@ extension Stack {
         nil
     }
     
-    static func insertSpacers(forSpacing spacing: Double?, in subviews: [View], horizontally: Bool = false) -> [View] {
+    static func insertSpacers(forSpacing spacing: Double?,
+                              in subviews: [View],
+                              horizontally: Bool = false) -> [View] {
         guard let spacing = spacing else {
             return subviews
         }

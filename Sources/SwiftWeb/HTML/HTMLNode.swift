@@ -71,6 +71,8 @@ public enum HTMLNode {
         case flexBasis = "flex-basis"
         case flexShrink = "flex-shrink"
         case alignSelf = "align-self"
+        case marginLeft = "margin-left"
+        case paddingLeft = "padding-left"
         
         public var description: String {
             self.rawValue
