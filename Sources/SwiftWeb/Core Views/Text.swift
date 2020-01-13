@@ -8,7 +8,8 @@
 import Foundation
 
 public struct Text: View {
-    public let body: View? = nil
+    public typealias Body = Never
+    
     public let html: HTMLNode
     
     let text: String

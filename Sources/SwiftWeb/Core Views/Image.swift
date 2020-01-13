@@ -8,7 +8,8 @@
 import Foundation
 
 public struct Image: View {
-    public let body: View? = nil
+    public typealias Body = Never
+    
     public var html: HTMLNode {
         .div {
             .img(path: path)
@@ -21,7 +22,7 @@ public struct Image: View {
         path = name
     }
 
-    public func resizable() -> View {
+    public func resizable() -> some View {
         let newHTML: HTMLNode =
             .div {
                 .img(path: path, style: [.width: .percent(100), .height: .percent(100)])

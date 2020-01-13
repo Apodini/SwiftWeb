@@ -7,18 +7,13 @@
 
 import Foundation
 
-public struct Frame: View {
-    public let body: View? = nil
+public struct Frame<Content>: View where Content: View {
+    public typealias Body = Never
+
     public var html: HTMLNode
     
-    init(framedView: View? = nil, width: Double? = nil, height: Double? = nil) {
-        var subNodes: [HTMLNode] = []
-            
-        if let framedView = framedView {
-            subNodes = [framedView.html]
-        }
-        
-        html = .div(subNodes: subNodes, style: [
+    init(framedView: Content, width: Double? = nil, height: Double? = nil) {
+        html = .div(subNodes: [framedView.html], style: [
             .width : width != nil ? .px(width!) : .initial,
             .height : height != nil ? .px(height!) : .initial,
             .flexGrow: .zero
@@ -27,7 +22,7 @@ public struct Frame: View {
 }
 
 public extension View {
-    func frame(width: Double? = nil, height: Double? = nil) -> View {
+    func frame(width: Double? = nil, height: Double? = nil) -> some View {
         
         // todo: make frame inherit grow properties!
 

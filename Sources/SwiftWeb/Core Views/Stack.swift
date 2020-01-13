@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Stack.swift
 //  
 //
 //  Created by Quirin Schweigert on 04.01.20.
@@ -7,47 +7,33 @@
 
 import Foundation
 
-protocol Stack: View {
-    var subviews: [View] { get }
+public protocol Stack: View {
+    var subnodes: [HTMLNode] { get }
 }
 
 extension Stack {
-    public var body: View? {
-        nil
-    }
-    
     static func insertSpacers(forSpacing spacing: Double?,
-                              in subviews: [View],
-                              horizontally: Bool = false) -> [View] {
+                              inNodes nodes: [HTMLNode],
+                              axis: LayoutAxis) -> [HTMLNode] {
         guard let spacing = spacing else {
-            return subviews
+            return nodes
         }
-        
-        var spacedViews: [View] = []
-        
-        for view in subviews {
-            if !spacedViews.isEmpty {
-                if horizontally {
-                    spacedViews.append(Frame(width: spacing))
-                } else {
-                    spacedViews.append(Frame(height: spacing))
+
+        var spacedNodes: [HTMLNode] = []
+
+        for view in nodes {
+            if !spacedNodes.isEmpty {
+                switch axis {
+                case .horizontal:
+                    spacedNodes.append(.div(subNodes: [], style: [.width : .px(spacing)]))
+                case .vertical:
+                    spacedNodes.append(.div(subNodes: [], style: [.height : .px(spacing)]))
                 }
             }
-            
-            spacedViews.append(view)
-        }
-        
-        return spacedViews
-    }
-}
 
-@_functionBuilder
-public class StackFunctionBuilder {
-    public static func buildBlock(_ subComponents: View...) -> [View] {
-        return subComponents
-    }
-    
-    static func buildExpression(_ expression: View) -> [View] {
-      return [expression]
+            spacedNodes.append(view)
+        }
+
+        return spacedNodes
     }
 }

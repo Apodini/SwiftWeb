@@ -7,11 +7,13 @@
 
 import Foundation
 
-public struct ZStack: Stack {
-    public let body: View? = nil
+public struct ZStack<Content>: Stack {
+    public let body: Content
+    
+    public var subnodes: [HTMLNode] = []
     
     public var html: HTMLNode {
-        let subNodes = subviews.map(\.html).map { node -> HTMLNode in
+        let stackedSubnodes = subnodes.map { node -> HTMLNode in
             .div(style: [
                     .position: .absolute,
                     .width: .percent(100),
@@ -24,13 +26,12 @@ public struct ZStack: Stack {
             }
         }
         
-        return .div(subNodes: subNodes, style: [.position : .relative, .flexGrow: .one])
+        return .div(subNodes: stackedSubnodes, style: [.position : .relative, .flexGrow: .one])
     }
     
-    var subviews: [View]
-    
-    public init(@StackFunctionBuilder buildSubviews: () -> [View]) {
-        self.subviews = buildSubviews()
+    public init(@ViewBuilder buildSubviews: () -> Content) {
+        body = buildSubviews()
+        subnodes = Self.buildSubnodes(fromView: body)
     }
 }
 

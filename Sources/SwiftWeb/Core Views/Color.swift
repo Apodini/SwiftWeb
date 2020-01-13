@@ -8,11 +8,11 @@
 import Foundation
 
 public struct Color: View {
+    public typealias Body = Never
+    
     public static var clear: Self {
         return Self()
     }
-    
-    public let body: View? = nil
     
     let color: (red: Int, green: Int, blue: Int, alpha: Double)
     let clear: Bool
@@ -62,17 +62,19 @@ public struct Color: View {
 }
 
 public extension View {
-    func foregroundColor(_ color: Color?) -> View {
-        guard case .div(let subNodes, let style) = html else {
-            return self
-        }
-        
-        var newStyle = style
-        
+    func foregroundColor(_ color: Color?) -> ModifiedView {
         let newColor: Color = color ?? .clear
-        
-        newStyle[.color] = .color(newColor)
 
-        return ModifiedView(newHTML: .div(subNodes: subNodes, style: newStyle))
+        switch html {
+        case .div(let subNodes, let style):
+            var newStyle = style
+
+            newStyle[.color] = .color(newColor)
+            return ModifiedView(newHTML: .div(subNodes: subNodes, style: newStyle))
+        case .img(let path, let style):
+            return ModifiedView(newHTML: .img(path: path, style: style))
+        case .raw(let string):
+            return ModifiedView(newHTML: .raw(string))
+        }
     }
 }

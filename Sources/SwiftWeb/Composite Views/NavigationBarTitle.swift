@@ -10,7 +10,7 @@ import Foundation
 public struct NavigationBarTitle: View {
     let title: String
     
-    public var body: View? {
+    public var body: some View {
         Text(title)
             .font(.system(size: 35, weight: .bold))
     }

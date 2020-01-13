@@ -7,26 +7,21 @@
 
 import Foundation
 
-public struct HStack: Stack {
-    public let body: View? = nil
-    let subviews: [View]
+public struct HStack<Content>: Stack where Content: View {
+    public let body: Content
+    
+    public var subnodes: [HTMLNode] = []
     
     public var html: HTMLNode {
-        let subNodes = subviews.map(\.html)
-        
-        // propagate growing parameters to imitate SwiftUI layout behaviour
-        let growingSubNodes = subNodes.map {
-            $0.shouldGrow ? $0.withAddedStyle(key: .alignSelf, value: .center) ?? $0 : $0
-        }
-        
-        return .div(subNodes: growingSubNodes, style: [
+        .div(subNodes: subnodes, style: [
             .display: .flex,
             .flexDirection: .row,
-            .flexGrow: subNodes.shouldGrow ? .one : .zero
+            .flexGrow: subnodes.shouldGrow ? .one : .zero
         ])
     }
     
-    public init(spacing: Double? = nil, @StackFunctionBuilder buildSubviews: () -> [View]) {
-        self.subviews = Self.insertSpacers(forSpacing: spacing, in: buildSubviews(), horizontally: true)
+    public init(spacing: Double? = nil, @ViewBuilder buildSubviews: () -> Content) {
+        body = buildSubviews()
+        subnodes = Self.insertSpacers(forSpacing: spacing, inNodes: Self.buildSubnodes(fromView: body), axis: .horizontal)
     }
 }

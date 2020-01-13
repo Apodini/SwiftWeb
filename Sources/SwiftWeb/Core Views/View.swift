@@ -7,17 +7,16 @@
 
 import Foundation
 
-public protocol View {
-//    associatedtype Body: View
-    
-    var body: View? { get }
-    var html: HTMLNode { get }    
+public protocol TypeErasedView {
+    var html: HTMLNode { get }
 }
 
-public extension View {
-    var html: HTMLNode {
-        body?.html ?? .raw("")
-    }
+public protocol View: TypeErasedView {
+    associatedtype Body: View
+    
+    var body: Body { get }
+    
+    var html: HTMLNode { get }
 }
 
 public extension View {
@@ -34,4 +33,28 @@ public extension View {
                                                color: color)) ?? html
         )
     }
+}
+
+public extension View {
+    var body: some View {
+        return EmptyView()
+    }
+}
+
+public extension View {
+    var html: HTMLNode {
+        body.html
+    }
+}
+
+extension Never: View {
+    public var body: Never { fatalError("Never Type has no body") }
+}
+
+public struct EmptyView: View {
+    public typealias Body = Never
+}
+
+public extension View where Body == Never {
+    var body: Never { fatalError("\(type(of: self)) has no body") }
 }
