@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ZStack<Content>: Stack {
+public struct ZStack<Content>: Stack where Content: View {
     public let body: Content
     
     public var subnodes: [HTMLNode] = []
