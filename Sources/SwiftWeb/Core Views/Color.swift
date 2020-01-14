@@ -14,6 +14,11 @@ public struct Color: View {
         return Self()
     }
     
+    public static let red = Color(red: 1.0, green: 0.0, blue: 0.0)
+    public static let green = Color(red: 0.0, green: 1.0, blue: 0.0)
+    public static let blue = Color(red: 0.0, green: 0.0, blue: 1.0)
+    public static let gray = Color(red: 0.5, green: 0.5, blue: 0.5)
+    
     let color: (red: Int, green: Int, blue: Int, alpha: Double)
     let clear: Bool
     

@@ -76,6 +76,8 @@ public enum HTMLNode {
         case position
         case borderRadius = "border-radius"
         case boxShadow = "box-shadow"
+        case padding
+        case border
         
         public var description: String {
             self.rawValue
@@ -101,6 +103,7 @@ public enum HTMLNode {
         case relative
         case absolute
         case shadow(offsetX: Double, offsetY: Double, radius: Double, color: Color)
+        case border(width: Double, color: Color)
         
         public var cssString: String {
             switch self {
@@ -124,6 +127,8 @@ public enum HTMLNode {
                 return "flex-end"
             case .shadow(let offsetX, let offsetY, let radius, let color):
                 return "\(offsetX)px \(offsetY)px \(radius)px \(color.cssString)"
+            case .border(let width, let color):
+                return "\(width)px solid \(color.cssString)"
             default:
                 return String(describing: self)
             }

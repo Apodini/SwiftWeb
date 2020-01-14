@@ -21,6 +21,7 @@ class HTMLTemplate {
                         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
                         display: flex;
                         flex-direction: column;
+                        align-items: center;
                         margin: 0;
                         cursor: default;
                         

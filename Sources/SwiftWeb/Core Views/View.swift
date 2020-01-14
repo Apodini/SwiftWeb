@@ -33,6 +33,19 @@ public extension View {
                                                color: color)) ?? html
         )
     }
+    
+    func padding(_ length: Double? = nil) -> some View {
+        let length = length ?? 10.0
+        
+        return ModifiedView(newHTML: .div(subNodes: [html], style: [.padding : .px(length)]))
+    }
+    
+    func border(_ color: Color, width: Double = 1) -> some View {
+        return ModifiedView(newHTML:
+            html.withAddedStyle(key: .border,
+                                value: .border(width: width, color: color)) ?? html
+        )
+    }
 }
 
 public extension View {
