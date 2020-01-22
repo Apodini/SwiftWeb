@@ -16,12 +16,26 @@ public struct HStack<Content>: Stack where Content: View {
         .div(subNodes: subnodes, style: [
             .display: .flex,
             .flexDirection: .row,
-            .flexGrow: subnodes.shouldGrow ? .one : .zero
         ])
+    }
+    
+    public var layoutGrowthAxes: Set<LayoutGrowthAxis> {
+        var growAxes = body.layoutGrowthAxes
+        
+        if growAxes.contains(.undetermined) { // .undetermined means that there is a spacer among the subviews
+                                              // which is not contained in another stack.
+            growAxes.remove(.undetermined)
+            growAxes.insert(.horizontal) // This means that this horizontal stack view can grow among its
+                                         // primary axis.
+        }
+        
+        return growAxes
     }
     
     public init(spacing: Double? = nil, @ViewBuilder buildSubviews: () -> Content) {
         body = buildSubviews()
-        subnodes = Self.insertSpacers(forSpacing: spacing, inNodes: Self.buildSubnodes(fromView: body), axis: .horizontal)
+        subnodes = Self.insertSpacers(forSpacing: spacing,
+                                      inNodes: Self.buildSubnodes(fromView: body, inLayoutAxis: .horizontal),
+                                      axis: .horizontal)
     }
 }

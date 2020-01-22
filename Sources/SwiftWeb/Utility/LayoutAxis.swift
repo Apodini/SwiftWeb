@@ -7,7 +7,13 @@
 
 import Foundation
 
-enum LayoutAxis {
+public enum LayoutAxis {
     case horizontal
     case vertical
+}
+
+public enum LayoutGrowthAxis {
+    case undetermined
+    case vertical
+    case horizontal
 }

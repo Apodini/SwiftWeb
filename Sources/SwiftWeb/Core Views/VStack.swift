@@ -26,7 +26,9 @@ public struct VStack<Content>: Stack where Content: View {
                 @ViewBuilder buildSubviews: () -> Content) {
         body = buildSubviews()
         horizontalAlignment = alignment
-        subnodes = Self.insertSpacers(forSpacing: spacing, inNodes: Self.buildSubnodes(fromView: body), axis: .vertical)
+        subnodes = Self.insertSpacers(forSpacing: spacing,
+                                      inNodes: Self.buildSubnodes(fromView: body, inLayoutAxis: .vertical),
+                                      axis: .vertical)
     }
 }
 
@@ -34,7 +36,6 @@ public enum HorizontalAlignment {
     case center
     case leading
     case trailing
-    case stretch // needs to be substituted by spacer logic
     
     var cssValue: HTMLNode.CSSValue {
         switch self {
@@ -44,8 +45,6 @@ public enum HorizontalAlignment {
             return .flexStart
         case .trailing:
             return .flexEnd
-        case .stretch:
-            return .stretch
         }
     }
 }

@@ -67,7 +67,7 @@ public struct Color: View {
 }
 
 public extension View {
-    func foregroundColor(_ color: Color?) -> ModifiedView {
+    func foregroundColor(_ color: Color?) -> some View {
         let newColor: Color = color ?? .clear
 
         switch html {
@@ -75,11 +75,11 @@ public extension View {
             var newStyle = style
 
             newStyle[.color] = .color(newColor)
-            return ModifiedView(newHTML: .div(subNodes: subNodes, style: newStyle))
+            return ModifiedView(body: self, newHTML: .div(subNodes: subNodes, style: newStyle))
         case .img(let path, let style):
-            return ModifiedView(newHTML: .img(path: path, style: style))
+            return ModifiedView(body: self, newHTML: .img(path: path, style: style))
         case .raw(let string):
-            return ModifiedView(newHTML: .raw(string))
+            return ModifiedView(body: self, newHTML: .raw(string))
         }
     }
 }

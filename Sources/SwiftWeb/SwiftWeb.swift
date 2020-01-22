@@ -9,6 +9,6 @@ import Foundation
 
 public class SwiftWeb {
     public static func render<T>(view: T) -> String where T: View {
-        HTMLTemplate.render(withBody: view.html.render())
+        HTMLTemplate.render(withBody: view.html(inLayoutAxis: .vertical).render())
     }
 }

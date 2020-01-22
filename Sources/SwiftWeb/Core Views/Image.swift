@@ -18,7 +18,7 @@ public struct Image: View {
     
     let path: String
 
-    public init(name: String) {
+    public init(_ name: String) {
         path = name
     }
 
@@ -28,6 +28,6 @@ public struct Image: View {
                 .img(path: path, style: [.width: .percent(100), .height: .percent(100)])
             }
         
-        return ModifiedView(newHTML: newHTML)
+        return ModifiedView(body: EmptyView(), newHTML: newHTML)
     }
 }

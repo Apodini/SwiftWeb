@@ -11,12 +11,16 @@ public struct List: View {
     public typealias Body = Never
     
     public var cells: [HTMLNode] = []
+    
+    public var layoutGrowthAxes: Set<LayoutGrowthAxis> {
+        [.horizontal]
+    }
 
     public var html: HTMLNode {
         let separator: HTMLNode = .div(style: [
             .height: .px(1),
             .backgroundColor: .color(Color(white: 0.85)),
-            .width: .percent(100)
+            .width: .percent(100),
         ])
 
         var subNodes: [HTMLNode] = []
@@ -36,6 +40,7 @@ public struct List: View {
                 .display: .flex,
                 .flexDirection: .column,
                 .alignItems: .flexStart,
+                .justifyContent: .center,
             ])
         }
     }

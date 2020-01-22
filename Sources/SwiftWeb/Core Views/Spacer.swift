@@ -11,8 +11,14 @@ public struct Spacer: View {
     public typealias Body = Never
     
     public let html: HTMLNode
+    
+    public var layoutGrowthAxes: [LayoutGrowthAxis] {
+        [.undetermined]                                 // A Spacer can grow horizontally as well as vertically,
+                                                        // dependent on the primary axis of the containing stack
+                                                        // view.
+    }
 
     public init() {
-        html = .div(style: [.flexGrow: .one])
+        html = .div()
     }
 }

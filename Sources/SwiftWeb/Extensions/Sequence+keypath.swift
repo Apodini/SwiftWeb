@@ -14,7 +14,7 @@ public extension Sequence {
         }
     }
     
-    func flatMap<T>(_ keyPath: KeyPath<Element, T?>) -> [T] {
+    func compactMap<T>(_ keyPath: KeyPath<Element, T?>) -> [T] {
         return self.compactMap {
             $0[keyPath: keyPath]
         }

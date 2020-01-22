@@ -7,12 +7,13 @@
 
 import Foundation
 
-public struct ModifiedView: View {
-    public typealias Body = Never
+public struct ModifiedView<Body>: View where Body: View {
+    public var body: Body
     
     public var html: HTMLNode
     
-    init(newHTML: HTMLNode) {
+    init(body: Body, newHTML: HTMLNode) {
+        self.body = body
         html = newHTML
     }
 }

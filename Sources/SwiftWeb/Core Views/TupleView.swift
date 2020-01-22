@@ -8,7 +8,8 @@
 import Foundation
 
 public protocol TypeErasedTupleView {
-    func mapToHTMLNodes() -> [HTMLNode]
+    func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
+    func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
 }
 
 public struct TupleView<T>: View, TypeErasedTupleView {
@@ -21,31 +22,45 @@ public struct TupleView<T>: View, TypeErasedTupleView {
     }
     
     public var html: HTMLNode {
-        return .div(subNodes: mapToHTMLNodes(), style: [:])
+        return .div(subNodes: map(\.html), style: [:])
     }
     
-    public func mapToHTMLNodes() -> [HTMLNode] {
+    public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
         let mirror = Mirror(reflecting: value)
-        var mappedValues: [HTMLNode] = []
-        
-        for child in mirror.children {
-            guard let view = child.value as? TypeErasedView else {
-                fatalError("TupleView must contain a tuple of Views")
+        return mirror.children
+            .map { child in
+                guard let view = child.value as? TypeErasedView else {
+                    fatalError("TupleView must contain a tuple of Views")
+                }
+                
+                return view
             }
-
-            mappedValues.append(view.html)
+            .map(transform)
+    }
+    
+    public func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T] {
+        return self.map {
+            $0[keyPath: keyPath]
         }
-        
-        return mappedValues
     }
 }
 
 public extension View {
     static func buildSubnodes<Content>(fromView view: Content) -> [HTMLNode] where Content: View {
         if let tupleViewBody = view as? TypeErasedTupleView {
-            return tupleViewBody.mapToHTMLNodes()
+            return tupleViewBody.map(\.html)
         } else {
             return [view.html]
+        }
+    }
+    
+    static func buildSubnodes<Content>(fromView view: Content, inLayoutAxis layoutAxis: LayoutAxis) -> [HTMLNode] where Content: View {
+        if let tupleViewBody = view as? TypeErasedTupleView {
+            return tupleViewBody.map {
+                $0.html(inLayoutAxis: layoutAxis)
+            }
+        } else {
+            return [view.html(inLayoutAxis: layoutAxis)]
         }
     }
 }

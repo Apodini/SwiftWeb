@@ -17,7 +17,7 @@ public struct Text: View {
     public init(_ text: String) {
         self.text = text
         self.html =
-            .div(style: [.justifyContent: .center, .alignItems: .center, .flexGrow: .zero]) {
+            .div(style: [.justifyContent: .center, .alignItems: .center]) {
                 .div(style: [.flexGrow: .zero]) {
                     .raw(text)
                 }
