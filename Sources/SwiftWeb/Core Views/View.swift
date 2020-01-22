@@ -135,16 +135,17 @@ public extension View {
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode {
         return layoutGrowthAxes.reduce(html) { html, growthAxis in
             switch (growthAxis, inLayoutAxis) {
-            case (.horizontal, .horizontal), (.vertical, .vertical):
-                return html.withAddedStyle(key: .flexGrow, value: .one)
+            case (.horizontal, .horizontal), (.vertical, .vertical):         // For aligned axis of the layout direction of the parent
+                return html.withAddedStyle(key: .flexGrow, value: .one)      // node and this node the html node can grow along the primary axis.
             case (.vertical, .horizontal), (.horizontal, .vertical):
-                return html.withAddedStyle(key: .alignSelf, value: .stretch)
+                return html.withAddedStyle(key: .alignSelf, value: .stretch) // For the perpendicular case it needs to stretch across the secondary axis.
             case (.undetermined, _):
                 return html.withAddedStyle(key: .flexGrow, value: .one)
             }
         }
     }
 }
+
 
 // MARK: Debugging
 
