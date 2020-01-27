@@ -9,16 +9,18 @@ import Foundation
 
 public protocol TypeErasedView {
     var html: HTMLNode { get }
-    var layoutGrowthAxes: Set<LayoutGrowthAxis> { get }
+    var growingLayoutAxes: Set<GrowingLayoutAxis> { get }
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode
 }
 
 public protocol View: TypeErasedView {
     associatedtype Body: View
     
+    // The body property is used to delegate the generation of html for a specific node to another view. It should be
+    // set for all view which enclose other views in order to allow the layout system to propagate properties properly
+    // through the tree.
     var body: Body { get }
 }
-
 
 // MARK: View body default implementation
 
@@ -87,7 +89,7 @@ public extension View {
         if type(of: Body.self) == type(of: Never.self) {
             return "\(String(describing: Self.self)){ body: Never }"
         } else {
-            return "\(String(describing: Self.self)){ body: \(body.description), layoutGrowthAxes: \(layoutGrowthAxes.description) }"
+            return "\(String(describing: Self.self)){ body: \(body.description), layoutGrowthAxes: \(growingLayoutAxes.description) }"
         }
     }
 }
@@ -95,45 +97,61 @@ public extension View {
 
 // MARK: View layout growth axes
 
-public extension View {
-    var layoutGrowthAxes: Set<LayoutGrowthAxis> {
-        var growAxes = body.layoutGrowthAxes
-        
-        if self is VStack<Body> {
-            if growAxes.contains(.undetermined) { // .undetermined means that there is a spacer among the subviews
-                                                  // which is not contained in another stack.
-                growAxes.remove(.undetermined)
-                growAxes.insert(.vertical) // This means that this horizontal stack view can grow among its
-                                           // primary axis.
-            }
-        } else if self is HStack<Body> {
-            if growAxes.contains(.undetermined) {
-                growAxes.remove(.undetermined)
-                growAxes.insert(.horizontal)
-            }
-        }
-        
-        return growAxes
-    }
+public protocol GrowingAxesModifying {
+    var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> { get }
 }
 
-public extension View where Body == Never {
-    var layoutGrowthAxes: Set<LayoutGrowthAxis> {
-        if self is Spacer {
-            return [.undetermined]
-        } else if let tupleViewSelf = self as? TypeErasedTupleView {
-            return tupleViewSelf.map(\.layoutGrowthAxes).reduce([]) { accumulator, growthAxes in
-                accumulator.union(growthAxes)
-            }
+public extension View {
+    var growingLayoutAxes: Set<GrowingLayoutAxis> {
+        if let growingAxesModifyingSelf = self as? GrowingAxesModifying {
+            return growingAxesModifyingSelf.modifiedGrowingLayoutAxes
+        } else if Body.self != Never.self {
+            return body.growingLayoutAxes
         } else {
             return []
         }
     }
 }
 
+//public extension View {
+//    var layoutGrowthAxes: Set<LayoutGrowthAxis> {
+//        var growAxes = body.layoutGrowthAxes
+//
+//        if self is VStack<Body> {
+//            if growAxes.contains(.undetermined) { // .undetermined means that there is a spacer among the subviews
+//                                                  // which is not contained in another stack.
+//                growAxes.remove(.undetermined)
+//                growAxes.insert(.vertical) // This means that this horizontal stack view can grow among its
+//                                           // primary axis.
+//            }
+//        } else if self is HStack<Body> {
+//            if growAxes.contains(.undetermined) {
+//                growAxes.remove(.undetermined)
+//                growAxes.insert(.horizontal)
+//            }
+//        }
+//
+//        return growAxes
+//    }
+//}
+//
+//public extension View where Body == Never {
+//    var layoutGrowthAxes: Set<LayoutGrowthAxis> {
+//        if self is Spacer {
+//            return [.undetermined]
+//        } else if let tupleViewSelf = self as? TypeErasedTupleView {
+//            return tupleViewSelf.map(\.layoutGrowthAxes).reduce([]) { accumulator, growthAxes in
+//                accumulator.union(growthAxes)
+//            }
+//        } else {
+//            return []
+//        }
+//    }
+//}
+
 public extension View {
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode {
-        return layoutGrowthAxes.reduce(html) { html, growthAxis in
+        return growingLayoutAxes.reduce(html) { html, growthAxis in
             switch (growthAxis, inLayoutAxis) {
             case (.horizontal, .horizontal), (.vertical, .vertical):         // For aligned axis of the layout direction of the parent
                 return html.withAddedStyle(key: .flexGrow, value: .one)      // node and this node the html node can grow along the primary axis.

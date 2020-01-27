@@ -12,7 +12,7 @@ public struct List: View {
     
     public var cells: [HTMLNode] = []
     
-    public var layoutGrowthAxes: Set<LayoutGrowthAxis> {
+    public var growingLayoutAxes: Set<GrowingLayoutAxis> {
         [.horizontal]
     }
 

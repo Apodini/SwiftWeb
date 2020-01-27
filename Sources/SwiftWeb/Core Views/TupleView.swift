@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol TypeErasedTupleView {
+public protocol TypeErasedTupleView: GrowingAxesModifying {
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
 }
@@ -23,6 +23,12 @@ public struct TupleView<T>: View, TypeErasedTupleView {
     
     public var html: HTMLNode {
         return .div(subNodes: map(\.html), style: [:])
+    }
+    
+    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
+        self.map(\.growingLayoutAxes).reduce([]) { accumulator, growthAxes in
+            accumulator.union(growthAxes)
+        }
     }
     
     public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {

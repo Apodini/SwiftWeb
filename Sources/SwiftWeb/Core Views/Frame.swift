@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Frame<Content>: View where Content: View {
+public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
     public let body: Content
     
     let width: Double?
@@ -28,8 +28,8 @@ public struct Frame<Content>: View where Content: View {
     }
     
     // Fixing the width and / or height of a View removes its possibility to grow in the respective axis.
-    public var layoutGrowthAxes: Set<LayoutGrowthAxis> {
-        Set<LayoutGrowthAxis>(body.layoutGrowthAxes.compactMap { axis in
+    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
+        Set<GrowingLayoutAxis>(body.growingLayoutAxes.compactMap { axis in
             switch (axis: axis, width: width, height: height) {
             case (axis: .horizontal, width: .some(_), height: _):
                 return nil

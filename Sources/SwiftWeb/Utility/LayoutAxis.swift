@@ -12,7 +12,7 @@ public enum LayoutAxis {
     case vertical
 }
 
-public enum LayoutGrowthAxis {
+public enum GrowingLayoutAxis {
     case undetermined
     case vertical
     case horizontal
