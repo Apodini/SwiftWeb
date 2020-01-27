@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Color: View {
+public struct Color: View, GrowingAxesModifying {
     public typealias Body = Never
     
     public static var clear: Self {
@@ -36,6 +36,10 @@ public struct Color: View {
             .alignSelf: .stretch,
             .flexGrow: .one
         ])
+    }
+    
+    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
+        [.vertical, .horizontal]
     }
     
     public init(red: Double, green: Double, blue: Double, alpha: Double) {

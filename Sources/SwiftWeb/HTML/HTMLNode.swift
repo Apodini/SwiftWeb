@@ -73,11 +73,14 @@ public enum HTMLNode {
         case flexShrink = "flex-shrink"
         case alignSelf = "align-self"
         case marginLeft = "margin-left"
-        case paddingLeft = "padding-left"
         case position
         case borderRadius = "border-radius"
         case boxShadow = "box-shadow"
         case padding
+        case paddingLeft = "padding-left"
+        case paddingTop = "padding-top"
+        case paddingRight = "padding-right"
+        case paddingBottom = "padding-bottom"
         case border
         
         public var description: String {

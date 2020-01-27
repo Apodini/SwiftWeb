@@ -67,10 +67,26 @@ public extension View {
         )
     }
     
-    func padding(_ length: Double? = nil) -> some View {
+    func padding(_ edges: Edge.Set = .all, _ length: Double? = nil) -> some View {
         let length = length ?? 10.0
         
-        return ModifiedView(body: self, newHTML: .div(subNodes: [html.withAddedStyle(key: .flexGrow, value: .one).withAddedStyle(key: .alignSelf, value: .stretch)], style: [.padding : .px(length)]))
+        let paddingPropertyMapping: [(cssKey: HTMLNode.CSSKey, edgeSet: Edge.Set)] = [
+            (.paddingTop, .top),
+            (.paddingLeft, .leading),
+            (.paddingRight, .trailing),
+            (.paddingBottom, .bottom),
+        ]
+        
+        let paddingStyle = Dictionary(uniqueKeysWithValues: paddingPropertyMapping.compactMap({
+            edges.contains($0.edgeSet) ? ($0.cssKey, HTMLNode.CSSValue.px(length)) : nil
+        }))
+        
+        return ModifiedView(body: self, newHTML: .div(
+            subNodes: [html
+                .withAddedStyle(key: .flexGrow, value: .one)
+                .withAddedStyle(key: .alignSelf, value: .stretch)],
+            style: paddingStyle)
+        )
     }
     
     func border(_ color: Color, width: Double = 1) -> some View {
@@ -94,7 +110,6 @@ public extension View {
     }
 }
 
-
 // MARK: View layout growth axes
 
 public protocol GrowingAxesModifying {
@@ -117,10 +132,13 @@ public extension View {
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode {
         return growingLayoutAxes.reduce(html) { html, growthAxis in
             switch (growthAxis, inLayoutAxis) {
-            case (.horizontal, .horizontal), (.vertical, .vertical):         // For aligned axis of the layout direction of the parent
-                return html.withAddedStyle(key: .flexGrow, value: .one)      // node and this node the html node can grow along the primary axis.
+            // For aligned axis of the layout direction of the parent node and this node the html node can grow along
+            // the primary axis.
+            case (.horizontal, .horizontal), (.vertical, .vertical):
+                return html.withAddedStyle(key: .flexGrow, value: .one)
+            // For the perpendicular case it needs to stretch across the secondary axis.
             case (.vertical, .horizontal), (.horizontal, .vertical):
-                return html.withAddedStyle(key: .alignSelf, value: .stretch) // For the perpendicular case it needs to stretch across the secondary axis.
+                return html.withAddedStyle(key: .alignSelf, value: .stretch)
             case (.undetermined, _):
                 return html.withAddedStyle(key: .flexGrow, value: .one)
             }

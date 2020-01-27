@@ -19,6 +19,7 @@ public struct Font {
         case thin = 150
         case regular = 250
         case medium = 400
+        case semibold = 500
         case bold = 600
     }
 }

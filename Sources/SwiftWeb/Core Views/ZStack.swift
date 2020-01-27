@@ -31,7 +31,7 @@ public struct ZStack<Content>: Stack where Content: View {
     
     public init(@ViewBuilder buildSubviews: () -> Content) {
         body = buildSubviews()
-        subnodes = Self.buildSubnodes(fromView: body)
+        subnodes = Self.buildSubnodes(fromView: body, inLayoutAxis: .vertical)
     }
 }
 
