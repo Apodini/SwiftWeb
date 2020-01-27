@@ -113,42 +113,6 @@ public extension View {
     }
 }
 
-//public extension View {
-//    var layoutGrowthAxes: Set<LayoutGrowthAxis> {
-//        var growAxes = body.layoutGrowthAxes
-//
-//        if self is VStack<Body> {
-//            if growAxes.contains(.undetermined) { // .undetermined means that there is a spacer among the subviews
-//                                                  // which is not contained in another stack.
-//                growAxes.remove(.undetermined)
-//                growAxes.insert(.vertical) // This means that this horizontal stack view can grow among its
-//                                           // primary axis.
-//            }
-//        } else if self is HStack<Body> {
-//            if growAxes.contains(.undetermined) {
-//                growAxes.remove(.undetermined)
-//                growAxes.insert(.horizontal)
-//            }
-//        }
-//
-//        return growAxes
-//    }
-//}
-//
-//public extension View where Body == Never {
-//    var layoutGrowthAxes: Set<LayoutGrowthAxis> {
-//        if self is Spacer {
-//            return [.undetermined]
-//        } else if let tupleViewSelf = self as? TypeErasedTupleView {
-//            return tupleViewSelf.map(\.layoutGrowthAxes).reduce([]) { accumulator, growthAxes in
-//                accumulator.union(growthAxes)
-//            }
-//        } else {
-//            return []
-//        }
-//    }
-//}
-
 public extension View {
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode {
         return growingLayoutAxes.reduce(html) { html, growthAxis in
