@@ -82,6 +82,7 @@ public enum HTMLNode {
         case paddingRight = "padding-right"
         case paddingBottom = "padding-bottom"
         case border
+        case overflow
         
         public var description: String {
             self.rawValue
@@ -108,6 +109,7 @@ public enum HTMLNode {
         case absolute
         case shadow(offsetX: Double, offsetY: Double, radius: Double, color: Color)
         case border(width: Double, color: Color)
+        case hidden
         
         public var cssString: String {
             switch self {

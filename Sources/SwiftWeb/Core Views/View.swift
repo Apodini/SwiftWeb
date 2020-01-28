@@ -53,7 +53,12 @@ public extension View where Body == Never {
 
 public extension View {
     func cornerRadius(_ radius: Double) -> some View {
-        return ModifiedView(body: self, newHTML: html.withAddedStyle(key: .borderRadius, value: .px(radius)))
+        return ModifiedView(
+            body: self,
+            newHTML: html
+                .withAddedStyle(key: .borderRadius, value: .px(radius))
+                .withAddedStyle(key: .overflow, value: .hidden)
+        )
     }
     
     func shadow(color: Color, radius: Double, x: Double, y: Double) -> some View {

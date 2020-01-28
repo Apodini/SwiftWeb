@@ -38,7 +38,7 @@ class HTMLTemplate {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-                        overflow: hidden;
+                        overflow: visible;
                     }
                 </style>
             </head>
