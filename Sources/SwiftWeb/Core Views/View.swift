@@ -164,7 +164,7 @@ extension View {
     public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
         if let customMappableSelf = self as? CustomMappable {
             
-            // This is where the recursion happens that makes 
+            // This is where the recursion happens that makes composing TupleViews and ForEach views possible
             return customMappableSelf.customMap({
                 $0.map(transform)
             }).flatMap({$0})
