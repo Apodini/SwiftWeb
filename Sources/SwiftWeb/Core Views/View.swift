@@ -11,6 +11,8 @@ public protocol TypeErasedView {
     var html: HTMLNode { get }
     var growingLayoutAxes: Set<GrowingLayoutAxis> { get }
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode
+    func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
+    func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
 }
 
 public protocol View: TypeErasedView {
@@ -147,6 +149,33 @@ public extension View {
             case (.undetermined, _):
                 return html.withAddedStyle(key: .flexGrow, value: .one)
             }
+        }
+    }
+}
+
+
+// MARK: CustomMappable
+
+public protocol CustomMappable {
+    func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
+}
+
+extension View {
+    public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
+        if let customMappableSelf = self as? CustomMappable {
+            
+            // This is where the recursion happens that makes 
+            return customMappableSelf.customMap({
+                $0.map(transform)
+            }).flatMap({$0})
+        } else {
+            return [transform(self)]
+        }
+    }
+    
+    public func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T] {
+        return self.map {
+            $0[keyPath: keyPath]
         }
     }
 }

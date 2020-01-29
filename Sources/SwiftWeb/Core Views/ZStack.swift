@@ -29,9 +29,9 @@ public struct ZStack<Content>: Stack where Content: View {
         return .div(subNodes: stackedSubnodes, style: [.position : .relative, .flexGrow: .one])
     }
     
-    public init(@ViewBuilder buildSubviews: () -> Content) {
-        body = buildSubviews()
-        subnodes = Self.buildSubnodes(fromView: body, inLayoutAxis: .vertical)
+    public init(@ViewBuilder content: () -> Content) {
+        body = content()
+        subnodes = body.map { $0.html(inLayoutAxis: .vertical) }
     }
 }
 

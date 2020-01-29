@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol TypeErasedTupleView: GrowingAxesModifying {
+public protocol TypeErasedTupleView: GrowingAxesModifying, CustomMappable {
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
 }
@@ -31,7 +31,7 @@ public struct TupleView<T>: View, TypeErasedTupleView {
         }
     }
     
-    public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
+    public func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
         let mirror = Mirror(reflecting: value)
         return mirror.children
             .map { child in
@@ -43,30 +43,14 @@ public struct TupleView<T>: View, TypeErasedTupleView {
             }
             .map(transform)
     }
-    
-    public func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T] {
-        return self.map {
-            $0[keyPath: keyPath]
-        }
-    }
 }
 
-public extension View {
-    static func buildSubnodes<Content>(fromView view: Content) -> [HTMLNode] where Content: View {
-        if let tupleViewBody = view as? TypeErasedTupleView {
-            return tupleViewBody.map(\.html)
-        } else {
-            return [view.html]
-        }
-    }
-    
-    static func buildSubnodes<Content>(fromView view: Content, inLayoutAxis layoutAxis: LayoutAxis) -> [HTMLNode] where Content: View {
-        if let tupleViewBody = view as? TypeErasedTupleView {
-            return tupleViewBody.map {
-                $0.html(inLayoutAxis: layoutAxis)
-            }
-        } else {
-            return [view.html(inLayoutAxis: layoutAxis)]
-        }
-    }
-}
+//public extension View {
+//    static func buildSubnodes<Content>(fromView view: Content) -> [HTMLNode] where Content: View {
+//        return view.map { $0.html }
+//    }
+//
+//    static func buildSubnodes<Content>(fromView view: Content, inLayoutAxis layoutAxis: LayoutAxis) -> [HTMLNode] where Content: View {
+//        return view.map { $0.html(inLayoutAxis: layoutAxis) }
+//    }
+//}

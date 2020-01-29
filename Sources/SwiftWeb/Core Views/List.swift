@@ -45,9 +45,8 @@ public struct List: View {
         }
     }
 
-    public init<Content>(@ViewBuilder buildSubviews: () -> Content) where Content: View {
-        let body = buildSubviews()
-        cells = Self.buildSubnodes(fromView: body)
+    public init<Content>(@ViewBuilder content: () -> Content) where Content: View {
+        cells = content().map(\.html)
     }
 
     public init<Data>(_ data: Data, buildSubview: (Data.Element) -> TypeErasedView) where Data: RandomAccessCollection {

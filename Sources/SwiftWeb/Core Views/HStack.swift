@@ -28,7 +28,7 @@ public struct HStack<Content>: Stack, GrowingAxesModifying where Content: View {
     public init(spacing: Double? = nil, @ViewBuilder buildSubviews: () -> Content) {
         body = buildSubviews()
         subnodes = Self.insertSpacers(forSpacing: spacing,
-                                      inNodes: Self.buildSubnodes(fromView: body, inLayoutAxis: .horizontal),
+                                      inNodes: body.map { $0.html(inLayoutAxis: .horizontal) },
                                       axis: .horizontal)
     }
 }

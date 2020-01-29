@@ -33,7 +33,7 @@ public struct VStack<Content>: Stack, GrowingAxesModifying where Content: View {
         body = buildSubviews()
         horizontalAlignment = alignment
         subnodes = Self.insertSpacers(forSpacing: spacing,
-                                      inNodes: Self.buildSubnodes(fromView: body, inLayoutAxis: .vertical),
+                                      inNodes: body.map { $0.html(inLayoutAxis: .vertical) },
                                       axis: .vertical)
     }
 }
