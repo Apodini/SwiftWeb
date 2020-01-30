@@ -147,77 +147,8 @@ public enum HTMLNode {
         }
     }
 
-    
-    // doesn't seem to work
-//    static func div(style: [CSSKey: String], @HTMLNodeFunctionBuilder buildSubnodes: () -> [HTMLNode]) -> Self {
-//        return .div(subNodes: buildSubnodes(), style: style)
-//    }
-    
     static func div(style: [CSSKey: CSSValue] = [:], buildSubnode: () -> HTMLNode) -> Self {
         return .div(subNodes: [buildSubnode()], style: style)
-    }
-    
-//    // node should grow if it contains a growing subnode
-//    var shouldGrow: Bool {
-//        switch self {
-//        case .div(let subNodes, let style):
-//            if style.containsGrowStyle {
-//                return true
-//            }
-//
-//            for node in subNodes {
-//                if node.shouldGrow {
-//                    return true
-//                }
-//            }
-//        case .img(_, let style):
-//            return style.containsGrowStyle
-//        default:
-//            break
-//        }
-//
-//        return false
-//    }
-    
-//    var isFlexLayout: Bool {
-//        guard case .div(_, let style) = self else {
-//            return false
-//        }
-//
-//        return style[.display] == .flex
-//
-////        switch self {
-////        case .div(_, let style):
-////            return style[.display] == .flex
-////        default:
-////            return false
-////        }
-//    }
-    
-//    var growthAxes: Set<LayoutGrowthAxis> {
-//        guard case .div(let subnodes, let style) = self else {
-//            return []
-//        }
-//
-//        let childGrowthAxes = subnodes.reduce(Set<LayoutGrowthAxis>()) { (accumulator: Set<LayoutGrowthAxis>, node: HTMLNode) in
-//            accumulator.union(node.growthAxes)
-//        }
-//
-//        // flex layout turns the undetermined growth axes of its child nodes into the growth axes in line with its
-//        // layout axis to mimic SwiftUI behaviour
-//
-//        return []
-//    }
-}
-
-@_functionBuilder
-class HTMLNodeFunctionBuilder {
-    public static func buildBlock(_ subComponents: HTMLNode...) -> [HTMLNode] {
-        return subComponents
-    }
-    
-    static func buildExpression(_ expression: HTMLNode) -> [HTMLNode] {
-      return [expression]
     }
 }
 
@@ -239,15 +170,3 @@ extension Dictionary where Key == HTMLNode.CSSKey, Value == HTMLNode.CSSValue {
         return false
     }
 }
-
-//extension Collection where Element == HTMLNode {
-//    var shouldGrow: Bool {
-//        for node in self {
-//            if node.shouldGrow {
-//                return true
-//            }
-//        }
-//
-//        return false
-//    }
-//}
