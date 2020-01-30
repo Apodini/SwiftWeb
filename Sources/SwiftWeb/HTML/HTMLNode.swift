@@ -35,7 +35,7 @@ public enum HTMLNode {
             return nil
         }
         
-        let cssString = styleDictionary // compute style with adjusted growing properties here
+        let cssString = styleDictionary
             .compactMap { (key, value) in "\(key): \(value.cssString); " }
             .joined()
         
@@ -149,24 +149,5 @@ public enum HTMLNode {
 
     static func div(style: [CSSKey: CSSValue] = [:], buildSubnode: () -> HTMLNode) -> Self {
         return .div(subNodes: [buildSubnode()], style: style)
-    }
-}
-
-extension Dictionary where Key == HTMLNode.CSSKey, Value == HTMLNode.CSSValue {
-    var containsGrowStyle: Bool {
-        if let flexGrow = self[.flexGrow] {
-            switch flexGrow {
-            case .one:
-                return true
-            case .int(let value):
-                if value > 0 {
-                    return true
-                }
-            default:
-                break
-            }
-        }
-        
-        return false
     }
 }
