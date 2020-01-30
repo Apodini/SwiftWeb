@@ -44,9 +44,11 @@ public struct List: View {
             ])
         }
     }
-
+    
     public init<Content>(@ViewBuilder content: () -> Content) where Content: View {
-        cells = content().map(\.html)
+        cells = content()
+            .map { $0.anyView().frame(minHeight: 44) }
+            .map(\.html)
     }
 
     public init<Data>(_ data: Data, buildSubview: (Data.Element) -> TypeErasedView) where Data: RandomAccessCollection {

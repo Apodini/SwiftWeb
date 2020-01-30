@@ -12,6 +12,8 @@ public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
     
     let width: Double?
     let height: Double?
+    let minWidth: Double?
+    let minHeight: Double?
     
     public var html: HTMLNode {
         .div(
@@ -23,6 +25,8 @@ public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
             style: [
                 .width : width != nil ? .px(width!) : .initial,
                 .height : height != nil ? .px(height!) : .initial,
+                .minWidth : minWidth != nil ? .px(minWidth!) : .initial,
+                .minHeight : minHeight != nil ? .px(minHeight!) : .initial,
             ]
         )
     }
@@ -45,16 +49,25 @@ public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
         })
     }
 
-    init(framedView: Content, width: Double? = nil, height: Double? = nil) {
+    public init(framedView: Content,
+                width: Double? = nil,
+                height: Double? = nil,
+                minWidth: Double? = nil,
+                minHeight: Double? = nil) {
         body = framedView
         self.width = width
         self.height = height
+        self.minWidth = minWidth
+        self.minHeight = minHeight
     }
 }
 
 public extension View {
-    func frame(width: Double? = nil, height: Double? = nil) -> some View {
-        return Frame(framedView: self, width: width, height: height)
+    func frame(width: Double? = nil,
+               height: Double? = nil,
+               minWidth: Double? = nil,
+               minHeight: Double? = nil) -> some View {
+        return Frame(framedView: self, width: width, height: height, minWidth: minWidth, minHeight: minHeight)
     }
 }
 
