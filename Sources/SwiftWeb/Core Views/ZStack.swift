@@ -26,7 +26,11 @@ public struct ZStack<Content>: Stack where Content: View {
             }
         }
         
-        return .div(subNodes: stackedSubnodes, style: [.position : .relative, .flexGrow: .one])
+        let r: HTMLNode = .div(subNodes: stackedSubnodes, style: [.position : .relative, .flexGrow: .one])
+        
+        print(r.render())
+        
+        return r
     }
     
     public init(@ViewBuilder content: () -> Content) {

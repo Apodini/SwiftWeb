@@ -7,22 +7,26 @@
 
 import Foundation
 
-public struct AnyView: View {
+public struct AnyView: View, GrowingAxesModifying {
+    
     public typealias Body = Never
     
-    public var html: HTMLNode
+    public let html: HTMLNode
     
-    init(html: HTMLNode) {
+    public let modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis>
+    
+    init(html: HTMLNode, modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> = []) {
         self.html = html
+        self.modifiedGrowingLayoutAxes = modifiedGrowingLayoutAxes
     }
     
     init<Content>(content: Content) where Content: View {
-        self.init(html: content.html)
+        self.init(html: content.html, modifiedGrowingLayoutAxes: content.growingLayoutAxes)
     }
 }
 
 public extension TypeErasedView {
     func anyView() -> AnyView {
-        return AnyView(html: html)
+        return AnyView(html: html, modifiedGrowingLayoutAxes: growingLayoutAxes)
     }
 }
