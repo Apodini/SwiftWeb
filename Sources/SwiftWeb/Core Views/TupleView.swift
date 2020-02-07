@@ -44,13 +44,3 @@ public struct TupleView<T>: View, TypeErasedTupleView {
             .map(transform)
     }
 }
-
-//public extension View {
-//    static func buildSubnodes<Content>(fromView view: Content) -> [HTMLNode] where Content: View {
-//        return view.map { $0.html }
-//    }
-//
-//    static func buildSubnodes<Content>(fromView view: Content, inLayoutAxis layoutAxis: LayoutAxis) -> [HTMLNode] where Content: View {
-//        return view.map { $0.html(inLayoutAxis: layoutAxis) }
-//    }
-//}

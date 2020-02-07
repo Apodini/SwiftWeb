@@ -29,7 +29,7 @@ public struct Picker<SelectionValue, Content>: View where SelectionValue: Hashab
                         .padding(.vertical, 5)
                         .background(Color(white: 1.0))
                         .cornerRadius(6)
-                        .shadow(color: Color.init(white: 0).opacity(0.24), radius: 5, x: 0, y: 2)
+                        .shadow(color: Color(white: 0).opacity(0.24), radius: 5, x: 0, y: 2)
                         .padding(.horizontal, 3)
                         .padding(.vertical, 3)
                         .anyView()
