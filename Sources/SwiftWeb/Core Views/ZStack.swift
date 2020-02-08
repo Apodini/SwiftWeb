@@ -7,7 +7,9 @@
 
 import Foundation
 
-public struct ZStack<Content>: Stack where Content: View {
+public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
+    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> = [.vertical, .horizontal]
+    
     public let body: Content
     
     public var subnodes: [HTMLNode] = []
@@ -26,15 +28,12 @@ public struct ZStack<Content>: Stack where Content: View {
             }
         }
         
-        let r: HTMLNode = .div(subNodes: stackedSubnodes, style: [.position : .relative, .flexGrow: .one])
-        
-        print(r.render())
-        
-        return r
+        return .div(subNodes: stackedSubnodes, style: [.position : .relative, .flexGrow: .one])
     }
     
     public init(@ViewBuilder content: () -> Content) {
         body = content()
+        print("ZStack body.growingLayoutAxes: ", body.growingLayoutAxes)
         subnodes = body.map { $0.html(inLayoutAxis: .vertical) }
     }
 }
@@ -50,5 +49,22 @@ public extension View {
         newStyle[.backgroundColor] = .color(backgroundColor)
 
         return ModifiedView(body: self, newHTML: .div(subNodes: subNodes, style: newStyle))
+    }
+    
+    func globalOverlay<Overlay>(@ViewBuilder _ overlay: () -> Overlay) -> some View where Overlay: View {
+        let overlay = overlay()
+        
+        return ZStack {
+            self
+            ModifiedView(
+                body: overlay,
+                newHTML: overlay.html
+                    .withAddedStyle(key: .position, value: .fixed)
+                    .withAddedStyle(key: .top, value: .zero)
+                    .withAddedStyle(key: .right, value: .zero)
+                    .withAddedStyle(key: .bottom, value: .zero)
+                    .withAddedStyle(key: .left, value: .zero)
+            )
+        }
     }
 }

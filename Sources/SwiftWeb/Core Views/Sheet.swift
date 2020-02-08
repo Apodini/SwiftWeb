@@ -10,9 +10,7 @@ public extension View {
         if !isPresented {
             return self.anyView()
         } else {
-            return ZStack {
-                self
-                
+            return self.globalOverlay {
                 VStack {
                     Spacer()
                     
@@ -23,9 +21,9 @@ public extension View {
                     
                     Spacer()
                 }
-                    .background(Color(white: 0.0).opacity(0.14))
+                .background(Color(white: 0.0).opacity(0.14))
             }
-                .anyView()
+            .anyView()
         }
     }
 }

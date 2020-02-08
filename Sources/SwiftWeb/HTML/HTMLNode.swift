@@ -86,6 +86,10 @@ public enum HTMLNode {
         case minWidth = "min-width"
         case minHeight = "min-height"
         case filter
+        case top
+        case left
+        case right
+        case bottom
         
         public var description: String {
             self.rawValue
@@ -113,6 +117,7 @@ public enum HTMLNode {
         case shadow(offsetX: Double, offsetY: Double, radius: Double, color: Color)
         case border(width: Double, color: Color)
         case hidden
+        case fixed
         
         public var cssString: String {
             switch self {
