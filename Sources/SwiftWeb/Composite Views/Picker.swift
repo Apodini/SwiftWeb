@@ -8,11 +8,15 @@
 
 import Foundation
 
-public struct Picker<SelectionValue, Content>: View where SelectionValue: Hashable, Content: View  {
+public struct Picker<SelectionValue, Content>: View
+        where SelectionValue: Hashable, Content: View  {
     let content: Content
     let selectionValue: SelectionValue
     
-    public init<S>(_ title: S, selection: SelectionValue, @ViewBuilder content: () -> Content) where S: StringProtocol {
+    public init<S>(_ title: S,
+                   selection: SelectionValue,
+                   @ViewBuilder content: () -> Content)
+                        where S: StringProtocol {
         self.content = content()
         self.selectionValue = selection
     }
@@ -20,7 +24,7 @@ public struct Picker<SelectionValue, Content>: View where SelectionValue: Hashab
     public var body: some View {
         HStack {
             ForEach(content.map(\.self)) { view -> AnyView in
-                if let taggedView = view as? TaggedViewProtocol,
+                if let taggedView = view as? TypeErasedTaggedView,
                    let tag = taggedView.tag as? SelectionValue,
                    tag == self.selectionValue {
                     return view.anyView()
@@ -29,7 +33,8 @@ public struct Picker<SelectionValue, Content>: View where SelectionValue: Hashab
                         .padding(.vertical, 5)
                         .background(Color(white: 1.0))
                         .cornerRadius(6)
-                        .shadow(color: Color(white: 0).opacity(0.24), radius: 5, x: 0, y: 2)
+                        .shadow(color: Color(white: 0).opacity(0.24),
+                                radius: 5, x: 0, y: 2)
                         .padding(.horizontal, 3)
                         .padding(.vertical, 3)
                         .anyView()

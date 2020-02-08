@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Image.swift
 //  
 //
 //  Created by Quirin Schweigert on 05.01.20.
@@ -24,7 +24,7 @@ public struct Image: View {
 
     public func resizable() -> some View {
         let newHTML: HTMLNode =
-            .div {
+            .div(style: [.alignItems : .center, .justifyContent: .center]) {
                 .img(path: path, style: [.width: .percent(100), .height: .percent(100)])
             }
         

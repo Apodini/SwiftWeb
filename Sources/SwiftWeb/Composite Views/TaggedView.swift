@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  TaggedView.swift
 //  
 //
 //  Created by Quirin Schweigert on 30.01.20.
@@ -7,18 +7,13 @@
 
 import Foundation
 
-public protocol TaggedViewProtocol {
+public protocol TypeErasedTaggedView {
     var tag: Any? { get }
 }
 
-public struct TaggedView<Body>: View, TaggedViewProtocol where Body: View {
+public struct TaggedView<Body>: View, TypeErasedTaggedView where Body: View {
     public let tag: Any?
     public let body: Body
-    
-    public init(tag: Any, body: Body) {
-        self.tag = tag
-        self.body = body
-    }
 }
 
 public extension View {

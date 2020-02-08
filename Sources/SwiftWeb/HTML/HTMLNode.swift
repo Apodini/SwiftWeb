@@ -85,6 +85,7 @@ public enum HTMLNode {
         case overflow
         case minWidth = "min-width"
         case minHeight = "min-height"
+        case filter
         
         public var description: String {
             self.rawValue
