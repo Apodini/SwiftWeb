@@ -12,6 +12,10 @@ public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : Rand
     let idKeyPath: KeyPath<Data.Element, ID>
     let content: (Data.Element) -> Content
     
+    public var html: HTMLNode {
+        return .div(subNodes: map(\.html), style: [:])
+    }
+    
     public init(_ data: Data, id idKeyPath: KeyPath<Data.Element, ID>, content: @escaping (Data.Element) -> Content) {
         self.data = data
         self.idKeyPath = idKeyPath

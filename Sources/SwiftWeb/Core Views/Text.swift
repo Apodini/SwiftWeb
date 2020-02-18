@@ -38,6 +38,10 @@ extension View {
             
             newStyle[.fontSize] = .px(font.size)
             newStyle[.fontWeight] = .int(font.weight.rawValue)
+
+            if font.design == .rounded {
+                newStyle[.fontFamily] = .raw("sf-pro-rounded-bold")
+            }
             
             return ModifiedView(body: self, newHTML: .div(subNodes: subNodes, style: newStyle))
         case .img(let path, let style):

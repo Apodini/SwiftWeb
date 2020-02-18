@@ -13,6 +13,7 @@ public protocol TypeErasedView {
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
+    func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
 }
 
 public protocol View: TypeErasedView {
@@ -74,6 +75,11 @@ public extension View {
         )
     }
     
+    func shadow() -> some View {
+        return shadow(color: Color(white: 0.0).opacity(0.20),
+                      radius: 40.0, x: 0.0, y: 2.0)
+    }
+    
     func padding(_ edges: Edge.Set = .all, _ length: Double? = nil) -> some View {
         let length = length ?? 10.0
         
@@ -106,16 +112,13 @@ public extension View {
 
 
 // MARK: View description
-
-public extension View {
-    var description: String {
-        if type(of: Body.self) == type(of: Never.self) {
-            return "\(String(describing: Self.self)){ body: Never }"
-        } else {
-            return "\(String(describing: Self.self)){ body: \(body.description), layoutGrowthAxes: \(growingLayoutAxes.description) }"
-        }
+    
+public extension TypeErasedView {
+    var debugDescription: String {
+        String(describing: Self.self)
     }
 }
+
 
 // MARK: View layout growth axes
 
@@ -167,7 +170,7 @@ extension View {
             // This is where the recursion happens that makes composing TupleViews and ForEach views possible
             return customMappableSelf.customMap({
                 $0.map(transform)
-            }).flatMap({$0})
+            }).flatMap({ $0 })
         } else {
             return [transform(self)]
         }
@@ -176,6 +179,21 @@ extension View {
     public func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T] {
         return self.map {
             $0[keyPath: keyPath]
+        }
+    }
+    
+    public func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
+        if let customMappableSelf = self as? CustomMappable {
+
+            return customMappableSelf.customMap({
+                $0.deepMap(transform)
+            }).flatMap({ $0 })
+        } else {
+            if type(of: Body.self) != type(of: Never.self) {
+                return body.deepMap(transform) + [transform(self)]
+            } else {
+                return [transform(self)]
+            }
         }
     }
 }

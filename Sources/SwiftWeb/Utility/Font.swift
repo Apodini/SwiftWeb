@@ -10,9 +10,12 @@ import Foundation
 public struct Font {
     let size: Double
     let weight: Weight
+    let design: Design
     
-    public static func system(size: Double, weight: Weight = .regular) -> Font {
-        return Font(size: size, weight: weight)
+    public static func system(size: Double,
+                              weight: Weight = .regular,
+                              design: Design = .default) -> Font {
+        return Font(size: size, weight: weight, design: design)
     }
     
     public enum Weight: Int {
@@ -21,5 +24,10 @@ public struct Font {
         case medium = 400
         case semibold = 500
         case bold = 600
+    }
+    
+    public enum Design : Hashable {
+        case `default`
+        case rounded
     }
 }

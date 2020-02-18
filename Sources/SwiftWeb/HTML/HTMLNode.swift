@@ -90,6 +90,7 @@ public enum HTMLNode {
         case left
         case right
         case bottom
+        case fontFamily = "font-family"
         
         public var description: String {
             self.rawValue

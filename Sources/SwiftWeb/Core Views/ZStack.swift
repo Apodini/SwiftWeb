@@ -22,7 +22,6 @@ public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
                     .height: .percent(100),
                     .display: .flex,
                     .flexDirection: .column,
-                    .alignItems: .stretch,
                 ]) {
                 node
             }
@@ -33,7 +32,6 @@ public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
     
     public init(@ViewBuilder content: () -> Content) {
         body = content()
-        print("ZStack body.growingLayoutAxes: ", body.growingLayoutAxes)
         subnodes = body.map { $0.html(inLayoutAxis: .vertical) }
     }
 }
@@ -54,8 +52,8 @@ public extension View {
     func globalOverlay<Overlay>(@ViewBuilder _ overlay: () -> Overlay) -> some View where Overlay: View {
         let overlay = overlay()
         
-        return ZStack {
-            self
+        return TupleView((
+            self,
             ModifiedView(
                 body: overlay,
                 newHTML: overlay.html
@@ -65,6 +63,6 @@ public extension View {
                     .withAddedStyle(key: .bottom, value: .zero)
                     .withAddedStyle(key: .left, value: .zero)
             )
-        }
+        ))
     }
 }

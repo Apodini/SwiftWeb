@@ -17,6 +17,11 @@ class HTMLTemplate {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>SwiftWeb</title>
                 <style>
+                    @font-face {
+                        font-family: sf-pro-rounded-bold;
+                        src: url(SF-Pro-Rounded-Bold.otf);
+                    }
+        
                     body {
                         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
                         display: flex;
