@@ -15,11 +15,12 @@ class HTMLTemplate {
             <head>
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <script src="static/script.js"></script>
                 <title>SwiftWeb</title>
                 <style>
                     @font-face {
                         font-family: sf-pro-rounded-bold;
-                        src: url(SF-Pro-Rounded-Bold.otf);
+                        src: url(static/SF-Pro-Rounded-Bold.otf);
                     }
         
                     body {

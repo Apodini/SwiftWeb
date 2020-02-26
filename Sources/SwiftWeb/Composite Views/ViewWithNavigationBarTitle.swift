@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ViewWithNavigationBarTitle.swift
 //  
 //
 //  Created by Quirin Schweigert on 18.02.20.
@@ -23,7 +23,9 @@ struct ViewWithNavigationBarTitle<Content>: View where Content: View {
     let navigationBarTitle: String
     let navigitonBarTitleDisplayMode: NavigationBarItem.TitleDisplayMode
     
-    public init(content: Content, navigationBarTitle: String, navigationBarTitleDisplayMode: NavigationBarItem.TitleDisplayMode = .automatic) {
+    public init(content: Content,
+                navigationBarTitle: String,
+                navigationBarTitleDisplayMode: NavigationBarItem.TitleDisplayMode = .automatic) {
         self.content = content
         self.navigationBarTitle = navigationBarTitle
         self.navigitonBarTitleDisplayMode = navigationBarTitleDisplayMode

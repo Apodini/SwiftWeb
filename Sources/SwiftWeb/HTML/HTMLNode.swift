@@ -24,7 +24,7 @@ public enum HTMLNode {
             """
         case .img(let path, let style):
             return """
-                <img src="/\(path)" \(Self.generateCSSTag(from: style) ?? "")/>
+                <img src="/static/\(path)" \(Self.generateCSSTag(from: style) ?? "")/>
             """
         }
     }

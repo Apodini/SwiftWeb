@@ -26,7 +26,7 @@ struct PreferenceView<Body, Key>: View, TypeErasedPreferenceView
         }
 }
 
-public protocol PreferenceKey { // where Value: Equatable
+public protocol PreferenceKey {
     associatedtype Value
     static var defaultValue: Self.Value { get }
     static func reduce(value: inout Self.Value, nextValue: () -> Self.Value)

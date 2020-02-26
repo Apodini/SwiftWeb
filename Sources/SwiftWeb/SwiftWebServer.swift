@@ -10,7 +10,6 @@ import Foundation
 import Swifter
 
 public class SwiftWebServer {
-    static let port = 8080
     static let projectDirectoryName = "SwiftWebServer/"
     
     let server: HttpServer
@@ -18,21 +17,31 @@ public class SwiftWebServer {
 
     public init<ContentView>(contentView: ContentView, path: String) where ContentView: View {
         server = HttpServer()
+        staticFilesPath = getRessourceDirectoryPath(filePath: path)
 
         server["/"] = { request in
             return HttpResponse.ok(.text(SwiftWeb.render(view: contentView)))
         }
-
-        server["/:path"] = { request in
+        
+        server["/static/:path"] = { request in
+            print("request: \(request.path)")
+            
             guard let fileName = request.path.components(separatedBy: "/").last,
-                  let ressource = self.loadRessourceFile(name: fileName) else {
+                let ressource = self.loadRessourceFile(name: fileName) else {
                     return HttpResponse.notFound
             }
             
             return HttpResponse.ok(.data(ressource))
         }
         
-        staticFilesPath = getRessourceDirectoryPath(filePath: path)
+        server["/websocket"] = websocket(text: { session, text in
+            print(text)
+            session.writeText(text)
+        }, connected: { _ in
+            print("client connected")
+        }, disconnected: { _ in
+            print("client disconnected")
+        })
     }
     
     func getRessourceDirectoryPath(filePath: String) -> String? {

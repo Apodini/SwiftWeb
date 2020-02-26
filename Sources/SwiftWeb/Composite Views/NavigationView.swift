@@ -25,7 +25,6 @@ public struct NavigationView<Content>: View where Content: View {
             (navigationBarTitleDisplayMode == .inline ?
                 inlineTitleBar.anyView() : largeTitleBar.anyView())
 
-            
             content
         }
     }
