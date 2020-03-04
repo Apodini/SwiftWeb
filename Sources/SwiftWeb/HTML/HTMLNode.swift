@@ -9,16 +9,25 @@ import Foundation
 
 public enum HTMLNode {
     case raw(String)
-    case div(subNodes: [HTMLNode] = [], style: [CSSKey: CSSValue] = [:])
-    case img(path: String, style: [CSSKey: CSSValue] = [:])
+    
+    case div(
+        subNodes: [HTMLNode] = [],
+        style: [CSSKey: CSSValue] = [:],
+        customAttributes: [String: String] = [:]
+    )
+    
+    case img(
+        path: String,
+        style: [CSSKey: CSSValue] = [:]
+    )
     
     public func render() -> String {
         switch self {
         case .raw(let string):
             return string
-        case .div(let subNodes, let style):
+        case .div(let subNodes, let style, let customAttributes):
             return """
-                <div \(Self.generateCSSTag(from: style) ?? "")>
+            <div \(Self.generateCSSTag(from: style) ?? "") \(customAttributes.htmlAttributesString)>
                     \(subNodes.map({ $0.render()}).joined())
                 </div>
             """
@@ -42,18 +51,41 @@ public enum HTMLNode {
         return "style=\"\(cssString)\""
     }
     
-    func withAddedStyle(key: CSSKey, value: CSSValue) -> HTMLNode {
+    public func withStyle(key: CSSKey, value: CSSValue) -> Self {
         switch self {
         case .raw(_):
             return self
-        case .div(let subnodes, let style):
+        case .div(let subnodes, let style, let customAttributes):
             var newStyle = style
             newStyle[key] = value
-            return .div(subNodes: subnodes, style: newStyle)
+            return .div(
+                subNodes: subnodes,
+                style: newStyle,
+                customAttributes: customAttributes
+            )
+            
         case .img(let path, let style):
             var newStyle = style
             newStyle[key] = value
             return .img(path: path, style: newStyle)
+        }
+    }
+    
+    public func withCustomAttribute(key: String, value: String) -> Self {
+        switch self {
+        case .raw(_):
+            return self
+        case .div(let subnodes, let style, let customAttributes):
+            var newAttributes = customAttributes
+            newAttributes[key] = value
+            return .div(
+                subNodes: subnodes,
+                style: style,
+                customAttributes: newAttributes
+            )
+            
+        case .img(_, _):
+            return self
         }
     }
     
@@ -156,5 +188,15 @@ public enum HTMLNode {
 
     static func div(style: [CSSKey: CSSValue] = [:], buildSubnode: () -> HTMLNode) -> Self {
         return .div(subNodes: [buildSubnode()], style: style)
+    }
+}
+
+extension Dictionary where Key == String, Value == String {
+    var htmlAttributesString: String {
+        self
+            .map { key, value in
+                "\(key)=\"\(value)\""
+            }
+            .joined(separator: " ")
     }
 }

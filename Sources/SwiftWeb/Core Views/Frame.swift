@@ -19,8 +19,8 @@ public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
         .div(
             subNodes: [
                 body.html
-                    .withAddedStyle(key: .flexGrow, value: .one)
-                    .withAddedStyle(key: .alignSelf, value: .stretch)
+                    .withStyle(key: .flexGrow, value: .one)
+                    .withStyle(key: .alignSelf, value: .stretch)
             ],
             style: [
                 .width : width != nil ? .px(width!) : .initial,

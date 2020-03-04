@@ -32,22 +32,17 @@ public struct Text: View {
 
 extension View {
     public func font(_ font: Font) -> some View {
-        switch html {
-        case .div(let subNodes, let style):
-            var newStyle = style
-            
-            newStyle[.fontSize] = .px(font.size)
-            newStyle[.fontWeight] = .int(font.weight.rawValue)
-
-            if font.design == .rounded {
-                newStyle[.fontFamily] = .raw("sf-pro-rounded-bold")
-            }
-            
-            return ModifiedView(body: self, newHTML: .div(subNodes: subNodes, style: newStyle))
-        case .img(let path, let style):
-            return ModifiedView(body: self, newHTML: .img(path: path, style: style))
-        case .raw(let string):
-            return ModifiedView(body: self, newHTML: .raw(string))
+        var newHTML = html
+            .withStyle(key: .fontSize, value: .px(font.size))
+            .withStyle(key: .fontWeight, value: .int(font.weight.rawValue))
+        
+        if font.design == .rounded {
+            newHTML = newHTML.withStyle(
+                key: .fontFamily,
+                value: .raw("sf-pro-rounded-bold")
+            )
         }
+        
+        return ModifiedView(body: self, newHTML: newHTML)
     }
 }

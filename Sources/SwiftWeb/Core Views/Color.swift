@@ -73,27 +73,23 @@ public struct Color: View, GrowingAxesModifying {
 public extension View {
     func foregroundColor(_ color: Color?) -> some View {
         let newColor: Color = color ?? .clear
-
-        switch html {
-        case .div(let subNodes, let style):
-            var newStyle = style
-
-            newStyle[.color] = .color(newColor)
-            return ModifiedView(body: self, newHTML: .div(subNodes: subNodes, style: newStyle))
-        case .img(let path, let style):
-            return ModifiedView(body: self, newHTML: .img(path: path, style: style))
-        case .raw(let string):
-            return ModifiedView(body: self, newHTML: .raw(string))
-        }
+        
+        return ModifiedView(
+            body: self,
+            newHTML: html.withStyle(
+                key: .color,
+                value: .color(newColor)
+            )
+        )
     }
     
     func systemBlueFilter() -> some View {
         let cssFilter = "contrast(0%) brightness(0%) invert(39%) sepia(81%) saturate(4741%) hue-rotate(202deg) brightness(103%) contrast(101%)"
-        return ModifiedView(body: self, newHTML: html.withAddedStyle(key: .filter, value: .raw(cssFilter)))
+        return ModifiedView(body: self, newHTML: html.withStyle(key: .filter, value: .raw(cssFilter)))
     }
     
     func systemGrayFilter() -> some View {
         let cssFilter = "contrast(0%) brightness(0%) invert(60%) sepia(0%) saturate(0%) hue-rotate(111deg) brightness(98%) contrast(96%)"
-        return ModifiedView(body: self, newHTML: html.withAddedStyle(key: .filter, value: .raw(cssFilter)))
+        return ModifiedView(body: self, newHTML: html.withStyle(key: .filter, value: .raw(cssFilter)))
     }
 }

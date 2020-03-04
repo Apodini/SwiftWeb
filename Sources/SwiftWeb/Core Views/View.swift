@@ -19,9 +19,10 @@ public protocol TypeErasedView {
 public protocol View: TypeErasedView {
     associatedtype Body: View
     
-    // The body property is used to delegate the generation of html for a specific node to another view. It should be
-    // set for all view which enclose other views in order to allow the layout system to propagate properties properly
-    // through the tree.
+    // The body property is used to delegate the generation of html for a
+    // specific node to another view. It should be set for all view which
+    // enclose other views in order to allow the layout system to propagate
+    // properties properly through the tree.
     var body: Body { get }
 }
 
@@ -59,15 +60,18 @@ public extension View {
         return ModifiedView(
             body: self,
             newHTML: html
-                .withAddedStyle(key: .borderRadius, value: .px(radius))
-                .withAddedStyle(key: .overflow, value: .hidden)
+                .withStyle(key: .borderRadius, value: .px(radius))
+                .withStyle(key: .overflow, value: .hidden)
         )
     }
     
-    func shadow(color: Color, radius: Double, x: Double, y: Double) -> some View {
+    func shadow(color: Color,
+                radius: Double,
+                x: Double,
+                y: Double) -> some View {
         return ModifiedView(
             body: self,
-            newHTML: html.withAddedStyle(key: .boxShadow,
+            newHTML: html.withStyle(key: .boxShadow,
                                 value: .shadow(offsetX: x,
                                                offsetY: y,
                                                radius: radius,
@@ -96,15 +100,15 @@ public extension View {
         
         return ModifiedView(body: self, newHTML: .div(
             subNodes: [html
-                .withAddedStyle(key: .flexGrow, value: .one)
-                .withAddedStyle(key: .alignSelf, value: .stretch)],
+                .withStyle(key: .flexGrow, value: .one)
+                .withStyle(key: .alignSelf, value: .stretch)],
             style: paddingStyle)
         )
     }
     
     func border(_ color: Color, width: Double = 1) -> some View {
         return ModifiedView(body: self,
-                            newHTML: html.withAddedStyle(key: .border,
+                            newHTML: html.withStyle(key: .border,
                                                          value: .border(width: width, color: color))
         )
     }
@@ -142,15 +146,19 @@ public extension View {
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode {
         return growingLayoutAxes.reduce(html) { html, growthAxis in
             switch (growthAxis, inLayoutAxis) {
-            // For aligned axis of the layout direction of the parent node and this node the html node can grow along
-            // the primary axis.
+                
+            // For aligned axis of the layout direction of the parent node and
+            // this node the html node can grow along the primary axis.
             case (.horizontal, .horizontal), (.vertical, .vertical):
-                return html.withAddedStyle(key: .flexGrow, value: .one)
-            // For the perpendicular case it needs to stretch across the secondary axis.
+                return html.withStyle(key: .flexGrow, value: .one)
+                
+            // For the perpendicular case it needs to stretch across the
+            // secondary axis.
             case (.vertical, .horizontal), (.horizontal, .vertical):
-                return html.withAddedStyle(key: .alignSelf, value: .stretch)
+                return html.withStyle(key: .alignSelf, value: .stretch)
+                
             case (.undetermined, _):
-                return html.withAddedStyle(key: .flexGrow, value: .one)
+                return html.withStyle(key: .flexGrow, value: .one)
             }
         }
     }

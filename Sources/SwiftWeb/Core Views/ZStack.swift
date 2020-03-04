@@ -38,15 +38,17 @@ public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
 
 public extension View {
     func background<Background>(_ background: Background) -> some View where Background: View {
-        guard let backgroundColor = background as? Color,
-            case .div(let subNodes, let style) = html else {
+        guard let backgroundColor = background as? Color else {
             fatalError("not supported")
         }
-        
-        var newStyle = style
-        newStyle[.backgroundColor] = .color(backgroundColor)
 
-        return ModifiedView(body: self, newHTML: .div(subNodes: subNodes, style: newStyle))
+        return ModifiedView(
+            body: self,
+            newHTML: html.withStyle(
+                key: .backgroundColor,
+                value: .color(backgroundColor)
+            )
+        )
     }
     
     func globalOverlay<Overlay>(@ViewBuilder _ overlay: () -> Overlay) -> some View where Overlay: View {
@@ -57,11 +59,11 @@ public extension View {
             ModifiedView(
                 body: overlay,
                 newHTML: overlay.html
-                    .withAddedStyle(key: .position, value: .fixed)
-                    .withAddedStyle(key: .top, value: .zero)
-                    .withAddedStyle(key: .right, value: .zero)
-                    .withAddedStyle(key: .bottom, value: .zero)
-                    .withAddedStyle(key: .left, value: .zero)
+                    .withStyle(key: .position, value: .fixed)
+                    .withStyle(key: .top, value: .zero)
+                    .withStyle(key: .right, value: .zero)
+                    .withStyle(key: .bottom, value: .zero)
+                    .withStyle(key: .left, value: .zero)
             )
         ))
     }

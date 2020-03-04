@@ -14,10 +14,18 @@ public class SwiftWebServer {
     
     let server: HttpServer
     var staticFilesPath: String?
+    
+    let rootView: TypeErasedView
+    let rootStateContainer: StateContainer
 
     public init<ContentView>(contentView: ContentView, path: String) where ContentView: View {
         server = HttpServer()
+        rootView = contentView
+        rootStateContainer = 
         staticFilesPath = getRessourceDirectoryPath(filePath: path)
+        
+        print("1: \(contentView.body.html.render())")
+        print("2: \(contentView.body.html.render())")
 
         server["/"] = { request in
             return HttpResponse.ok(.text(SwiftWeb.render(view: contentView)))
@@ -35,8 +43,8 @@ public class SwiftWebServer {
         }
         
         server["/websocket"] = websocket(text: { session, text in
-            print(text)
-            session.writeText(text)
+            print("tap on \(text)")
+            self.handleTapEvent(onElementWithID: text)
         }, connected: { _ in
             print("client connected")
         }, disconnected: { _ in
@@ -67,6 +75,15 @@ public class SwiftWebServer {
     }
     
     public func start() throws {
-        try server.start()
+        try server.start(80)
+    }
+    
+    func handleTapEvent(onElementWithID id: String) {
+        _ = rootView.deepMap {
+            if let tapGestureView = $0 as? TypeErasedTapGestureView,
+               tapGestureView.tapGestureViewID == id {
+                tapGestureView.action()
+            }
+        }
     }
 }
