@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  HTMLTemplate.swift
 //  
 //
 //  Created by Quirin Schweigert on 05.01.20.

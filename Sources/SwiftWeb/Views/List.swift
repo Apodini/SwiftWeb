@@ -1,6 +1,6 @@
 //
 //  List.swift
-//  App
+//  
 //
 //  Created by Quirin Schweigert on 12.12.19.
 //
