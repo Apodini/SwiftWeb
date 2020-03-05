@@ -8,7 +8,7 @@
 import Foundation
 
 class HTMLTemplate {
-    static func render(withBody body: String) -> String {
+    static func withContent(_ content: String) -> String {
         return """
             <!DOCTYPE html>
             <html lang="en">
@@ -49,7 +49,7 @@ class HTMLTemplate {
                 </style>
             </head>
             <body>
-                \(body)
+                \(content)
             </body>
             </html>
         """

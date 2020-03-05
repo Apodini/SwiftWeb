@@ -23,7 +23,7 @@ public class SwiftWebServer {
         staticFilesPath = getRessourceDirectoryPath(filePath: path)
 
         server["/"] = { request in
-            return HttpResponse.ok(.text(SwiftWeb.render(view: contentView)))
+            return HttpResponse.ok(.text(HTMLTemplate.withContent("")))
         }
         
         server["/static/:path"] = { request in
@@ -37,11 +37,14 @@ public class SwiftWebServer {
             return HttpResponse.ok(.data(ressource))
         }
         
-        server["/websocket"] = websocket(text: { session, text in
-            print("tap on \(text)")
+        server["/websocket"] = websocket(text: { session, string in
+            print("tap on \(string)")
+            self.viewTree.handleEvent(withID: string)
+            session.writeText(self.viewTree.render().string())
 //            self.handleTapEvent(onElementWithID: text)
-        }, connected: { _ in
+        }, connected: { session in
             print("client connected")
+            session.writeText(self.viewTree.render().string())
         }, disconnected: { _ in
             print("client disconnected")
         })

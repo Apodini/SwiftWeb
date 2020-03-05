@@ -14,8 +14,8 @@ public struct Spacer: View, GrowingAxesModifying {
     public let html: HTMLNode
     
     public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
-        // A Spacer can grow horizontally as well as vertically, dependent on the primary axis of the containing stack
-        // view.
+        // A Spacer can grow horizontally as well as vertically, dependent on the primary axis of
+        // the containing stack view.
         [.undetermined]
     }
 

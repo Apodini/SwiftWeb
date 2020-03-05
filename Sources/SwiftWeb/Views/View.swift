@@ -14,6 +14,9 @@ public protocol TypeErasedView {
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
     func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
+    
+    var viewNode: ViewNode? { get set } // reference to `ViewNode` which contains state
+    var initialState: [String: Any] { get }
 }
 
 public protocol View: TypeErasedView {
@@ -175,7 +178,8 @@ extension View {
     public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
         if let customMappableSelf = self as? CustomMappable {
             
-            // This is where the recursion happens that makes composing TupleViews and ForEach views possible
+            // This is where the recursion happens that makes composing TupleViews and ForEach views
+            // possible
             return customMappableSelf.customMap({
                 $0.map(transform)
             }).flatMap({ $0 })
@@ -213,5 +217,22 @@ public extension View {
     func withDebugReference(_ action: (Self) -> ()) -> Self {
         action(self)
         return self
+    }
+}
+
+
+// State Prototyping
+
+public extension View {
+    var viewNode: ViewNode? {
+        get {
+            nil
+        }
+        
+        set { }
+    }
+    
+    var initialState: [String : Any] {
+        [:]
     }
 }

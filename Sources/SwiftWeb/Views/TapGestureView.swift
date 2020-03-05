@@ -7,16 +7,19 @@
 
 import Foundation
 
-protocol TypeErasedTapGestureView {
+public protocol TypeErasedTapGestureView {
     var tapGestureViewID: String { get }
-    var action: () -> Void { get }
+    func action()
 }
 
 public struct TapGestureView<Content>: TypeErasedTapGestureView, View
 where Content: View {
     public var body: Content
-    var tapGestureViewID = "0000" // UUID()
-    var action: () -> Void
+    public var tapGestureViewID = "0000" // UUID()
+    
+    public func action() {
+        
+    }
     
     public var html: HTMLNode {
         body.html.withCustomAttribute(
@@ -28,6 +31,6 @@ where Content: View {
 
 public extension View {
     func onTapGesture(perform action: @escaping () -> Void) -> some View {
-        return TapGestureView(body: self, action: action)
+        return TapGestureView(body: self)
     }
 }

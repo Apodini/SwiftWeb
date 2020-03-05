@@ -21,14 +21,14 @@ public enum HTMLNode {
         style: [CSSKey: CSSValue] = [:]
     )
     
-    public func render() -> String {
+    public func string() -> String {
         switch self {
         case .raw(let string):
             return string
         case .div(let subNodes, let style, let customAttributes):
             return """
             <div \(Self.generateCSSTag(from: style) ?? "") \(customAttributes.htmlAttributesString)>
-                    \(subNodes.map({ $0.render()}).joined())
+                    \(subNodes.map({ $0.string()}).joined())
                 </div>
             """
         case .img(let path, let style):
