@@ -9,16 +9,12 @@ import Foundation
 
 public class ViewNode {
     public var view: TypeErasedView
-    public var state: [String: Any] {
-        didSet {
-            print(state)
-        }
-    }
+    public let stateStorageNode: StateStorageNode
     public var subContainers: [ViewNode]
     
     init(view: TypeErasedView) {
         self.view = view
-        state = view.initialState
+        stateStorageNode = StateStorageNode()
         subContainers = []
     }
     
@@ -28,20 +24,43 @@ public class ViewNode {
      so that composite views can use that.
      */
     public func render() -> HTMLNode {
-        view.viewNode = self
-        return view.html
+        executeInStateContext { view in
+            view.html
+        }
     }
     
     public func handleEvent(withID id: String) {
-        if let tapGestureView = view as? TypeErasedTapGestureView,
-           id == tapGestureView.tapGestureViewID {
-            tapGestureView.action()
+        executeInStateContext { view in
+            if let tapGestureView = view as? TypeErasedTapGestureView,
+                id == tapGestureView.tapGestureViewID {
+                tapGestureView.action()
+            }
         }
     }
     
-    public func setState(_ newState: [String: Any]) {
-        for (key, value) in newState {
-            state[key] = value
+    public func executeInStateContext<T>(transaction: (TypeErasedView) -> T) -> T {
+        let viewMirror = Mirror(reflecting: view)
+        
+        // This ties all `@State` properties of the view to the `StateStorageNode` associated with
+        // this `ViewNode`.
+        for child in viewMirror.children {
+            if let typeErasedState = child.value as? TypeErasedState {
+                typeErasedState.propertyName = child.label
+                typeErasedState.stateStorageNode = stateStorageNode
+            }
         }
+        
+        // For testing we'll make sure to remove the reference for this storage container for now.
+        // It might be intended behaviour to keep this reference though because then we could
+        // make mutating view state from outside (e.g. a scheduled closure) work.
+        defer {
+            for child in viewMirror.children {
+                if let typeErasedState = child.value as? TypeErasedState {
+                    typeErasedState.stateStorageNode = nil
+                }
+            }
+        }
+        
+        return transaction(view)
     }
 }

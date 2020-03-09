@@ -15,7 +15,6 @@ public protocol TypeErasedView {
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
     func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
     
-    var viewNode: ViewNode? { get set } // reference to `ViewNode` which contains state
     var initialState: [String: Any] { get }
 }
 
