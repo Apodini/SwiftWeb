@@ -9,20 +9,17 @@ import Foundation
 
 public protocol TypeErasedTapGestureView {
     var tapGestureViewID: String { get }
-    func action()
+    var action: () -> Void { get }
 }
 
 public struct TapGestureView<Content>: TypeErasedTapGestureView, View
 where Content: View {
     public var body: Content
-    public var tapGestureViewID = "0000" // UUID()
-    
-    public func action() {
-        
-    }
-    
-    public var html: HTMLNode {
-        body.html.withCustomAttribute(
+    public var action: () -> Void
+    @State public var tapGestureViewID = UUID().uuidString
+
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        htmlOfSubnodes.joined().withCustomAttribute(
             key: "tap-id",
             value: tapGestureViewID
         )
@@ -31,6 +28,6 @@ where Content: View {
 
 public extension View {
     func onTapGesture(perform action: @escaping () -> Void) -> some View {
-        return TapGestureView(body: self)
+        return TapGestureView(body: self, action: action)
     }
 }

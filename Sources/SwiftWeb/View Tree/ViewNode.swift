@@ -41,10 +41,10 @@ public class ViewNode {
                 id == tapGestureView.tapGestureViewID {
                 tapGestureView.action()
             }
-        }
-        
-        subnodes.forEach { subnode in
-            subnode.handleEvent(withID: id)
+            
+            subnodes.forEach { subnode in
+                subnode.handleEvent(withID: id)
+            }
         }
     }
     
@@ -54,19 +54,18 @@ public class ViewNode {
         // This ties all `@State` properties of the view to the `StateStorageNode` associated with
         // this `ViewNode`.
         for child in viewMirror.children {
-            if let typeErasedState = child.value as? TypeErasedState {
-                typeErasedState.propertyName = child.label
-                typeErasedState.stateStorageNode = stateStorageNode
+            if let typeErasedState = child.value as? TypeErasedState, let label = child.label {
+                typeErasedState.connect(to: stateStorageNode, withPropertyName: label)
             }
         }
         
-        // For testing we'll make sure to remove the reference for this storage container for now.
-        // It might be intended behaviour to keep this reference though because then we could
-        // make mutating view state from outside (e.g. a scheduled closure) work.
+        // For testing we'll make sure to remove the reference for this storage container after the
+        // transaction for now. It might be intended behaviour to keep this reference though because
+        // then we could make mutating view state from outside (e.g. a scheduled closure) work.
         defer {
             for child in viewMirror.children {
                 if let typeErasedState = child.value as? TypeErasedState {
-                    typeErasedState.stateStorageNode = nil
+                    typeErasedState.disconnect()
                 }
             }
         }

@@ -7,15 +7,16 @@
 
 import Foundation
 
-protocol TypeErasedState: class {
-    var propertyName: String? { get set }
-    var stateStorageNode: StateStorageNode? { get set }
+public protocol TypeErasedState: class {
+    func connect(to stateStorageNode: StateStorageNode, withPropertyName propertyName: String)
+    func disconnect()
 }
 
 @propertyWrapper public class State<Value>: TypeErasedState {
-    var propertyName: String? = nil
-    var stateStorageNode: StateStorageNode? = nil
     let defaultValue: Value
+    
+    private var propertyName: String? = nil
+    private var stateStorageNode: StateStorageNode? = nil
     
     public var wrappedValue: Value {
         get {
@@ -35,6 +36,21 @@ protocol TypeErasedState: class {
             
             stateStorageNode.setProperty(value: newValue, forKey: propertyName)
         }
+    }
+    
+    public func connect(to stateStorageNode: StateStorageNode,
+                        withPropertyName propertyName: String) {
+        self.propertyName = propertyName
+        self.stateStorageNode = stateStorageNode
+        
+        if stateStorageNode.getProperty(forKey: propertyName) == nil {
+            stateStorageNode.setProperty(value: defaultValue, forKey: propertyName)
+        }
+    }
+    
+    public func disconnect() {
+        self.propertyName = nil
+        self.stateStorageNode = nil
     }
     
     public init(wrappedValue: Value) {
