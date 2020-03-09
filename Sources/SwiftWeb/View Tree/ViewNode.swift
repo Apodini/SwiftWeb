@@ -10,12 +10,14 @@ import Foundation
 public class ViewNode {
     public var view: TypeErasedView
     public let stateStorageNode: StateStorageNode
-    public var subContainers: [ViewNode]
+    public var subnodes: [ViewNode]
     
     init(view: TypeErasedView) {
         self.view = view
         stateStorageNode = StateStorageNode()
-        subContainers = []
+        subnodes = view.mapBody { subView in
+            ViewNode(view: subView)
+        }
     }
     
     /**
@@ -24,8 +26,12 @@ public class ViewNode {
      so that composite views can use that.
      */
     public func render() -> HTMLNode {
-        executeInStateContext { view in
-            view.html
+        let htmlOfSubnodes = subnodes.map { subnode in
+            subnode.render()
+        }
+        
+        return executeInStateContext { view in
+            view.html(forHTMLOfSubnodes: htmlOfSubnodes)
         }
     }
     
@@ -35,6 +41,10 @@ public class ViewNode {
                 id == tapGestureView.tapGestureViewID {
                 tapGestureView.action()
             }
+        }
+        
+        subnodes.forEach { subnode in
+            subnode.handleEvent(withID: id)
         }
     }
     
@@ -62,5 +72,35 @@ public class ViewNode {
         }
         
         return transaction(view)
+    }
+}
+
+extension ViewNode: CustomStringConvertible {
+    public var description: String {
+        if subnodes.isEmpty {
+            return "<ViewNode: \(Self.simpleType(of: view)) \(stateStorageNode.state)/>"
+        } else {
+            return "<ViewNode: \(Self.simpleType(of: view)) \(stateStorageNode.state)>\n\(subnodes.map({ $0.description }).joined(separator: "\n").blockIndented())</ViewNode>"
+        }
+    }
+    
+    private static func simpleType(of value: Any) -> String {
+        let typeString = String(describing: type(of: value))
+        if let simpleTypeString = typeString.split(separator: "<").first {
+            return String(simpleTypeString)
+        } else {
+            return typeString
+        }
+    }
+}
+
+extension String {
+    func blockIndented() -> String {
+        return self
+            .split(separator: "\n")
+            .map {
+                "   \($0)\n"
+            }
+            .joined()
     }
 }

@@ -12,10 +12,11 @@ public protocol TypeErasedView {
     var growingLayoutAxes: Set<GrowingLayoutAxis> { get }
     func html(inLayoutAxis: LayoutAxis) -> HTMLNode
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
+    func mapBody<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
     func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
     
-    var initialState: [String: Any] { get }
+    func html(forHTMLOfSubnodes: [HTMLNode]) -> HTMLNode
 }
 
 public protocol View: TypeErasedView {
@@ -39,6 +40,10 @@ public extension View {
 public extension View {
     var html: HTMLNode {
         body.html
+    }
+    
+    func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        htmlOfSubnodes.joined()
     }
 }
 
@@ -174,6 +179,23 @@ public protocol CustomMappable {
 }
 
 extension View {
+    public func mapBody<T>(_ transform: (TypeErasedView) -> T) -> [T] {
+        guard type(of: Body.self) != type(of: Never.self) else {
+            return []
+        }
+        
+        if let customMappableBody = body as? CustomMappable {
+            
+            // This is where the recursion happens that makes composing TupleViews and ForEach views
+            // possible
+            return customMappableBody.customMap({
+                $0.map(transform)
+            }).flatMap({ $0 })
+        } else {
+            return [transform(body)]
+        }
+    }
+    
     public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
         if let customMappableSelf = self as? CustomMappable {
             
@@ -216,22 +238,5 @@ public extension View {
     func withDebugReference(_ action: (Self) -> ()) -> Self {
         action(self)
         return self
-    }
-}
-
-
-// State Prototyping
-
-public extension View {
-    var viewNode: ViewNode? {
-        get {
-            nil
-        }
-        
-        set { }
-    }
-    
-    var initialState: [String : Any] {
-        [:]
     }
 }

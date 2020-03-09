@@ -1,6 +1,6 @@
 //
 //  HTMLNode.swift
-//  App
+//  
 //
 //  Created by Quirin Schweigert on 02.01.20.
 //
@@ -186,7 +186,7 @@ public enum HTMLNode {
         }
     }
 
-    static func div(style: [CSSKey: CSSValue] = [:], buildSubnode: () -> HTMLNode) -> Self {
+    public static func div(style: [CSSKey: CSSValue] = [:], buildSubnode: () -> HTMLNode) -> Self {
         return .div(subNodes: [buildSubnode()], style: style)
     }
 }
@@ -198,5 +198,17 @@ extension Dictionary where Key == String, Value == String {
                 "\(key)=\"\(value)\""
             }
             .joined(separator: " ")
+    }
+}
+
+public extension Array where Element == HTMLNode {
+    func joined() -> HTMLNode {
+        if isEmpty {
+            return .raw(.init())
+        } else if count == 1, let first = first {
+            return first
+        } else {
+            return .div(subNodes: self)
+        }
     }
 }

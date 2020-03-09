@@ -22,3 +22,9 @@ class ViewTree {
         rootNode.handleEvent(withID: id)
     }
 }
+
+extension ViewTree: CustomStringConvertible {
+    var description: String {
+        rootNode.description
+    }
+}

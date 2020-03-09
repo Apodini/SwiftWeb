@@ -9,24 +9,20 @@ import Foundation
 
 public struct Text: View {
     public typealias Body = Never
-    
-    public let html: HTMLNode
-    
+
     let text: String
+    public let html: HTMLNode = .raw("deprecated")
     
     public init(_ text: String) {
         self.text = text
-        self.html =
-            .div(style: [.justifyContent: .center, .alignItems: .center]) {
-                .div(style: [.flexGrow: .zero]) {
-                    .raw(text)
-                }
-            }
     }
     
-    init(newHTML: HTMLNode, text: String) {
-        html = newHTML
-        self.text = text
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        .div(style: [.justifyContent: .center, .alignItems: .center]) {
+            .div(style: [.flexGrow: .zero]) {
+                .raw(text)
+            }
+        }
     }
 }
 

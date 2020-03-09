@@ -8,11 +8,7 @@
 import Foundation
 
 public class StateStorageNode {
-    public var state: [String: Any] {
-        didSet {
-            print(state)
-        }
-    }
+    public var state: [String: Any]
     
     init() {
         state = [:]

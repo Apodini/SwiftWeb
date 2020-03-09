@@ -41,10 +41,11 @@ public class SwiftWebServer {
             print("tap on \(string)")
             self.viewTree.handleEvent(withID: string)
             session.writeText(self.viewTree.render().string())
-//            self.handleTapEvent(onElementWithID: text)
+            print(self.viewTree.description)
         }, connected: { session in
             print("client connected")
             session.writeText(self.viewTree.render().string())
+            print(self.viewTree.description)
         }, disconnected: { _ in
             print("client disconnected")
         })
@@ -75,13 +76,4 @@ public class SwiftWebServer {
     public func start() throws {
         try server.start(80)
     }
-    
-//    func handleTapEvent(onElementWithID id: String) {
-//        _ = rootView.deepMap {
-//            if let tapGestureView = $0 as? TypeErasedTapGestureView,
-//               tapGestureView.tapGestureViewID == id {
-//                tapGestureView.action()
-//            }
-//        }
-//    }
 }
