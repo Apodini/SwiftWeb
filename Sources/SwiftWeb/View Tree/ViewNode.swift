@@ -15,8 +15,12 @@ public class ViewNode {
     init(view: TypeErasedView) {
         self.view = view
         stateStorageNode = StateStorageNode()
-        subnodes = view.mapBody { subView in
-            ViewNode(view: subView)
+        subnodes = []
+        
+        subnodes = executeInStateContext { view in
+            view.mapBody { subView in
+                ViewNode(view: subView)
+            }
         }
     }
     
@@ -47,7 +51,7 @@ public class ViewNode {
         }
     }
     
-    public func executeInStateContext<T>(transaction: (TypeErasedView) -> T) -> T {
+    public func executeInStateContext<T>(_ transaction: (TypeErasedView) -> T) -> T {
         let viewMirror = Mirror(reflecting: view)
         
         // This ties all `@State` properties of the view to the `StateStorageNode` associated with
