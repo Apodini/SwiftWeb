@@ -21,9 +21,8 @@ public class ViewNode {
     }
     
     /**
-     Put `view` into state context and render its HTML.
-     TODO: recursively render HTML of subnodes and make the render functions take an array of rendered HTML of the subcomponents
-     so that composite views can use that.
+     Put `view` into state context and render its HTML. Recursively render HTML of subnodes and hand the render functions an array
+     of rendered HTML of the subcomponents so that composite views can compose it.
      */
     public func render() -> HTMLNode {
         let htmlOfSubnodes = subnodes.map { subnode in
