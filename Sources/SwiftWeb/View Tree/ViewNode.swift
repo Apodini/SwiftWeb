@@ -20,27 +20,11 @@ public class ViewNode {
         if let oldViewNode = oldViewNode, type(of: view) == type(of: oldViewNode.view) {
             // transfer state to the new node
             stateStorageNode = oldViewNode.stateStorageNode
-            
-            // possibly reconcile deeper nodes
-            subnodes = executeInStateContext { view in
-                view.mapBody { subView in
-                    // case of a single subview
-                    if oldViewNode.subnodes.count == 1, let subnode = oldViewNode.subnodes.first {
-                        return ViewNode(forView: subView, reconciling: subnode)
-                    } else {
-                        // if the type of the new view doesn't match we don't transfer state
-                        return ViewNode(forView: subView)
-                    }
-                }
-            }
+            subnodes = buildSubtree(forView: view, reconcilingSubnodes: oldViewNode.subnodes)
         } else {
             // build subtree with new state
             stateStorageNode = StateStorageNode()
-            subnodes = executeInStateContext { view in
-                view.mapBody { subView in
-                    ViewNode(forView: subView)
-                }
-            }
+            subnodes = buildSubtree(forView: view, reconcilingSubnodes: [])
         }
         
         stateStorageNode.onChange = {
@@ -75,7 +59,8 @@ public class ViewNode {
         }
         
         if !isValid {
-            rebuildSubtree()
+            // rebuild the subtree while reconciling existing subnodes
+            subnodes = buildSubtree(forView: view, reconcilingSubnodes: subnodes)
         }
     }
     
@@ -104,16 +89,23 @@ public class ViewNode {
         return transaction(view)
     }
     
-    public func rebuildSubtree() {
-        subnodes = executeInStateContext { view in
-            view.mapBody { subView in
-                if subnodes.count == 1, let subnode = subnodes.first {
-                    return ViewNode(forView: subView, reconciling: subnode)
-                } else {
-                    return ViewNode(forView: subView)
+    func buildSubtree(forView view: TypeErasedView,
+                      reconcilingSubnodes oldSubnodes: [ViewNode]) -> [ViewNode] {
+        executeInStateContext { view in
+            let newSubviews = view.mapBody { $0 }
+            
+            // for now, if the number of subviews matches, we match pairs at the same indices
+            if oldSubnodes.count == newSubviews.count {
+                return zip(newSubviews, oldSubnodes).map { (newSubview, oldSubnode) in
+                    return ViewNode(forView: newSubview, reconciling: oldSubnode)
+                }
+            } else {
+                return newSubviews.map { subview in
+                    ViewNode(forView: subview)
                 }
             }
         }
+        
     }
 }
 

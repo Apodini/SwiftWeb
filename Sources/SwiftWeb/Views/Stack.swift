@@ -7,9 +7,7 @@
 
 import Foundation
 
-public protocol Stack: View {
-    var subnodes: [HTMLNode] { get }
-}
+public protocol Stack: View { }
 
 extension Stack {
     static func insertSpacers(forSpacing spacing: Double?,

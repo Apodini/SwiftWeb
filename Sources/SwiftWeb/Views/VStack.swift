@@ -9,16 +9,11 @@ import Foundation
 
 public struct VStack<Content>: Stack, GrowingAxesModifying where Content: View {
     public let body: Content
-    
-    public var subnodes: [HTMLNode] = []
     let horizontalAlignment: HorizontalAlignment
+    let spacing: Double?
     
     public var html: HTMLNode {
-        .div(subNodes: subnodes, style: [
-            .display: .flex,
-            .flexDirection: .column,
-            .alignItems: horizontalAlignment.cssValue,
-        ])
+        .raw("not implemented")
     }
     
     public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
@@ -32,9 +27,21 @@ public struct VStack<Content>: Stack, GrowingAxesModifying where Content: View {
                 @ViewBuilder buildSubviews: () -> Content) {
         body = buildSubviews()
         horizontalAlignment = alignment
-        subnodes = Self.insertSpacers(forSpacing: spacing,
-                                      inNodes: body.map { $0.html(inLayoutAxis: .vertical) },
-                                      axis: .vertical)
+        self.spacing = spacing
+    }
+    
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        let htmlOfSpacedSubnodes = Self.insertSpacers(
+            forSpacing: spacing,
+            inNodes: htmlOfSubnodes, // in vertical layout axis?
+            axis: .vertical
+        )
+        
+        return .div(subNodes: htmlOfSpacedSubnodes, style: [
+            .display: .flex,
+            .flexDirection: .column,
+            .alignItems: horizontalAlignment.cssValue,
+        ])
     }
 }
 

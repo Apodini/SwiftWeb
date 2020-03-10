@@ -204,6 +204,7 @@ extension Dictionary where Key == String, Value == String {
 public extension Array where Element == HTMLNode {
     func joined() -> HTMLNode {
         if isEmpty {
+            print("joining empty html")
             return .raw(.init())
         } else if count == 1, let first = first {
             return first
