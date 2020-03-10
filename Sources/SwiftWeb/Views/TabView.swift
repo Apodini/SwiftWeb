@@ -9,11 +9,11 @@ import Foundation
 
 public struct TabView<Content>: View where Content: View {
     let content: Content
-    let selectionValue: Int
+    @State var selectionValue: Int = 0
     
     public init(selection: Int = 0, @ViewBuilder content: () -> Content) {
-        self.selectionValue = selection
         self.content = content()
+        self.selectionValue = selection
     }
     
     public var body: some View {
@@ -45,9 +45,14 @@ public struct TabView<Content>: View where Content: View {
                             .frame(width: 22.0, height: 22.0)
                     }
                     
-                    return index == self.selectionValue ?
-                        stack.systemBlueFilter().anyView()
-                        : stack.systemGrayFilter().anyView()
+                    let tabItemView = Text(String(describing: index))
+//                        index == self.selectionValue ?
+//                        stack.systemBlueFilter().anyView()
+//                        : stack.systemGrayFilter().anyView()
+                    
+                    return tabItemView.onTapGesture {
+                        self.selectionValue = index
+                    }.anyView()
                 }
                 
                 Spacer()

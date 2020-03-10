@@ -7,26 +7,33 @@
 
 import Foundation
 
-public struct AnyView: View, GrowingAxesModifying {
-    
+public struct AnyView: View, CustomMappable {
     public typealias Body = Never
+    let containedView: TypeErasedView
     
-    public let html: HTMLNode
+    public var html: HTMLNode {
+        .raw("not implemented")
+    }
     
-    public let modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis>
-    
-    init(html: HTMLNode, modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> = []) {
-        self.html = html
-        self.modifiedGrowingLayoutAxes = modifiedGrowingLayoutAxes
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        containedView.html(forHTMLOfSubnodes: htmlOfSubnodes)
     }
     
     init<Content>(content: Content) where Content: View {
-        self.init(html: content.html, modifiedGrowingLayoutAxes: content.growingLayoutAxes)
+        containedView = content
+    }
+    
+    init(content: TypeErasedView) {
+        containedView = content
+    }
+    
+    public func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
+        return [transform(containedView)]
     }
 }
 
 public extension TypeErasedView {
     func anyView() -> AnyView {
-        return AnyView(html: html, modifiedGrowingLayoutAxes: growingLayoutAxes)
+        return AnyView(content: self)
     }
 }

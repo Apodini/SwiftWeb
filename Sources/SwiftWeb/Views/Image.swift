@@ -11,9 +11,7 @@ public struct Image: View {
     public typealias Body = Never
     
     public var html: HTMLNode {
-        .div {
-            .img(path: path)
-        }
+        .raw("not implemented")
     }
     
     let path: String
@@ -29,5 +27,11 @@ public struct Image: View {
             }
         
         return ModifiedView(body: EmptyView(), newHTML: newHTML)
+    }
+    
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        .div {
+            .img(path: path)
+        }
     }
 }
