@@ -10,8 +10,8 @@ import Foundation
 class ViewTree {
     let rootNode: ViewNode
     
-    init(rootView: TypeErasedView) {
-        rootNode = ViewNode(view: rootView)
+    init(withRootView rootView: TypeErasedView) {
+        rootNode = ViewNode(forView: rootView)
     }
     
     func render() -> HTMLNode {

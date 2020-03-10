@@ -11,16 +11,40 @@ public class ViewNode {
     public var view: TypeErasedView
     public let stateStorageNode: StateStorageNode
     public var subnodes: [ViewNode]
-    
-    init(view: TypeErasedView) {
+    var isValid = true
+
+    init(forView view: TypeErasedView, reconciling oldViewNode: ViewNode? = nil) {
         self.view = view
-        stateStorageNode = StateStorageNode()
         subnodes = []
-        
-        subnodes = executeInStateContext { view in
-            view.mapBody { subView in
-                ViewNode(view: subView)
+
+        if let oldViewNode = oldViewNode, type(of: view) == type(of: oldViewNode.view) {
+            // transfer state to the new node
+            stateStorageNode = oldViewNode.stateStorageNode
+            
+            // possibly reconcile deeper nodes
+            subnodes = executeInStateContext { view in
+                view.mapBody { subView in
+                    // case of a single subview
+                    if oldViewNode.subnodes.count == 1, let subnode = oldViewNode.subnodes.first {
+                        return ViewNode(forView: subView, reconciling: subnode)
+                    } else {
+                        // if the type of the new view doesn't match we don't transfer state
+                        return ViewNode(forView: subView)
+                    }
+                }
             }
+        } else {
+            // build subtree with new state
+            stateStorageNode = StateStorageNode()
+            subnodes = executeInStateContext { view in
+                view.mapBody { subView in
+                    ViewNode(forView: subView)
+                }
+            }
+        }
+        
+        stateStorageNode.onChange = {
+            self.isValid = false
         }
     }
     
@@ -49,6 +73,10 @@ public class ViewNode {
                 subnode.handleEvent(withID: id)
             }
         }
+        
+        if !isValid {
+            rebuildSubtree()
+        }
     }
     
     public func executeInStateContext<T>(_ transaction: (TypeErasedView) -> T) -> T {
@@ -75,6 +103,18 @@ public class ViewNode {
         
         return transaction(view)
     }
+    
+    public func rebuildSubtree() {
+        subnodes = executeInStateContext { view in
+            view.mapBody { subView in
+                if subnodes.count == 1, let subnode = subnodes.first {
+                    return ViewNode(forView: subView, reconciling: subnode)
+                } else {
+                    return ViewNode(forView: subView)
+                }
+            }
+        }
+    }
 }
 
 extension ViewNode: CustomStringConvertible {
@@ -82,7 +122,11 @@ extension ViewNode: CustomStringConvertible {
         if subnodes.isEmpty {
             return "<ViewNode: \(Self.simpleType(of: view)) \(stateStorageNode.state)/>"
         } else {
-            return "<ViewNode: \(Self.simpleType(of: view)) \(stateStorageNode.state)>\n\(subnodes.map({ $0.description }).joined(separator: "\n").blockIndented())</ViewNode>"
+            return """
+                <ViewNode: \(Self.simpleType(of: view)) \(stateStorageNode.state)>
+                \(subnodes.map({ $0.description }).joined(separator: "\n").blockIndented())
+                </ViewNode>
+                """
         }
     }
     
@@ -101,8 +145,8 @@ extension String {
         return self
             .split(separator: "\n")
             .map {
-                "   \($0)\n"
+                "   \($0)"
             }
-            .joined()
+            .joined(separator: "\n")
     }
 }

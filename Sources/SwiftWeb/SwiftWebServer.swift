@@ -19,7 +19,7 @@ public class SwiftWebServer {
 
     public init<ContentView>(contentView: ContentView, path: String) where ContentView: View {
         server = HttpServer()
-        viewTree = ViewTree(rootView: contentView)
+        viewTree = ViewTree(withRootView: contentView)
         staticFilesPath = getRessourceDirectoryPath(filePath: path)
 
         server["/"] = { request in
