@@ -39,16 +39,14 @@ public struct TabView<Content>: View where Content: View {
                     let stack = VStack(spacing: 7) {
                         text
                             .font(.system(size: 11, weight: .medium))
-                            .foregroundColor(Color(white: 0.58))
                         image
                             .resizable()
                             .frame(width: 22.0, height: 22.0)
                     }
                     
-                    let tabItemView = Text(String(describing: index))
-//                        index == self.selectionValue ?
-//                        stack.systemBlueFilter().anyView()
-//                        : stack.systemGrayFilter().anyView()
+                    let tabItemView = index == self.selectionValue ?
+                        stack.systemBlueFilter().anyView()
+                        : stack.systemGrayFilter().anyView()
                     
                     return tabItemView.onTapGesture {
                         self.selectionValue = index
@@ -63,6 +61,5 @@ public struct TabView<Content>: View where Content: View {
                 .frame(height: 0.5)
         }
         .background(Color(white: 0.97))
-        
     }
 }

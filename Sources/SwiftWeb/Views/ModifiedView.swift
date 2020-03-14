@@ -7,6 +7,7 @@
 
 import Foundation
 
+// deprecated, remove after migration to ViewNode rendering system is done
 public struct ModifiedView<Body>: View where Body: View {
     public var body: Body
     

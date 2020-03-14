@@ -9,29 +9,37 @@ import Foundation
 
 public struct Image: View {
     public typealias Body = Never
+    private let isResizable: Bool
     
     public var html: HTMLNode {
         .raw("not implemented")
     }
     
-    let path: String
+    let name: String
 
     public init(_ name: String) {
-        path = name
+        self.name = name
+        isResizable = false
+    }
+    
+    private init(_ name: String, isResizable: Bool) {
+        self.name = name
+        self.isResizable = isResizable
     }
 
-    public func resizable() -> some View {
-        let newHTML: HTMLNode =
-            .div(style: [.alignItems : .center, .justifyContent: .center]) {
-                .img(path: path, style: [.width: .percent(100), .height: .percent(100)])
-            }
-        
-        return ModifiedView(body: EmptyView(), newHTML: newHTML)
+    public func resizable() -> Image {
+        return Self(name, isResizable: true)
     }
     
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
-        .div {
-            .img(path: path)
+        if !isResizable {
+            return .div {
+                .img(path: name)
+            }
+        } else {
+            return .div(style: [.alignItems : .center, .justifyContent: .center]) {
+                .img(path: name, style: [.width: .percent(100), .height: .percent(100)])
+            }
         }
     }
 }

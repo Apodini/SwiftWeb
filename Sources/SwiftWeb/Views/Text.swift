@@ -25,20 +25,3 @@ public struct Text: View {
         }
     }
 }
-
-extension View {
-    public func font(_ font: Font) -> some View {
-        var newHTML = html
-            .withStyle(key: .fontSize, value: .px(font.size))
-            .withStyle(key: .fontWeight, value: .int(font.weight.rawValue))
-        
-        if font.design == .rounded {
-            newHTML = newHTML.withStyle(
-                key: .fontFamily,
-                value: .raw("sf-pro-rounded-bold")
-            )
-        }
-        
-        return ModifiedView(body: self, newHTML: newHTML)
-    }
-}

@@ -16,9 +16,13 @@ public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
     let minHeight: Double?
     
     public var html: HTMLNode {
-        .div(
+        .raw("not implemented")
+    }
+    
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        return .div(
             subNodes: [
-                body.html
+                htmlOfSubnodes.joined()
                     .withStyle(key: .flexGrow, value: .one)
                     .withStyle(key: .alignSelf, value: .stretch)
             ],

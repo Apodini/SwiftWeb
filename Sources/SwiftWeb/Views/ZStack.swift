@@ -41,30 +41,26 @@ public extension View {
         guard let backgroundColor = background as? Color else {
             fatalError("not supported")
         }
-
-        return ModifiedView(
-            body: self,
-            newHTML: html.withStyle(
+        
+        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+            html.withStyle(
                 key: .backgroundColor,
                 value: .color(backgroundColor)
             )
-        )
+        })
     }
     
     func globalOverlay<Overlay>(@ViewBuilder _ overlay: () -> Overlay) -> some View where Overlay: View {
-        let overlay = overlay()
-        
         return TupleView((
             self,
-            ModifiedView(
-                body: overlay,
-                newHTML: overlay.html
+            ModifiedContent(content: overlay(), modifier: HTMLTransformingViewModifier() { html in
+                html
                     .withStyle(key: .position, value: .fixed)
                     .withStyle(key: .top, value: .zero)
                     .withStyle(key: .right, value: .zero)
                     .withStyle(key: .bottom, value: .zero)
                     .withStyle(key: .left, value: .zero)
-            )
+            })
         ))
     }
 }
