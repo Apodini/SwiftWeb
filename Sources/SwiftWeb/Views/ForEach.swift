@@ -12,10 +12,6 @@ public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : Rand
     let idKeyPath: KeyPath<Data.Element, ID>
     let content: (Data.Element) -> Content
     
-    public var html: HTMLNode {
-        return .raw("not implemented")
-    }
-    
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         htmlOfSubnodes.joined()
     }

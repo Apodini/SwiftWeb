@@ -11,10 +11,6 @@ public struct AnyView: View, CustomMappable {
     public typealias Body = Never
     let containedView: TypeErasedView
     
-    public var html: HTMLNode {
-        .raw("not implemented")
-    }
-    
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         containedView.html(forHTMLOfSubnodes: htmlOfSubnodes)
     }

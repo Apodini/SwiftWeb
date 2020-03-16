@@ -8,17 +8,13 @@
 import Foundation
 
 public protocol TypeErasedView {
-    @available(*, deprecated, message: "use `html(forHTMLOfSubnodes: [HTMLNode]) -> HTMLNode` instead")
-    var html: HTMLNode { get }
-    
     var layoutAxis: LayoutAxis { get }
+    func html(forHTMLOfSubnodes: [HTMLNode]) -> HTMLNode
     
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func mapBody<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
     func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
-    
-    func html(forHTMLOfSubnodes: [HTMLNode]) -> HTMLNode
 }
 
 public protocol View: TypeErasedView {
@@ -44,10 +40,6 @@ public extension View {
 }
 
 public extension View {
-    var html: HTMLNode {
-        .raw("not implemented")
-    }
-    
     func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         htmlOfSubnodes.joined()
     }

@@ -19,10 +19,6 @@ public struct Spacer: View, GrowingAxesModifying {
             [.undetermined]
     }
     
-    public var html: HTMLNode {
-        .raw("not implemented")
-    }
-
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         .div()
     }

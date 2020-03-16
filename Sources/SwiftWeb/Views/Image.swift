@@ -11,10 +11,6 @@ public struct Image: View {
     public typealias Body = Never
     private let isResizable: Bool
     
-    public var html: HTMLNode {
-        .raw("not implemented")
-    }
-    
     let name: String
 
     public init(_ name: String) {

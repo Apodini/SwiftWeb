@@ -14,11 +14,7 @@ public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
     let height: Double?
     let minWidth: Double?
     let minHeight: Double?
-    
-    public var html: HTMLNode {
-        .raw("not implemented")
-    }
-    
+
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         return .div(
             subNodes: [

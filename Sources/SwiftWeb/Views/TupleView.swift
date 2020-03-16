@@ -21,10 +21,6 @@ public struct TupleView<T>: View, TypeErasedTupleView {
         self.value = value
     }
     
-    public var html: HTMLNode {
-        .raw("not implemented")
-    }
-    
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         htmlOfSubnodes.joined()
     }

@@ -30,10 +30,6 @@ public struct Color: View, GrowingAxesModifying {
         return "rgba(\(color.red), \(color.green), \(color.blue), \(color.alpha))"
     }
     
-    public var html: HTMLNode {
-        .raw("not implemented")
-    }
-    
     public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>)
         -> Set<GrowingLayoutAxis> {
             [.vertical, .horizontal]

@@ -1,6 +1,6 @@
 //
 //  PreferenceView.swift
-//  
+//
 //
 //  Created by Quirin Schweigert on 18.02.20.
 //
