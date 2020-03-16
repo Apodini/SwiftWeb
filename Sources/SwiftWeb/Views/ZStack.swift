@@ -12,17 +12,19 @@ public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
     
     public let body: Content
     
-    public var subnodes: [HTMLNode] = []
-    
     public var html: HTMLNode {
-        let stackedSubnodes = subnodes.map { node -> HTMLNode in
+        .raw("not implemented")
+    }
+    
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        let stackedSubnodes = htmlOfSubnodes.map { node -> HTMLNode in // TODO htmlofsubnodes in vertical layout axis
             .div(style: [
-                    .position: .absolute,
-                    .width: .percent(100),
-                    .height: .percent(100),
-                    .display: .flex,
-                    .flexDirection: .column,
-                ]) {
+                .position: .absolute,
+                .width: .percent(100),
+                .height: .percent(100),
+                .display: .flex,
+                .flexDirection: .column,
+            ]) {
                 node
             }
         }
@@ -32,7 +34,6 @@ public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
     
     public init(@ViewBuilder content: () -> Content) {
         body = content()
-        subnodes = body.map { $0.html(inLayoutAxis: .vertical) }
     }
 }
 

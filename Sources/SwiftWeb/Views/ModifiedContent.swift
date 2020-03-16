@@ -8,7 +8,7 @@
 import Foundation
 
 struct ModifiedContent<Content, Modifier>: View
-where Content: View, Modifier: ViewModifier, Modifier.Content == Content {
+where Modifier: ViewModifier, Modifier.Content == Content {
     let content: Content
     let modifier: Modifier
     

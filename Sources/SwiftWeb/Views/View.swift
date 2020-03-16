@@ -64,26 +64,24 @@ public extension View where Body == Never {
 
 public extension View {
     func cornerRadius(_ radius: Double) -> some View {
-        return ModifiedView(
-            body: self,
-            newHTML: html
+        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+            html
                 .withStyle(key: .borderRadius, value: .px(radius))
                 .withStyle(key: .overflow, value: .hidden)
-        )
+        })
     }
     
     func shadow(color: Color,
                 radius: Double,
                 x: Double,
                 y: Double) -> some View {
-        return ModifiedView(
-            body: self,
-            newHTML: html.withStyle(key: .boxShadow,
-                                value: .shadow(offsetX: x,
-                                               offsetY: y,
-                                               radius: radius,
-                                               color: color))
-        )
+        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+            html.withStyle(key: .boxShadow,
+                           value: .shadow(offsetX: x,
+                                          offsetY: y,
+                                          radius: radius,
+                                          color: color))
+        })
     }
     
     func shadow() -> some View {
@@ -105,19 +103,21 @@ public extension View {
             edges.contains($0.edgeSet) ? ($0.cssKey, HTMLNode.CSSValue.px(length)) : nil
         }))
         
-        return ModifiedView(body: self, newHTML: .div(
-            subNodes: [html
-                .withStyle(key: .flexGrow, value: .one)
-                .withStyle(key: .alignSelf, value: .stretch)],
-            style: paddingStyle)
-        )
+        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+            .div(
+                subNodes: [html
+                    .withStyle(key: .flexGrow, value: .one)
+                    .withStyle(key: .alignSelf, value: .stretch)],
+                style: paddingStyle
+            )
+        })
     }
     
     func border(_ color: Color, width: Double = 1) -> some View {
-        return ModifiedView(body: self,
-                            newHTML: html.withStyle(key: .border,
-                                                         value: .border(width: width, color: color))
-        )
+        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+            html.withStyle(key: .border,
+                           value: .border(width: width, color: color))
+        })
     }
 }
 
