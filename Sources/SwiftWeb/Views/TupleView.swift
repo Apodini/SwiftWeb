@@ -25,12 +25,6 @@ public struct TupleView<T>: View, TypeErasedTupleView {
         htmlOfSubnodes.joined()
     }
     
-//    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
-//        self.map(\.growingLayoutAxes).reduce([]) { accumulator, growthAxes in
-//            accumulator.union(growthAxes)
-//        }
-//    }
-    
     public func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
         let mirror = Mirror(reflecting: value)
         return mirror.children

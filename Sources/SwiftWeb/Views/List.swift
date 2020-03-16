@@ -14,7 +14,12 @@ public struct List<Content>: View, GrowingAxesModifying where Content: View {
         self.content = content()
     }
     
-    public init<Data, ID, RowContent>(_ data: Data, id: KeyPath<Data.Element, ID>, rowContent: @escaping (Data.Element) -> RowContent) where Content == ForEach<Data, ID, HStack<RowContent>>, Data : RandomAccessCollection, ID : Hashable, RowContent : View {
+    public init<Data, ID, RowContent>(_ data: Data,
+                                      id: KeyPath<Data.Element, ID>,
+                                      rowContent: @escaping (Data.Element) -> RowContent)
+        where Content == ForEach<Data, ID, HStack<RowContent>>,
+              Data : RandomAccessCollection,
+              ID : Hashable, RowContent : View {
         
         content = ForEach(data, id: id) { element in
             HStack(alignment: .leading) {

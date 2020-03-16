@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : RandomAccessCollection, Content: View { // ID : Hashable,
+public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : RandomAccessCollection, Content: View { // ID : Hashable
     let data: Data
     let idKeyPath: KeyPath<Data.Element, ID>
     let content: (Data.Element) -> Content

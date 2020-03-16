@@ -79,14 +79,4 @@ public extension View {
             html.withStyle(key: .color, value: .color(newColor))
         })
     }
-    
-//    func systemBlueFilter() -> some View {
-//        let cssFilter = "contrast(0%) brightness(0%) invert(39%) sepia(81%) saturate(4741%) hue-rotate(202deg) brightness(103%) contrast(101%)"
-//        return ModifiedView(body: self, newHTML: html.withStyle(key: .filter, value: .raw(cssFilter)))
-//    }
-//
-//    func systemGrayFilter() -> some View {
-//        let cssFilter = "contrast(0%) brightness(0%) invert(60%) sepia(0%) saturate(0%) hue-rotate(111deg) brightness(98%) contrast(96%)"
-//        return ModifiedView(body: self, newHTML: html.withStyle(key: .filter, value: .raw(cssFilter)))
-//    }
 }
