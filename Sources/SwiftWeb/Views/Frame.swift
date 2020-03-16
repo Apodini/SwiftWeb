@@ -35,9 +35,10 @@ public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
         )
     }
     
-    // Fixing the width and / or height of a View removes its possibility to grow in the respective axis.
-    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
-        Set<GrowingLayoutAxis>(body.growingLayoutAxes.compactMap { axis in
+    // Fixing the width and / or height of a View removes its possibility to grow in the respective
+    // axis.
+    public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes growingAxesOfSubnodes: Set<GrowingLayoutAxis>) -> Set<GrowingLayoutAxis> {
+        Set<GrowingLayoutAxis>(growingAxesOfSubnodes.compactMap { axis in
             switch (axis: axis, width: width, height: height) {
             case (axis: .horizontal, width: .some(_), height: _):
                 return nil

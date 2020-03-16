@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol TypeErasedTupleView: GrowingAxesModifying, CustomMappable {
+public protocol TypeErasedTupleView: CustomMappable {
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
 }
@@ -22,14 +22,18 @@ public struct TupleView<T>: View, TypeErasedTupleView {
     }
     
     public var html: HTMLNode {
-        return .div(subNodes: map(\.html), style: [:])
+        .raw("not implemented")
     }
     
-    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
-        self.map(\.growingLayoutAxes).reduce([]) { accumulator, growthAxes in
-            accumulator.union(growthAxes)
-        }
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        htmlOfSubnodes.joined()
     }
+    
+//    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
+//        self.map(\.growingLayoutAxes).reduce([]) { accumulator, growthAxes in
+//            accumulator.union(growthAxes)
+//        }
+//    }
     
     public func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
         let mirror = Mirror(reflecting: value)

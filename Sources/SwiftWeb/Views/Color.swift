@@ -34,6 +34,11 @@ public struct Color: View, GrowingAxesModifying {
         .raw("not implemented")
     }
     
+    public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>)
+        -> Set<GrowingLayoutAxis> {
+            [.vertical, .horizontal]
+    }
+    
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         .div(style: [
             .backgroundColor : .color(self),
@@ -41,11 +46,7 @@ public struct Color: View, GrowingAxesModifying {
             .flexGrow: .one
         ])
     }
-    
-    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> {
-        [.vertical, .horizontal]
-    }
-    
+
     public init(red: Double, green: Double, blue: Double, alpha: Double) {
         color = (red: Int(red * 255), green: Int(green * 255), blue: Int(blue * 255), alpha: alpha)
         clear = false

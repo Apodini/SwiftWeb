@@ -33,14 +33,37 @@ public class ViewNode {
     }
     
     /**
+     To adapt the SwiftUI layout system (the effect of Spacers and growing properties of views in general) we keep track of the set of
+     growing axes for each view which we propagate through the view tree. This property is used when rendering to set CSS properties
+     accordingly at each node of the tree.
+     */
+    var growingLayoutAxes: Set<GrowingLayoutAxis> { // TODO: buffer this
+        let growingLayoutAxesOfSubnodes = subnodes
+            .map(\.growingLayoutAxes)
+            .reduce(Set<GrowingLayoutAxis>()) { accumulator, growthAxes in
+                accumulator.union(growthAxes)
+        }
+        
+        if let growingAxesModifyingView = view as? GrowingAxesModifying {
+            return growingAxesModifyingView
+                .modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: growingLayoutAxesOfSubnodes)
+        }
+        
+        return growingLayoutAxesOfSubnodes
+    }
+    
+    /**
      Put `view` into state context and render its HTML. Recursively render HTML of subnodes and hand the render functions an array
-     of rendered HTML of the subcomponents so that composite views can compose it.
+     of rendered HTML of the subcomponents so that composite views can compose it. While rendering, keep track of the growing axes
+     of the view which can be determined by `View ` by implementing the protocol `GrowingLayoutAxesModifying`.
      */
     public func render() -> HTMLNode {
         let htmlOfSubnodes = subnodes.map { subnode in
-            subnode.render()
+            return Self.applyGrowingProperties(toHTMLNode: subnode.render(),
+                                               forGrowingLayoutAxes: subnode.growingLayoutAxes,
+                                               inLayoutAxis: view.layoutAxis)
         }
-        
+
         return executeInStateContext { view in
             view.html(forHTMLOfSubnodes: htmlOfSubnodes)
         }
@@ -105,17 +128,44 @@ public class ViewNode {
                 }
             }
         }
-        
+    }
+    
+    /**
+     Apply CSS properties to `toHTMLNode` to make it grow in `forGrowingLayoutAxes` when placed in a CSS flex layout with
+     the layout axis `inLayoutAxis`.
+     */
+    static func applyGrowingProperties(toHTMLNode htmlNode: HTMLNode,
+                                       forGrowingLayoutAxes growingLayoutAxes: Set<GrowingLayoutAxis>,
+                                       inLayoutAxis parentLayoutAxis: LayoutAxis) -> HTMLNode {
+        growingLayoutAxes.reduce(htmlNode) { html, growthAxis in
+            switch (growthAxis, parentLayoutAxis) {
+                
+            // For aligned axis of the layout direction of the parent node and this node the html
+            // node can grow along the primary axis.
+            case (.horizontal, .horizontal), (.vertical, .vertical):
+                return html.withStyle(key: .flexGrow, value: .one)
+                
+            // For the perpendicular case it needs to stretch across the
+            // secondary axis.
+            case (.vertical, .horizontal), (.horizontal, .vertical):
+                return html.withStyle(key: .alignSelf, value: .stretch)
+                
+            case (.undetermined, _):
+                return html.withStyle(key: .flexGrow, value: .one)
+            }
+        }
     }
 }
 
 extension ViewNode: CustomStringConvertible {
     public var description: String {
+        let descriptionOfThisNode = "\(Self.simpleType(of: view)) \(stateStorageNode.state)"
+        
         if subnodes.isEmpty {
-            return "<ViewNode: \(Self.simpleType(of: view)) \(stateStorageNode.state)/>"
+            return "<ViewNode: \(descriptionOfThisNode)/>"
         } else {
             return """
-                <ViewNode: \(Self.simpleType(of: view)) \(stateStorageNode.state)>
+                <ViewNode: \(descriptionOfThisNode)>
                 \(subnodes.map({ $0.description }).joined(separator: "\n").blockIndented())
                 </ViewNode>
                 """

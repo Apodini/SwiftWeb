@@ -8,12 +8,15 @@
 import Foundation
 
 public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
-    public var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> = [.vertical, .horizontal]
-    
     public let body: Content
     
     public var html: HTMLNode {
         .raw("not implemented")
+    }
+    
+    public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>)
+        -> Set<GrowingLayoutAxis> {
+            [.vertical, .horizontal]
     }
     
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {

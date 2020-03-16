@@ -13,7 +13,11 @@ public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : Rand
     let content: (Data.Element) -> Content
     
     public var html: HTMLNode {
-        return .div(subNodes: map(\.html), style: [:])
+        return .raw("not implemented")
+    }
+    
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        htmlOfSubnodes.joined()
     }
     
     public init(_ data: Data, id idKeyPath: KeyPath<Data.Element, ID>, content: @escaping (Data.Element) -> Content) {

@@ -8,9 +8,11 @@
 import Foundation
 
 public protocol TypeErasedView {
+    @available(*, deprecated, message: "use `html(forHTMLOfSubnodes: [HTMLNode]) -> HTMLNode` instead")
     var html: HTMLNode { get }
-    var growingLayoutAxes: Set<GrowingLayoutAxis> { get }
-    func html(inLayoutAxis: LayoutAxis) -> HTMLNode
+    
+    var layoutAxis: LayoutAxis { get }
+    
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func mapBody<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
@@ -32,6 +34,10 @@ public protocol View: TypeErasedView {
 // MARK: View body default implementation
 
 public extension View {
+    public var layoutAxis: LayoutAxis {
+        .vertical
+    }
+    
     var body: some View {
         return EmptyView()
     }
@@ -39,7 +45,7 @@ public extension View {
 
 public extension View {
     var html: HTMLNode {
-        body.html
+        .raw("not implemented")
     }
     
     func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
@@ -127,47 +133,6 @@ public extension View {
 public extension TypeErasedView {
     var debugDescription: String {
         String(describing: Self.self)
-    }
-}
-
-
-// MARK: View layout growth axes
-
-public protocol GrowingAxesModifying {
-    var modifiedGrowingLayoutAxes: Set<GrowingLayoutAxis> { get }
-}
-
-public extension View {
-    var growingLayoutAxes: Set<GrowingLayoutAxis> {
-        if let growingAxesModifyingSelf = self as? GrowingAxesModifying {
-            return growingAxesModifyingSelf.modifiedGrowingLayoutAxes
-        } else if Body.self != Never.self {
-            return body.growingLayoutAxes
-        } else {
-            return []
-        }
-    }
-}
-
-public extension View {
-    func html(inLayoutAxis: LayoutAxis) -> HTMLNode {
-        return growingLayoutAxes.reduce(html) { html, growthAxis in
-            switch (growthAxis, inLayoutAxis) {
-                
-            // For aligned axis of the layout direction of the parent node and
-            // this node the html node can grow along the primary axis.
-            case (.horizontal, .horizontal), (.vertical, .vertical):
-                return html.withStyle(key: .flexGrow, value: .one)
-                
-            // For the perpendicular case it needs to stretch across the
-            // secondary axis.
-            case (.vertical, .horizontal), (.horizontal, .vertical):
-                return html.withStyle(key: .alignSelf, value: .stretch)
-                
-            case (.undetermined, _):
-                return html.withStyle(key: .flexGrow, value: .one)
-            }
-        }
     }
 }
 
