@@ -34,7 +34,7 @@ public protocol View: TypeErasedView {
 // MARK: View body default implementation
 
 public extension View {
-    public var layoutAxis: LayoutAxis {
+    var layoutAxis: LayoutAxis {
         .vertical
     }
     
