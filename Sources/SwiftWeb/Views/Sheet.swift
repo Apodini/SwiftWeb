@@ -11,13 +11,20 @@ public extension View {
             return self.anyView()
         } else {
             return self.globalOverlay {
-                VStack {
+                HStack {
                     Spacer()
                     
-                    content()
-                        .frame(width: 618.0)
-                        .cornerRadius(10.0)
-                        .shadow(color: Color(white: 0.0).opacity(0.25), radius: 129.0, x: 0.0, y: 2.0)
+                    VStack {
+                        Spacer()
+                        
+                        content()
+                            .frame(width: 618.0)
+                            .cornerRadius(10.0)
+                            .shadow(color: Color(white: 0.0).opacity(0.25),
+                                    radius: 129.0, x: 0.0, y: 2.0)
+                        
+                        Spacer()
+                    }
                     
                     Spacer()
                 }
