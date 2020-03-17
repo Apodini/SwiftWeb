@@ -46,6 +46,10 @@ class HTMLTemplate {
                         align-items: center;
                         overflow: visible;
                     }
+        
+                    * {
+                        pointer-events: none;
+                    }
                 </style>
             </head>
             <body>

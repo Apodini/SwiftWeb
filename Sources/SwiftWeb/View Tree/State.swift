@@ -56,4 +56,15 @@ public protocol TypeErasedState: class {
     public init(wrappedValue: Value) {
         self.defaultValue = wrappedValue
     }
+    
+    public var projectedValue: Binding<Value> {
+        return binding
+    }
+
+    public var binding: Binding<Value> {
+        return Binding(
+            getValue: { self.wrappedValue },
+            setValue: { self.wrappedValue = $0 }
+        )
+    }
 }

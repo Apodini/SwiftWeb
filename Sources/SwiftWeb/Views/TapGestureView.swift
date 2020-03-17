@@ -19,10 +19,10 @@ where Content: View {
     @State public var tapGestureViewID = UUID().uuidString
 
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
-        htmlOfSubnodes.joined().withCustomAttribute(
-            key: "tap-id",
-            value: tapGestureViewID
-        )
+        htmlOfSubnodes
+            .joined()
+            .withCustomAttribute(key: "tap-id", value: tapGestureViewID)
+            .withStyle(key: .pointerEvents, value: .auto)
     }
 }
 

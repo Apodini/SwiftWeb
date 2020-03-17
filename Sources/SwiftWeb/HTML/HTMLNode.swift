@@ -46,6 +46,7 @@ public enum HTMLNode {
         
         let cssString = styleDictionary
             .compactMap { (key, value) in "\(key): \(value.cssString); " }
+            .sorted()
             .joined()
         
         return "style=\"\(cssString)\""
@@ -123,6 +124,7 @@ public enum HTMLNode {
         case right
         case bottom
         case fontFamily = "font-family"
+        case pointerEvents = "pointer-events"
         
         public var description: String {
             self.rawValue
@@ -151,6 +153,7 @@ public enum HTMLNode {
         case border(width: Double, color: Color)
         case hidden
         case fixed
+        case auto
         
         public var cssString: String {
             switch self {

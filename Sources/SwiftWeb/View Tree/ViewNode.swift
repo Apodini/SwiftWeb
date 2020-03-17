@@ -159,7 +159,11 @@ public class ViewNode {
 
 extension ViewNode: CustomStringConvertible {
     public var description: String {
-        let descriptionOfThisNode = "\(Self.simpleType(of: view)) \(stateStorageNode.state)"
+        var descriptionOfThisNode = "\(Self.simpleType(of: view)) \(stateStorageNode.state)"
+        
+        if let text = view as? Text {
+            descriptionOfThisNode += " \"\(text.text)\""
+        }
         
         if subnodes.isEmpty {
             return "<ViewNode: \(descriptionOfThisNode)/>"

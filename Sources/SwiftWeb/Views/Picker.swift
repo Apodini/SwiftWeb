@@ -15,8 +15,7 @@ public struct Picker<SelectionValue, Content>: View
     
     public init<S>(_ title: S,
                    selection: SelectionValue,
-                   @ViewBuilder content: () -> Content)
-                        where S: StringProtocol {
+                   @ViewBuilder content: () -> Content) where S: StringProtocol {
         self.content = content()
         self.selectionValue = selection
     }
@@ -24,10 +23,12 @@ public struct Picker<SelectionValue, Content>: View
     public var body: some View {
         HStack {
             ForEach(content.map(\.self)) { view -> AnyView in
+                var wrappedView: AnyView
+                
                 if let taggedView = view as? TypeErasedTaggedView,
                    let tag = taggedView.tag as? SelectionValue,
                    tag == self.selectionValue {
-                    return view.anyView()
+                    wrappedView = view.anyView()
                         .font(.system(size: 14, weight: .medium))
                         .padding(.horizontal, 37)
                         .padding(.vertical, 5)
@@ -39,12 +40,23 @@ public struct Picker<SelectionValue, Content>: View
                         .padding(.vertical, 3)
                         .anyView()
                 } else {
-                    return view.anyView()
+                    wrappedView = view.anyView()
                         .font(.system(size: 14))
                         .padding(.horizontal, 40)
                         .padding(.vertical, 8)
                         .anyView()
                 }
+//
+//                if let taggedView = view as? TypeErasedTaggedView,
+//                    let tag = taggedView.tag as? SelectionValue {
+//                    wrappedView = wrappedView
+//                        .onTapGesture {
+//                            self.selectionValue = tag
+//                        }
+//                        .anyView()
+//                }
+                
+                return wrappedView
             }
         }
         .background(Color(white: 0.93))

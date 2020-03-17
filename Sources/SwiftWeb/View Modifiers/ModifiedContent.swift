@@ -17,7 +17,7 @@ where Modifier: ViewModifier, Modifier.Content == Content {
     }
     
     func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
-        modifier.html(forHTMLOfContent: content.html(forHTMLOfSubnodes: htmlOfSubnodes))
+        modifier.html(forHTMLOfContent: htmlOfSubnodes.joined())
     }
 }
 
