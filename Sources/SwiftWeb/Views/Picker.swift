@@ -11,13 +11,13 @@ import Foundation
 public struct Picker<SelectionValue, Content>: View
         where SelectionValue: Hashable, Content: View  {
     let content: Content
-    let selectionValue: SelectionValue
+    var selectionValue: Binding<SelectionValue>
     
     public init<S>(_ title: S,
-                   selection: SelectionValue,
-                   @ViewBuilder content: () -> Content) where S: StringProtocol {
+            selection: Binding<SelectionValue>,
+            @ViewBuilder content: () -> Content) where S: StringProtocol {
+        selectionValue = selection
         self.content = content()
-        self.selectionValue = selection
     }
     
     public var body: some View {
@@ -27,7 +27,7 @@ public struct Picker<SelectionValue, Content>: View
                 
                 if let taggedView = view as? TypeErasedTaggedView,
                    let tag = taggedView.tag as? SelectionValue,
-                   tag == self.selectionValue {
+                    tag == self.selectionValue.wrappedValue {
                     wrappedView = view.anyView()
                         .font(.system(size: 14, weight: .medium))
                         .padding(.horizontal, 37)
@@ -46,15 +46,16 @@ public struct Picker<SelectionValue, Content>: View
                         .padding(.vertical, 8)
                         .anyView()
                 }
-//
-//                if let taggedView = view as? TypeErasedTaggedView,
-//                    let tag = taggedView.tag as? SelectionValue {
-//                    wrappedView = wrappedView
-//                        .onTapGesture {
-//                            self.selectionValue = tag
-//                        }
-//                        .anyView()
-//                }
+
+                // add tap gesture listeners to select the respective values
+                if let taggedView = view as? TypeErasedTaggedView,
+                    let tag = taggedView.tag as? SelectionValue {
+                    wrappedView = wrappedView
+                        .onTapGesture {
+                            self.selectionValue.wrappedValue = tag
+                        }
+                        .anyView()
+                }
                 
                 return wrappedView
             }
