@@ -23,6 +23,7 @@ where FixedContent: View, OverlayContent: View {
                     .withStyle(key: .bottom, value: .zero)
                     .withStyle(key: .left, value: .zero)
             })
+                .frame(width: 0, height: 0) // to stop growing axes from the overlay from propagating
         ))
     }
 }

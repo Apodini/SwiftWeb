@@ -1,5 +1,5 @@
 //
-//  StateContainer.swift
+//  ViewNode.swift
 //  
 //
 //  Created by Quirin Schweigert on 04.03.20.
@@ -66,6 +66,7 @@ public class ViewNode {
 
         return executeInStateContext { view in
             view.html(forHTMLOfSubnodes: htmlOfSubnodes)
+                .withCustomAttribute(key: "view", value: Self.simpleType(of: view))
         }
     }
     

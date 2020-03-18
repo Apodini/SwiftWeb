@@ -13,7 +13,8 @@ struct ColorFilterModifier<Content>: ViewModifier where Content: View {
     let cssFilterString: String
     
     func html(forHTMLOfContent htmlOfContent: HTMLNode) -> HTMLNode {
-        htmlOfContent.withStyle(key: .filter, value: .raw(cssFilterString))
+        htmlOfContent
+            .withStyle(key: .filter, value: .raw(cssFilterString))
     }
 }
 
