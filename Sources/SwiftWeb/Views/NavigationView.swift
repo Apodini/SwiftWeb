@@ -58,3 +58,28 @@ public struct NavigationView<Content>: View where Content: View {
             .padding(.bottom, 10)
     }
 }
+
+struct NavigationBarTitleKey: PreferenceKey {
+    static var defaultValue: (String, NavigationBarItem.TitleDisplayMode) = ("", .automatic)
+    
+    static func reduce(value: inout (String, NavigationBarItem.TitleDisplayMode),
+                       nextValue: () -> (String, NavigationBarItem.TitleDisplayMode)) {
+        value = nextValue()
+    }
+}
+
+public extension View {
+    func navigationBarTitle(_ title: String,
+                            displayMode: NavigationBarItem.TitleDisplayMode = .automatic) -> some View {
+        self.preference(key: NavigationBarTitleKey.self,
+                        value: (title, displayMode))
+    }
+}
+
+public struct NavigationBarItem {
+    public enum TitleDisplayMode: Int, Equatable {
+        case automatic
+        case inline
+        case large
+    }
+}
