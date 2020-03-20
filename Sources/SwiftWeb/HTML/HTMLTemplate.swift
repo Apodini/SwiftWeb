@@ -49,6 +49,7 @@ class HTMLTemplate {
         
                     * {
                         pointer-events: none;
+                        flex-shrink: 0;
                     }
                 </style>
             </head>
