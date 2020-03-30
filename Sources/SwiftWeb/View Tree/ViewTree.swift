@@ -18,8 +18,8 @@ class ViewTree {
         rootNode.render()
     }
     
-    func handleEvent(withID id: String) {
-        rootNode.handleEvent(withID: id)
+    func handle(inputEvent: InputEvent) {
+        rootNode.handle(inputEvent: inputEvent)
     }
 }
 

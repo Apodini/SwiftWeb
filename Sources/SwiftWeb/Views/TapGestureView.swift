@@ -7,22 +7,17 @@
 
 import Foundation
 
-public protocol TypeErasedTapGestureView {
-    var tapGestureViewID: String { get }
-    var action: () -> Void { get }
-}
-
-public struct TapGestureView<Content>: TypeErasedTapGestureView, View
-where Content: View {
+public struct TapGestureView<Content>: View, ClickInputEventResponder where Content: View {
     public var body: Content
     public var action: () -> Void
-    @State public var tapGestureViewID = UUID().uuidString
 
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         htmlOfSubnodes
             .joined()
-            .withCustomAttribute(key: "tap-id", value: tapGestureViewID)
-            .withStyle(key: .pointerEvents, value: .auto)
+    }
+    
+    func onClickInputEvent() {
+        action()
     }
 }
 

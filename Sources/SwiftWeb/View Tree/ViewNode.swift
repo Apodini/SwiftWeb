@@ -65,20 +65,41 @@ public class ViewNode {
         }
 
         return executeInStateContext { view in
-            view.html(forHTMLOfSubnodes: htmlOfSubnodes)
+            var html = view.html(forHTMLOfSubnodes: htmlOfSubnodes)
                 .withCustomAttribute(key: "view", value: Self.simpleType(of: view))
+                .withCustomAttribute(key: "id", value: stateStorageNode.viewInstanceID.uuidString)
+            
+            if view is ClickInputEventResponder {
+                html = html
+                    .withCustomAttribute(key: "click-event-responder")
+                    .withStyle(key: .pointerEvents, value: .auto)
+            }
+            
+            if view is ChangeInputEventResponder {
+                html = html.withCustomAttribute(key: "change-event-responder")
+            }
+
+            return html
         }
     }
     
-    public func handleEvent(withID id: String) {
+    public func handle(inputEvent: InputEvent) {
         executeInStateContext { view in
-            if let tapGestureView = view as? TypeErasedTapGestureView,
-                id == tapGestureView.tapGestureViewID {
-                tapGestureView.action()
+            switch inputEvent {
+            case .click(let id):
+                if id == stateStorageNode.viewInstanceID,
+                   let clickInputEventResponder = view as? ClickInputEventResponder {
+                    clickInputEventResponder.onClickInputEvent()
+                }
+            case .change(let id, let newValue):
+                if id == stateStorageNode.viewInstanceID,
+                    let changeInputEventResponder = view as? ChangeInputEventResponder {
+                    changeInputEventResponder.onChangeInputEvent(newValue: newValue)
+                }
             }
             
             subnodes.forEach { subnode in
-                subnode.handleEvent(withID: id)
+                subnode.handle(inputEvent: inputEvent)
             }
         }
         

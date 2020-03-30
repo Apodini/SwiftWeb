@@ -35,10 +35,10 @@ public struct NavigationView<Content>: View where Content: View {
 
             content
         }
-            .preference(key: NavigationBarTitleKey.self,
-                        value: NavigationBarTitleKey.defaultValue)
-            .preference(key: TrailingNavigationBarItemsKey.self,
-                        value: TrailingNavigationBarItemsKey.defaultValue)
+//            .preference(key: NavigationBarTitleKey.self,
+//                        value: NavigationBarTitleKey.defaultValue)
+//            .preference(key: TrailingNavigationBarItemsKey.self,
+//                        value: TrailingNavigationBarItemsKey.defaultValue)
     }
     
     var inlineTitleBar: some View {

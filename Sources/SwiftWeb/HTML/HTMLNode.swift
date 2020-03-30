@@ -13,11 +13,16 @@ public enum HTMLNode {
     case div(
         subNodes: [HTMLNode] = [],
         style: [CSSKey: CSSValue] = [:],
-        customAttributes: [String: String] = [:]
+        customAttributes: [String: String?] = [:]
     )
     
     case img(
         path: String,
+        style: [CSSKey: CSSValue] = [:]
+    )
+    
+    case input(
+        placeholder: String,
         style: [CSSKey: CSSValue] = [:]
     )
     
@@ -27,27 +32,31 @@ public enum HTMLNode {
             return string
         case .div(let subNodes, let style, let customAttributes):
             return """
-            <div \(Self.generateCSSTag(from: style) ?? "") \(customAttributes.htmlAttributesString)>
+                <div \(Self.cssTag(from: style)) \(customAttributes.htmlAttributesString)>
                     \(subNodes.map({ $0.string()}).joined())
                 </div>
-            """
+                """
         case .img(let path, let style):
             return """
-                <img src="/static/\(path)" \(Self.generateCSSTag(from: style) ?? "")/>
-            """
+                <img src="/static/\(path)" \(Self.cssTag(from: style))/>
+                """
+        case .input(let placeholder, let style):
+            return """
+                <input placeholder="\(placeholder)" \(Self.cssTag(from: style))/>
+                """
         }
     }
     
-    static func generateCSSTag(from styleDictionary: [CSSKey: CSSValue],
-                               forLayoutInAxis layoutAxis: LayoutAxis? = nil) -> String? {
+    static func cssTag(from styleDictionary: [CSSKey: CSSValue],
+                       forLayoutInAxis layoutAxis: LayoutAxis? = nil) -> String {
         guard !styleDictionary.isEmpty else {
-            return nil
+            return .init()
         }
         
         let cssString = styleDictionary
-            .compactMap { (key, value) in "\(key): \(value.cssString); " }
+            .compactMap { (key, value) in "\(key): \(value.cssString);" }
             .sorted()
-            .joined()
+            .joined(separator: " ")
         
         return "style=\"\(cssString)\""
     }
@@ -69,13 +78,16 @@ public enum HTMLNode {
             var newStyle = style
             newStyle[key] = value
             return .img(path: path, style: newStyle)
+            
+        case .input(let placeholder, let style):
+            var newStyle = style
+            newStyle[key] = value
+            return .input(placeholder: placeholder, style: newStyle)
         }
     }
     
-    public func withCustomAttribute(key: String, value: String) -> Self {
+    public func withCustomAttribute(key: String, value: String? = nil) -> Self {
         switch self {
-        case .raw(_):
-            return self
         case .div(let subnodes, let style, let customAttributes):
             var newAttributes = customAttributes
             newAttributes[key] = value
@@ -85,7 +97,7 @@ public enum HTMLNode {
                 customAttributes: newAttributes
             )
             
-        case .img(_, _):
+        default:
             return self
         }
     }
@@ -194,12 +206,17 @@ public enum HTMLNode {
     }
 }
 
-extension Dictionary where Key == String, Value == String {
+extension Dictionary where Key == String, Value == String? {
     var htmlAttributesString: String {
         self
             .map { key, value in
-                "\(key)=\"\(value)\""
+                if let value = value {
+                    return "\(key)=\"\(value)\""
+                }
+                
+                return key
             }
+            .sorted()
             .joined(separator: " ")
     }
 }

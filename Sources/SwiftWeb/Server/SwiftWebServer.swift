@@ -38,8 +38,22 @@ public class SwiftWebServer {
         }
         
         server["/websocket"] = websocket(text: { session, string in
-            print("tap on \(string)")
-            self.viewTree.handleEvent(withID: string)
+            guard let data = string.data(using: .utf8) else {
+                return
+            }
+            
+            let inputEvent: InputEvent
+            
+            do {
+                inputEvent = try JSONDecoder().decode(InputEvent.self, from: data)
+            } catch {
+                print("error decoding received input event")
+                return
+            }
+            
+            print("received input event: \(inputEvent)")
+            
+            self.viewTree.handle(inputEvent: inputEvent)
             session.writeText(self.viewTree.render().string())
             print(self.viewTree.description)
         }, connected: { session in
