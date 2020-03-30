@@ -23,7 +23,9 @@ public enum HTMLNode {
     
     case input(
         placeholder: String,
-        style: [CSSKey: CSSValue] = [:]
+        value: String,
+        style: [CSSKey: CSSValue] = [:],
+        customAttributes: [String: String?] = [:]
     )
     
     public func string() -> String {
@@ -40,9 +42,9 @@ public enum HTMLNode {
             return """
                 <img src="/static/\(path)" \(Self.cssTag(from: style))/>
                 """
-        case .input(let placeholder, let style):
+        case .input(let placeholder, let value, let style, let customAttributes):
             return """
-                <input placeholder="\(placeholder)" \(Self.cssTag(from: style))/>
+                <input placeholder="\(placeholder)" value="\(value)" \(Self.cssTag(from: style)) \(customAttributes.htmlAttributesString)/>
                 """
         }
     }
@@ -61,13 +63,13 @@ public enum HTMLNode {
         return "style=\"\(cssString)\""
     }
     
-    public func withStyle(key: CSSKey, value: CSSValue) -> Self {
+    public func withStyle(key: CSSKey, value newValue: CSSValue) -> Self {
         switch self {
         case .raw(_):
             return self
         case .div(let subnodes, let style, let customAttributes):
             var newStyle = style
-            newStyle[key] = value
+            newStyle[key] = newValue
             return .div(
                 subNodes: subnodes,
                 style: newStyle,
@@ -76,23 +78,40 @@ public enum HTMLNode {
             
         case .img(let path, let style):
             var newStyle = style
-            newStyle[key] = value
+            newStyle[key] = newValue
             return .img(path: path, style: newStyle)
             
-        case .input(let placeholder, let style):
+        case .input(let placeholder, let value, let style, let customAttributes):
             var newStyle = style
-            newStyle[key] = value
-            return .input(placeholder: placeholder, style: newStyle)
+            newStyle[key] = newValue
+            return .input(
+                placeholder: placeholder,
+                value: value,
+                style: newStyle,
+                customAttributes: customAttributes
+            )
         }
     }
     
-    public func withCustomAttribute(key: String, value: String? = nil) -> Self {
+    public func withCustomAttribute(key: String, value newValue: String? = nil) -> Self {
         switch self {
         case .div(let subnodes, let style, let customAttributes):
             var newAttributes = customAttributes
-            newAttributes[key] = value
+            newAttributes[key] = newValue
+            
             return .div(
                 subNodes: subnodes,
+                style: style,
+                customAttributes: newAttributes
+            )
+            
+        case .input(let placeholder, let value, let style, let customAttributes):
+            var newAttributes = customAttributes
+            newAttributes[key] = newValue
+            
+            return .input(
+                placeholder: placeholder,
+                value: value,
                 style: style,
                 customAttributes: newAttributes
             )

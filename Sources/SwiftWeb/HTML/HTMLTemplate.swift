@@ -47,6 +47,16 @@ class HTMLTemplate {
                         overflow: visible;
                     }
         
+                    input {
+                        -webkit-appearance: none;
+                        border-width: 0px;
+                        border: none;
+                    }
+        
+                    input:focus {
+                        outline: none;
+                    }
+        
                     * {
                         pointer-events: none;
                         flex-shrink: 0;

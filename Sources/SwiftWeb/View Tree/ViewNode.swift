@@ -67,16 +67,18 @@ public class ViewNode {
         return executeInStateContext { view in
             var html = view.html(forHTMLOfSubnodes: htmlOfSubnodes)
                 .withCustomAttribute(key: "view", value: Self.simpleType(of: view))
-                .withCustomAttribute(key: "id", value: stateStorageNode.viewInstanceID.uuidString)
             
             if view is ClickInputEventResponder {
                 html = html
                     .withCustomAttribute(key: "click-event-responder")
+                    .withCustomAttribute(key: "id", value: stateStorageNode.viewInstanceID.uuidString)
                     .withStyle(key: .pointerEvents, value: .auto)
             }
             
             if view is ChangeInputEventResponder {
-                html = html.withCustomAttribute(key: "change-event-responder")
+                html = html
+                    .withCustomAttribute(key: "change-event-responder")
+                    .withCustomAttribute(key: "id", value: stateStorageNode.viewInstanceID.uuidString)
             }
 
             return html
@@ -184,8 +186,10 @@ extension ViewNode: CustomStringConvertible {
         var descriptionOfThisNode = "\(Self.simpleType(of: view)) \(stateStorageNode.state)"
         
         if let text = view as? Text {
-            descriptionOfThisNode += " \"\(text.text)\""
+            descriptionOfThisNode.append(" \"\(text.text)\"")
         }
+        
+        descriptionOfThisNode.append(" \(stateStorageNode.viewInstanceID.uuidString)")
         
         if subnodes.isEmpty {
             return "<ViewNode: \(descriptionOfThisNode)/>"

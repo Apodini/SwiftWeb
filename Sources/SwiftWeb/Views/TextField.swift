@@ -7,17 +7,23 @@
 
 import Foundation
 
-public struct TextField: View {
+public struct TextField: View, ChangeInputEventResponder {
     public typealias Body = Never
     
     let title: String
+    let text: Binding<String>
     
-    
-    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
-        .input(placeholder: title, style: [.pointerEvents: .auto])
+    func onChangeInputEvent(newValue: String) {
+        text.wrappedValue = newValue
     }
     
-    public init<S>(_ title: S) where S: StringProtocol {
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        print("rendering html for TextField with value: \"\(text.wrappedValue)\"")
+        return .input(placeholder: title, value: text.wrappedValue, style: [.pointerEvents: .auto])
+    }
+    
+    public init<S>(_ title: S, text: Binding<String>) where S: StringProtocol {
         self.title = String(title)
+        self.text = text
     }
 }
