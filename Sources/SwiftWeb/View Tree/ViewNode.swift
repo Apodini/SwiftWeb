@@ -58,13 +58,13 @@ public class ViewNode {
      of the view which can be determined by `View ` by implementing the protocol `GrowingLayoutAxesModifying`.
      */
     public func render() -> HTMLNode {
-        let htmlOfSubnodes = subnodes.map { subnode in
-            return Self.applyGrowingProperties(toHTMLNode: subnode.render(),
-                                               forGrowingLayoutAxes: subnode.growingLayoutAxes,
-                                               inLayoutAxis: view.layoutAxis)
-        }
-
         return executeInStateContext { view in
+            let htmlOfSubnodes = subnodes.map { subnode in
+                return Self.applyGrowingProperties(toHTMLNode: subnode.render(),
+                                                   forGrowingLayoutAxes: subnode.growingLayoutAxes,
+                                                   inLayoutAxis: view.layoutAxis)
+            }
+            
             var html = view.html(forHTMLOfSubnodes: htmlOfSubnodes)
                 .withCustomAttribute(key: "view", value: Self.simpleType(of: view))
             

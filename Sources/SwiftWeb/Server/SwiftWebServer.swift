@@ -55,7 +55,7 @@ public class SwiftWebServer {
             
             self.viewTree.handle(inputEvent: inputEvent)
             session.writeText(self.viewTree.render().string())
-//            print(self.viewTree.description)
+            print(self.viewTree.description)
         }, connected: { session in
             print("client connected")
             session.writeText(self.viewTree.render().string())
