@@ -30,6 +30,8 @@ public class ViewNode {
         stateStorageNode.onChange = {
             self.isValid = false
         }
+        
+//        provideViewPreferences()
     }
     
     /**
@@ -179,46 +181,62 @@ public class ViewNode {
             }
         }
     }
-}
-
-extension ViewNode: CustomStringConvertible {
-    public var description: String {
-        var descriptionOfThisNode = "\(Self.simpleType(of: view)) \(stateStorageNode.state)"
-        
-        if let text = view as? Text {
-            descriptionOfThisNode.append(" \"\(text.text)\"")
+    
+    func findPreferenceValue<P>(forKey preferenceKey: P.Type) -> P.Value? where P: PreferenceKey {
+        let preferenceValueOfSubviews: P.Value? = subnodes.reduce(nil) {
+            (accumulatorValue, subnode) -> P.Value? in
+            let preferenceValueOfSubnode = subnode.findPreferenceValue(forKey: preferenceKey)
+            
+            // do we need to combine preference values because both accumulator and
+            // preferenceValueOfSubnode are present?
+            if let previousValue = accumulatorValue,
+                let valueOfSubnode = preferenceValueOfSubnode {
+                var value: P.Value = previousValue
+                
+                // reduce sibling preference values
+                P.reduce(value: &value) {
+                    valueOfSubnode
+                }
+                
+                // return the combined value
+                return value
+            }
+            
+            // return the one which is present
+            return preferenceValueOfSubnode ?? accumulatorValue
         }
         
-        descriptionOfThisNode.append(" \(stateStorageNode.viewInstanceID.uuidString)")
+        let preferenceValueOfThisView: P.Value?
         
-        if subnodes.isEmpty {
-            return "<ViewNode: \(descriptionOfThisNode)/>"
+        // is the view that this node is holding providing a preference value for the supplied key?
+        if let preferenceProviderView = view as? PreferenceProvider,
+            preferenceProviderView.preferenceKeyType == P.self {
+            preferenceValueOfThisView = preferenceProviderView.preferenceValue as? P.Value
         } else {
-            return """
-                <ViewNode: \(descriptionOfThisNode)>
-                \(subnodes.map({ $0.description }).joined(separator: "\n").blockIndented())
-                </ViewNode>
-                """
+            preferenceValueOfThisView = nil
         }
+        
+        if let preferenceValueOfThisView = preferenceValueOfThisView,
+            let preferenceValueOfSubviews = preferenceValueOfSubviews {
+            var value: P.Value = preferenceValueOfSubviews
+            
+            // reduce preference value of subnodes and parent node
+            P.reduce(value: &value) {
+                preferenceValueOfThisView
+            }
+            
+            return value
+        }
+        
+        return preferenceValueOfThisView ?? preferenceValueOfSubviews
     }
     
-    private static func simpleType(of value: Any) -> String {
-        let typeString = String(describing: type(of: value))
-        if let simpleTypeString = typeString.split(separator: "<").first {
-            return String(simpleTypeString)
-        } else {
-            return typeString
-        }
-    }
-}
-
-extension String {
-    func blockIndented() -> String {
-        return self
-            .split(separator: "\n")
-            .map {
-                "   \($0)"
-            }
-            .joined(separator: "\n")
-    }
+//    func provideViewPreferences() {
+//        if let preferenceChangeListener = view as? PreferenceChangeListener {
+////            preferenceChangeListener.onPreferenceChange(
+////                preferenceValue: findPreferenceValue(forKey: preferenceChangeListener.preferenceKey)
+////            )
+//            let preferenceValue = findPreferenceValue(forKey: preferenceChangeListener.)
+//        }
+//    }
 }

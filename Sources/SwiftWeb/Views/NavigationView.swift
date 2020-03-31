@@ -19,13 +19,13 @@ public struct NavigationView<Content>: View where Content: View {
             NavigationBarTitleKey.defaultValue
         trailingContent = Spacer()
         
-        _ = self.content.onPreferenceChange(NavigationBarTitleKey.self) { value in
-            (self.navigationBarTitle, self.navigationBarTitleDisplayMode) = value
-        }
-        
-        _ = self.content.onPreferenceChange(TrailingNavigationBarItemsKey.self) { value in
-            trailingContent = value ?? Spacer()
-        }
+//        _ = self.content.onPreferenceChange(NavigationBarTitleKey.self) { value in
+//            (self.navigationBarTitle, self.navigationBarTitleDisplayMode) = value
+//        }
+//        
+//        _ = self.content.onPreferenceChange(TrailingNavigationBarItemsKey.self) { value in
+//            trailingContent = value ?? Spacer()
+//        }
     }
     
     public var body: some View {
@@ -93,12 +93,11 @@ struct TrailingNavigationBarItemsKey: PreferenceKey {
 public extension View {
     func navigationBarTitle(_ title: String,
                             displayMode: NavigationBarItem.TitleDisplayMode = .automatic) -> some View {
-        self.preference(key: NavigationBarTitleKey.self,
-                        value: (title, displayMode))
+        self.preference(key: NavigationBarTitleKey.self, value: (title, displayMode))
     }
     
     func navigationBarItems<T>(trailing: T) -> some View where T : View {
-        self.preference(key: TrailingNavigationBarItemsKey.self, value: trailing)
+        self//.preference(key: TrailingNavigationBarItemsKey.self, value: trailing)
     }
 }
 
