@@ -18,7 +18,7 @@ public struct Button<Label>: View where Label : View {
             .onTapGesture(perform: action)
     }
     
-    init(action: @escaping () -> Void, @ViewBuilder label: () -> Label) {
+    public init(action: @escaping () -> Void, @ViewBuilder label: () -> Label) {
         self.action = action
         self.label = label()
     }
@@ -29,5 +29,12 @@ public extension Button where Label == Text {
         self = .init(action: action) {
             Text(String(title))
         }
+    }
+}
+
+public extension View {
+    func disabled(_ disabled: Bool) -> some View {
+        // TODO
+        return self
     }
 }

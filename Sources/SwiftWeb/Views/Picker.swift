@@ -64,3 +64,19 @@ public struct Picker<SelectionValue, Content>: View
         .cornerRadius(8)
     }
 }
+
+public protocol PickerStyle { }
+
+public struct SegmentedPickerStyle: PickerStyle {
+    public init() {}
+}
+
+public extension Picker {
+    func pickerStyle<S>(_ style: S) -> some View where S : PickerStyle {
+        guard style is SegmentedPickerStyle else {
+            fatalError("picker style not implemented")
+        }
+        
+        return self
+    }
+}

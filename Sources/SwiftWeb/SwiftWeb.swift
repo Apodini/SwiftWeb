@@ -11,3 +11,8 @@ public class SwiftWeb {
 //    public static func render<T>(view: T) -> String where T: View {
 //    }
 }
+
+public protocol PreviewProvider {
+    associatedtype Previews : View
+    static var previews: Self.Previews { get }
+}

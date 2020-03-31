@@ -21,6 +21,10 @@ import Foundation
         }
     }
     
+    public var projectedValue: Self {
+        return self
+    }
+    
     public init(getValue: @escaping () -> Value, setValue: @escaping (Value) -> Void) {
         self.getValue = getValue
         self.setValue = setValue

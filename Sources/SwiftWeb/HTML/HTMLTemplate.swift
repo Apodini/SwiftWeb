@@ -60,6 +60,8 @@ class HTMLTemplate {
                     * {
                         pointer-events: none;
                         flex-shrink: 0;
+                        font-size: inherit;
+                        font-weight: inherit;
                     }
                 </style>
             </head>
