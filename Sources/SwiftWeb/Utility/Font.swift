@@ -18,6 +18,14 @@ public struct Font {
         return Font(size: size, weight: weight, design: design)
     }
     
+    public static var title: Font {
+        .system(size: 26)
+    }
+    
+    public static var subheadline: Font {
+        .system(size: 16)
+    }
+    
     public enum Weight: Int {
         case thin = 150
         case regular = 250

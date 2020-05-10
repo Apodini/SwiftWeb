@@ -18,7 +18,6 @@ public struct TextField: View, ChangeInputEventResponder {
     }
     
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
-        print("rendering html for TextField with value: \"\(text.wrappedValue)\"")
         return .input(placeholder: title, value: text.wrappedValue, style: [.pointerEvents: .auto])
     }
     

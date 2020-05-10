@@ -21,6 +21,7 @@ public struct TupleView<T>: View, TypeErasedTupleView {
         self.value = value
     }
     
+    // TODO: this doesn't have any effect since TupleViews are not included in the ViewTree
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         htmlOfSubnodes.joined()
     }

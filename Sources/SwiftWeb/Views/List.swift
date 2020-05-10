@@ -22,7 +22,7 @@ public struct List<Content>: View, GrowingAxesModifying where Content: View {
               ID : Hashable, RowContent : View {
         
         content = ForEach(data, id: id) { element in
-            HStack(alignment: .leading) {
+            HStack(alignment: .center) {
                 rowContent(element)
             }
         }

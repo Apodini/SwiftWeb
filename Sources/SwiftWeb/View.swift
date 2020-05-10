@@ -69,10 +69,11 @@ public extension View {
         })
     }
     
-    func shadow(color: Color,
-                radius: Double,
-                x: Double,
-                y: Double) -> some View {
+    func shadow(color: Color = Color(white: 0.0).opacity(0.20),
+                radius: Double = 40.0,
+                x: Double = 0.0,
+                y: Double = 2.0
+    ) -> some View {
         return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
             html.withStyle(key: .boxShadow,
                            value: .shadow(offsetX: x,
@@ -82,12 +83,7 @@ public extension View {
         })
     }
     
-    func shadow() -> some View {
-        return shadow(color: Color(white: 0.0).opacity(0.20),
-                      radius: 40.0, x: 0.0, y: 2.0)
-    }
-    
-    func padding(_ edges: Edge.Set = .all, _ length: Double? = nil) -> some View {
+    func padding(_ edges: Edge.Set = .all, _ length: Double? = 5) -> some View {
         let length = length ?? 10.0
         
         let paddingPropertyMapping: [(cssKey: HTMLNode.CSSKey, edgeSet: Edge.Set)] = [
@@ -109,6 +105,10 @@ public extension View {
                 style: paddingStyle
             )
         })
+    }
+    
+    func padding(_ length: Double? = 5) -> some View {
+        padding(.all, length)
     }
     
     func border(_ color: Color, width: Double = 1) -> some View {
