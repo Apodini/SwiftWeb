@@ -83,7 +83,7 @@ public extension View {
         })
     }
     
-    func padding(_ edges: Edge.Set = .all, _ length: Double? = 5) -> some View {
+    func padding(_ edges: Edge.Set = .all, _ length: Double? = nil) -> some View {
         let length = length ?? 10.0
         
         let paddingPropertyMapping: [(cssKey: HTMLNode.CSSKey, edgeSet: Edge.Set)] = [
@@ -107,7 +107,7 @@ public extension View {
         })
     }
     
-    func padding(_ length: Double? = 5) -> some View {
+    func padding(_ length: Double? = nil) -> some View {
         padding(.all, length)
     }
     

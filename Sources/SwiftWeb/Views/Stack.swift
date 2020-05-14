@@ -13,9 +13,7 @@ extension Stack {
     static func insertSpacers(forSpacing spacing: Double?,
                               inNodes nodes: [HTMLNode],
                               axis: LayoutAxis) -> [HTMLNode] {
-        guard let spacing = spacing else {
-            return nodes
-        }
+        let spacing = spacing ?? 8
 
         var spacedNodes: [HTMLNode] = []
 

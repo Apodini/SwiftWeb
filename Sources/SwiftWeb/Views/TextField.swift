@@ -13,7 +13,7 @@ public struct TextField: View, ChangeInputEventResponder {
     let title: String
     let text: Binding<String>
     
-    func onChangeInputEvent(newValue: String) {
+    public func onChangeInputEvent(newValue: String) {
         text.wrappedValue = newValue
     }
     

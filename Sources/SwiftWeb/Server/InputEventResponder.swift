@@ -9,10 +9,10 @@ import Foundation
 
 protocol InputEventResponder { }
 
-protocol ClickInputEventResponder {
+public protocol ClickInputEventResponder {
     func onClickInputEvent()
 }
 
-protocol ChangeInputEventResponder {
+public protocol ChangeInputEventResponder {
     func onChangeInputEvent(newValue: String)
 }

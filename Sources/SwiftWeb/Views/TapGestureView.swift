@@ -16,7 +16,7 @@ public struct TapGestureView<Content>: View, ClickInputEventResponder where Cont
             .joined()
     }
     
-    func onClickInputEvent() {
+    public func onClickInputEvent() {
         action()
     }
 }

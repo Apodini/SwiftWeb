@@ -20,6 +20,6 @@ public struct Form<Content>: View where Content: View {
             content
         }
             .padding(.bottom, 20)
-            .background(Color(red:0.95, green:0.95, blue:0.97, alpha:1.0))
+            .background(Color(red: 0.95, green: 0.95, blue: 0.97, opacity: 1.0))
     }
 }

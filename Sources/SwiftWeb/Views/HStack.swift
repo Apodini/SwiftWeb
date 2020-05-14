@@ -12,6 +12,10 @@ public struct HStack<Content>: Stack, GrowingAxesModifying where Content: View {
     let horizontalAlignment: HorizontalAlignment
     let spacing: Double?
     
+    public var layoutAxis: LayoutAxis {
+        .horizontal
+    }
+    
     public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes growingAxesOfSubnodes: Set<GrowingLayoutAxis>)
         -> Set<GrowingLayoutAxis> {
             // `.undetermined` means that there is a spacer among the subviews which is not

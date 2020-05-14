@@ -13,7 +13,6 @@ public struct Button<Label>: View where Label : View {
     
     public var body: some View {
         label
-            .font(.system(size: 34, weight: .thin))
             .systemBlueFilter()
             .onTapGesture(perform: action)
     }
