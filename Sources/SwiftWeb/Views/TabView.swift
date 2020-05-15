@@ -17,14 +17,14 @@ public struct TabView<Content>: View where Content: View {
     }
     
     public var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             tabBar
             content.map(\.self)[selectionValue].anyView()
         }
     }
     
     var tabBar: some View {
-        VStack() {
+        VStack(spacing: 0) {
             HStack(spacing: 136.0) {
                 Spacer()
 
