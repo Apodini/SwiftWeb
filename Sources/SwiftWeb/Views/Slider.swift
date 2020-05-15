@@ -9,10 +9,14 @@
 import Foundation
 
 public struct Slider: View, ChangeInputEventResponder, GrowingAxesModifying {
-    @Binding var value: Double
+    let value: Binding<Double>
+    
+    public init(value: Binding<Double>) {
+        self.value = value
+    }
     
     public func onChangeInputEvent(newValue: String) {
-        value = Double(newValue) ?? 0
+        value.wrappedValue = Double(newValue) ?? 0
     }
     
     public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>) -> Set<GrowingLayoutAxis> {
@@ -27,7 +31,7 @@ public struct Slider: View, ChangeInputEventResponder, GrowingAxesModifying {
             <div id="slider-\(elementID)-container">
                 <div id="slider-\(elementID)-track"></div>
                 <div id="slider-\(elementID)-track-progress"></div>
-                <input type="range" min="0" max="1" step="0.001" value="\(String(value))" id="slider-\(elementID)"
+                <input type="range" min="0" max="1" step="0.001" value="\(String(value.wrappedValue))" id="slider-\(elementID)"
                     oninput="document.getElementById('slider-\(elementID)-track-progress').style.width = `calc(${this.value * 100}% - 12px)`"
                 />
             </div>
@@ -72,7 +76,7 @@ public struct Slider: View, ChangeInputEventResponder, GrowingAxesModifying {
                     border-radius: 3px;
                     top: 13px;
                     left: 12px;
-                    width: calc(\(String(value * 100))% - 12px);
+                width: calc(\(String(value.wrappedValue * 100))% - 12px);
                 }
             </style>
             """
