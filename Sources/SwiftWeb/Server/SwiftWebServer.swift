@@ -23,7 +23,11 @@ public class SwiftWebServer {
         staticFilesPath = getRessourceDirectoryPath(filePath: path)
 
         server["/"] = { request in
-            return HttpResponse.ok(.text(HTMLTemplate.withContent("")))
+            HttpResponse.ok(.text(HTMLTemplate.withContent("")))
+        }
+        
+        server["/script.js"] = { request in
+            HttpResponse.ok(.text(JavaScriptClient.script))
         }
         
         server["/static/:path"] = { request in
