@@ -7,8 +7,8 @@
 
 import Foundation
 
-class HTMLTemplate {
-    static func withContent(_ content: String) -> String {
+public struct HTMLTemplate {
+    public static func withContent(_ content: String) -> String {
         return """
             <!DOCTYPE html>
             <html lang="en">

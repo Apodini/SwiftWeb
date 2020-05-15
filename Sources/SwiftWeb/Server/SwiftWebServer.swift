@@ -7,91 +7,47 @@
 //
 
 import Foundation
-import Swifter
 
 public class SwiftWebServer {
-    static let projectDirectoryName = "SwiftWebServer/"
-    
-    let server: HttpServer
-    var staticFilesPath: String?
-    
     let viewTree: ViewTree
 
-    public init<ContentView>(contentView: ContentView, path: String) where ContentView: View {
-        server = HttpServer()
+    public init<ContentView>(contentView: ContentView) where ContentView: View {
         viewTree = ViewTree(withRootView: contentView)
-        staticFilesPath = getRessourceDirectoryPath(filePath: path)
-
-        server["/"] = { request in
-            HttpResponse.ok(.text(HTMLTemplate.withContent("")))
-        }
-        
-        server["/script.js"] = { request in
-            HttpResponse.ok(.text(JavaScriptClient.script))
-        }
-        
-        server["/static/:path"] = { request in
-            print("request: \(request.path)")
-            
-            guard let fileName = request.path.components(separatedBy: "/").last,
-                let ressource = self.loadRessourceFile(name: fileName) else {
-                    return HttpResponse.notFound
-            }
-            
-            return HttpResponse.ok(.data(ressource))
-        }
-        
-        server["/websocket"] = websocket(text: { session, string in
-            guard let data = string.data(using: .utf8) else {
-                return
-            }
-            
-            let inputEvent: InputEvent
-            
-            do {
-                inputEvent = try JSONDecoder().decode(InputEvent.self, from: data)
-            } catch let error {
-                print("error decoding received input event: \(error)")
-                return
-            }
-            
-            print("received input event: \(inputEvent)")
-            
-            self.viewTree.handle(inputEvent: inputEvent)
-            session.writeText(self.viewTree.render().string())
-            print(self.viewTree.description)
-        }, connected: { session in
-            print("client connected")
-            session.writeText(self.viewTree.render().string())
-            print(self.viewTree.description)
-        }, disconnected: { _ in
-            print("client disconnected")
-        })
     }
     
-    func getRessourceDirectoryPath(filePath: String) -> String? {
-        guard let cutIndex = filePath.range(of: Self.projectDirectoryName,
-                                            options: .backwards)?.upperBound else {
-            return nil
+    public func handleClientMessage(session: WebSocketSession, message: String) {
+        guard let data = message.data(using: .utf8) else {
+            return
         }
         
-        return String(filePath[..<cutIndex]) + "static/"
-    }
-    
-    func loadRessourceFile(name: String) -> Data? {
-        guard let staticFilesPath = staticFilesPath else {
-            return nil
+        let inputEvent: InputEvent
+        
+        do {
+            inputEvent = try JSONDecoder().decode(InputEvent.self, from: data)
+        } catch let error {
+            print("error decoding received input event: \(error)")
+            return
         }
         
-        let ressourcePath = staticFilesPath.appending(name)
-        return try? NSData(contentsOfFile: ressourcePath) as Data
+        print("received input event: \(inputEvent)")
+        
+        self.viewTree.handle(inputEvent: inputEvent)
+        session.write(text: self.viewTree.render().string())
+        print(self.viewTree.description)
     }
     
-    public func port() throws -> Int {
-        return try server.port()
+    public func handleClientConnect(session: WebSocketSession) {
+        print("client connected")
+        session.write(text: self.viewTree.render().string())
+        print(self.viewTree.description)
     }
     
-    public func start() throws {
-        try server.start(80)
+    public func handleClientDisconnect(session: WebSocketSession) {
+        print("client disconnected")
     }
 }
+
+public protocol WebSocketSession {
+    func write(text: String)
+}
+

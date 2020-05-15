@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct JavaScriptClient {
-    static var script: String {
+public struct JavaScriptClient {
+    public static var script: String {
         """
         console.log("connecting...");
         let socket = new WebSocket(`ws://${window.location.host}/websocket`);
