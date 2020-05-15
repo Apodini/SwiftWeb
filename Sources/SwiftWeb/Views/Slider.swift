@@ -7,20 +7,19 @@
 //
 
 import Foundation
-import SwiftWeb
 
-struct Slider: View, ChangeInputEventResponder, GrowingAxesModifying {
+public struct Slider: View, ChangeInputEventResponder, GrowingAxesModifying {
     @Binding var value: Double
     
-    func onChangeInputEvent(newValue: String) {
+    public func onChangeInputEvent(newValue: String) {
         value = Double(newValue) ?? 0
     }
     
-    func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>) -> Set<GrowingLayoutAxis> {
+    public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>) -> Set<GrowingLayoutAxis> {
         [.horizontal]
     }
     
-    func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         let elementID: String = UUID().uuidString
         
         return .div {
