@@ -16,7 +16,7 @@ The SwiftWeb framework is intentionally kept independant of any HTTP / WebSocket
 2. provide the JavaScript client script (`JavaScriptClient.script`) under `/script.js` and
 3. implement a WebSocket endpoint under `/websocket` on your server and connect it to a `SwiftWebServer` instance.
 
-Have a look at the [example implementation](https://github.com/Apodini/SwiftWeb-Example) for an XCode project running an HTTP and WebSocket server together with SwiftWeb.
+Have a look at the [example implementation](https://github.com/Apodini/SwiftWeb-Example) of an XCode project running an HTTP and WebSocket server together with SwiftWeb.
 
 ## Usage
 
@@ -29,6 +29,8 @@ Simply instantiate a server instance with a view instance:
 </p>
 
 The JavaScript client will connect to the server instance using a WebSocket connection and load the current state of the interface.
+
+Check out the [example project](https://github.com/Apodini/SwiftWeb-Example) implementing various view components with SwiftWeb. 
 
 ## Contributing
 Contributions to this projects are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/master/CONTRIBUTING.md) first.
