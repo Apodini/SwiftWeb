@@ -1,8 +1,8 @@
 <img align="left" alt="SwiftWeb logo" src="Images/swiftweb.png" width=100>
 
 ### SwiftWeb
-**Run Your SwiftUI App on a Swift Server.**<br/>
-**Serve Many Clients with Your SwiftUI Web App.**
+Run Your SwiftUI App on a Swift Server.<br/>
+Serve Many Clients with Your SwiftUI Web App.
 
 ---
 
