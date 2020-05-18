@@ -22,6 +22,10 @@ Have a look at the example implementation for an XCode project running an HTTP a
 
 Simply instantiate a server instance with a view instance: `SwiftWebServer(contentView: Text("Hello World!")`.
 
+<p align="center">
+<img alt="Hello World Screenshot" src="Images/helloworld-screenshot.png" width=500>
+</p>
+
 The JavaScript client will connect to the server instance using a WebSocket connection and load the current state of the interface.
 
 ## Contributing
