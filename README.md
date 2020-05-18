@@ -1,14 +1,13 @@
 <img align="left" alt="SwiftWeb logo" src="Images/swiftweb.png" width=100>
 
 ### SwiftWeb
-Run Your SwiftUI App on a Swift Server.<br/>
-Serve Many Clients with Your SwiftUI Web App.
+**Run Your SwiftUI App on a Swift Server. Serve Many Clients with Your SwiftUI Web App.**
 
 ---
 
 <img align="right" alt="SwiftWeb logo" src="Images/swiftweb-architecture.png" width=300>
 
-With **SwarmUI**, you can easily provide a web interface to your existing SwiftUI app. SwarmUI renders SwiftUI code to HTML and CSS and keeps a WebSocket connection to connected Browsers. User input events are sent to your Swift server which runs your application logic. Screen updates are sent back to connected clients.
+With **SwiftWeb**, you can easily provide a web interface to your existing SwiftUI app. SwiftWeb renders SwiftUI code to HTML and CSS and keeps a WebSocket connection to connected Browsers. User input events are sent to your Swift server which runs your application logic. Screen updates are sent back to connected clients.
 
 ## Requirements
 
