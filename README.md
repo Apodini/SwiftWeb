@@ -21,6 +21,7 @@ Have a look at the [example implementation](https://github.com/Apodini/SwiftWeb-
 ## Usage
 
 Simply instantiate a server instance with a view instance: 
+
 ```let swiftWebServer = SwiftWebServer(contentView: Text("Hello World!")```
 
 <p align="center">
