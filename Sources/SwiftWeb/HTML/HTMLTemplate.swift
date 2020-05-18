@@ -47,6 +47,11 @@ public struct HTMLTemplate {
                         overflow: visible;
                     }
         
+                    body > div {
+                        align-self: stretch;
+                        flex-grow: 1;
+                    }
+        
                     input {
                         -webkit-appearance: none;
                         border-width: 0px;
