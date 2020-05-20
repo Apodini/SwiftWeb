@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A container that presents rows of data arranged in a single column.
 public struct List<Content>: View, GrowingAxesModifying where Content: View {
     var content: Content
 

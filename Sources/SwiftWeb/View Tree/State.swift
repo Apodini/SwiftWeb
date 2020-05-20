@@ -7,17 +7,27 @@
 
 import Foundation
 
-public protocol TypeErasedState: class {
+protocol TypeErasedState: class {
     func connect(to stateStorageNode: StateStorageNode, withPropertyName propertyName: String)
     func disconnect()
 }
 
+/**
+ A property wrapper type that can read and write a value managed by SwiftWeb.
+ 
+ SwiftWeb manages the storage of any property you declare as a state. When the state value changes, the view invalidates its appearance and recomputes the body. Use the state as the single source of truth for a given view.
+ 
+ A State instance isn’t the value itself; it’s a means of reading and writing the value. To access a state’s underlying value, use its variable name, which returns the `wrappedValue` property value.
+ 
+ You should only access a state property from inside the view’s body, or from methods called by it.
+ */
 @propertyWrapper public class State<Value>: TypeErasedState {
     let defaultValue: Value
     
     private var propertyName: String? = nil
     private var stateStorageNode: StateStorageNode? = nil
     
+    /// The underlying value referenced by the state variable.
     public var wrappedValue: Value {
         get {
             guard let propertyName = propertyName, let stateStorageNode = stateStorageNode else {
@@ -38,7 +48,7 @@ public protocol TypeErasedState: class {
         }
     }
     
-    public func connect(to stateStorageNode: StateStorageNode,
+    func connect(to stateStorageNode: StateStorageNode,
                         withPropertyName propertyName: String) {
         self.propertyName = propertyName
         self.stateStorageNode = stateStorageNode
@@ -48,7 +58,7 @@ public protocol TypeErasedState: class {
         }
     }
     
-    public func disconnect() {
+    func disconnect() {
         self.propertyName = nil
         self.stateStorageNode = nil
     }
@@ -57,10 +67,12 @@ public protocol TypeErasedState: class {
         self.defaultValue = wrappedValue
     }
     
+    /// Returns the `binding` property of the `State` instance.
     public var projectedValue: Binding<Value> {
         return binding
     }
 
+    /// A binding to the state value.
     public var binding: Binding<Value> {
         return Binding(
             getValue: { self.wrappedValue },

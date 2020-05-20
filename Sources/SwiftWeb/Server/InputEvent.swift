@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum InputEvent {
+enum InputEvent {
     case click(id: UUID)
     case change(id: UUID, newValue: String)
 }

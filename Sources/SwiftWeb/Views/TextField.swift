@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A control that displays an editable text interface.
 public struct TextField: View, ChangeInputEventResponder {
     public typealias Body = Never
     
@@ -47,6 +48,7 @@ public struct TextField: View, ChangeInputEventResponder {
     }
 }
 
+/// The type of keyboard to display for a given text-based view.
 public enum UIKeyboardType {
     case decimalPad
 }

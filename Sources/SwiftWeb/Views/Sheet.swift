@@ -5,7 +5,7 @@
 //  Created by Quirin Schweigert on 04.02.20.
 //
 
-public struct Sheet<StaticContent, ModalContent>: View
+struct Sheet<StaticContent, ModalContent>: View
 where StaticContent: View, ModalContent: View {
     let staticContent: StaticContent
     let modalContent: ModalContent

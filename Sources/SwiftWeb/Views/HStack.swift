@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A view that arranges its children in a horizontal line.
 public struct HStack<Content>: Stack, GrowingAxesModifying where Content: View {
     public let body: Content
     let horizontalAlignment: HorizontalAlignment
@@ -47,6 +48,7 @@ public struct HStack<Content>: Stack, GrowingAxesModifying where Content: View {
     }
 }
 
+/// An alignment position along the horizontal axis.
 public enum VerticalAlignment {
     case center
     case top

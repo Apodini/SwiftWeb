@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A control that performs an action when triggered.
 public struct Button<Label>: View where Label : View {
     let action: () -> Void
     let label: Label

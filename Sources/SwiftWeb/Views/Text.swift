@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A view that displays one or more lines of read-only text.
 public struct Text: View {
     public typealias Body = Never
 

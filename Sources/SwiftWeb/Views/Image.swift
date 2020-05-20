@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A view that displays an image.
 public struct Image: View {
     public typealias Body = Never
     private let isResizable: Bool

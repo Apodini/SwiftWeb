@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The collection of underlying identified data that SwiftWeb uses to create views dynamically.
 public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : RandomAccessCollection, Content: View { // ID : Hashable
     let data: Data
     let idKeyPath: KeyPath<Data.Element, ID>

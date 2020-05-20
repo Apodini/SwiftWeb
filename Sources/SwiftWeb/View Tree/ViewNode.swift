@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ViewNode {
+class ViewNode {
     public var view: TypeErasedView
     public let stateStorageNode: StateStorageNode
     public var subnodes: [ViewNode]

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A view for presenting a stack of views representing a visible path in a navigation hierarchy. Currently, only the display of a title bar is implemented, no navigation is possible yet with SwiftWeb.
 public struct NavigationView<Content>: View where Content: View {
     let content: Content
     var navigationBarTitle: String
@@ -101,7 +102,10 @@ public extension View {
     }
 }
 
+/// A configuration for a navigation bar that represents a view at the top of a navigation stack.
 public struct NavigationBarItem {
+    
+    /// A style for displaying the title of a navigation bar.
     public enum TitleDisplayMode: Int, Equatable {
         case automatic
         case inline

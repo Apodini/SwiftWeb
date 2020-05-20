@@ -7,11 +7,11 @@
 
 import Foundation
 
-public protocol TypeErasedTaggedView {
+protocol TypeErasedTaggedView {
     var tag: Any? { get }
 }
 
-public struct TaggedView<Body>: View, TypeErasedTaggedView where Body: View {
+struct TaggedView<Body>: View, TypeErasedTaggedView where Body: View {
     public let tag: Any?
     public let body: Body
 }

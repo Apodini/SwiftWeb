@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A container for grouping controls used for data entry, such as in settings or inspectors.
 public struct Form<Content>: View where Content: View {
     let content: Content
     

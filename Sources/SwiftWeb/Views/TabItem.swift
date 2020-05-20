@@ -5,12 +5,12 @@
 //  Created by Quirin Schweigert on 08.02.20.
 //
 
-public protocol TypeErasedTabItem {
+protocol TypeErasedTabItem {
     var image: Image? { get }
     var text: Text? { get }
 }
 
-public struct TabItem<Body>: View, TypeErasedTabItem where Body: View {
+struct TabItem<Body>: View, TypeErasedTabItem where Body: View {
     public let image: Image?
     public let text: Text?
     public let body: Body

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class StateStorageNode {
+class StateStorageNode {
     public let viewInstanceID = UUID()
     public var state: [String: Any] = [:]
     public var onChange: (() -> Void)?

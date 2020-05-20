@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Stack: View { }
+protocol Stack: View { }
 
 extension Stack {
     static func insertSpacers(forSpacing spacing: Double?,

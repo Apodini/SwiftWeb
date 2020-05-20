@@ -7,12 +7,14 @@
 
 import Foundation
 
+/// An enumeration to indicate one edge of a rectangle.
 public enum Edge: Int8, CaseIterable {
     case bottom
     case leading
     case top
     case trailing
     
+    /// An efficient set of `Edge`s.
     public struct Set: OptionSet {
         public let rawValue: Int
         

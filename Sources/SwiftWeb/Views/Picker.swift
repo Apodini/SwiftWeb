@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A control for selecting from a set of mutually exclusive values. SwiftWeb currently only implements the `SegmentedPickerStyle` for `Picker`.
 public struct Picker<SelectionValue, Content>: View
         where SelectionValue: Hashable, Content: View  {
     let content: Content
@@ -65,6 +66,7 @@ public struct Picker<SelectionValue, Content>: View
     }
 }
 
+/// A custom specification for the appearance and interaction of a `Picker`.
 public protocol PickerStyle { }
 
 public struct SegmentedPickerStyle: PickerStyle {

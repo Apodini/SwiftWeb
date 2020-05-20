@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ A type-erased `View`.
+ 
+ An AnyView allows changing the type of view used in a given view hierarchy.
+ */
 public struct AnyView: View, CustomMappable {
     public typealias Body = Never
     let containedView: TypeErasedView

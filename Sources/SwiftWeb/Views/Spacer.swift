@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A flexible space that expands along the major axis of its containing stack layout, or on both axes if not contained in a stack.
 public struct Spacer: View, GrowingAxesModifying {
     public typealias Body = Never
     

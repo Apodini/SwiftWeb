@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A view that overlays its children, aligning them in both axes.
 public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
     public let body: Content
     

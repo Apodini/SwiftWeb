@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ A named value produced by a view.
+ 
+ A view with multiple children automatically combines its values for a given preference into a single value visible to its ancestors.
+ */
 public protocol PreferenceKey: AnyPreferenceKey {
     associatedtype Value
     static var defaultValue: Self.Value { get }
@@ -18,6 +23,7 @@ protocol PreferenceProvider {
     var preferenceValue: Any { get }
 }
 
+/// Type-erased `PreferenceKey`.
 public protocol AnyPreferenceKey {}
 
 protocol PreferenceChangeListener {

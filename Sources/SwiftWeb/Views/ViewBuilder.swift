@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A custom parameter attribute that constructs views from closures.
 @_functionBuilder public struct ViewBuilder {
 
     /// Builds an empty view from an block containing no statements, `{ }`.

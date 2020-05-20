@@ -17,17 +17,21 @@ public protocol TypeErasedView {
     func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
 }
 
+/**
+ A type that represents part of your app’s user interface and provides modifiers that you use to configure views.
+ 
+ You create custom views by declaring types that conform to the `View` protocol. Implement the required `body` computed property to provide the content for your custom view.
+ */
 public protocol View: TypeErasedView {
     associatedtype Body: View
     
-    // The body property is used to delegate the generation of html for a
-    // specific node to another view. It should be set for all view which
-    // enclose other views in order to allow the layout system to propagate
-    // properties properly through the tree.
+    /** The body property is used to delegate the generation of html for a
+     specific node to another view. It should be set for all view which
+     enclose other views in order to allow the layout system to propagate
+     properties properly through the tree.
+     */
     var body: Body { get }
 }
-
-// MARK: View body default implementation
 
 public extension View {
     var layoutAxis: LayoutAxis {
@@ -45,6 +49,9 @@ public extension View {
     }
 }
 
+/**
+ This extension makes the `Never` type conform to `View` so that it can be used as the associated `Body` type of the latter for `View`s without subviews.
+ */
 extension Never: View {
     public var body: Never { fatalError("Never Type has no body") }
 }
@@ -57,6 +64,66 @@ public extension View where Body == Never {
     var body: Never { fatalError("\(type(of: self)) has no body") }
 }
 
+/** Implement this protocol with your `View` to define the elements to which a transformation of this view is applied.
+ 
+ Use the `customMap(_:)` method to e.g. give access to multiple subviews which this view represents. This method is used to construct the view tree during runtime.
+ */
+public protocol CustomMappable {
+    func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
+}
+
+extension View {
+    public func mapBody<T>(_ transform: (TypeErasedView) -> T) -> [T] {
+        guard type(of: Body.self) != type(of: Never.self) else {
+            return []
+        }
+        
+        if let customMappableBody = body as? CustomMappable {
+            
+            // This is where the recursion happens that makes composing TupleViews and ForEach views
+            // possible
+            return customMappableBody.customMap({
+                $0.map(transform)
+            }).flatMap({ $0 })
+        } else {
+            return [transform(body)]
+        }
+    }
+    
+    public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
+        if let customMappableSelf = self as? CustomMappable {
+            
+            // This is where the recursion happens that makes composing TupleViews and ForEach views
+            // possible
+            return customMappableSelf.customMap({
+                $0.map(transform)
+            }).flatMap({ $0 })
+        } else {
+            return [transform(self)]
+        }
+    }
+    
+    public func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T] {
+        return self.map {
+            $0[keyPath: keyPath]
+        }
+    }
+    
+    public func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
+        if let customMappableSelf = self as? CustomMappable {
+            
+            return customMappableSelf.customMap({
+                $0.deepMap(transform)
+            }).flatMap({ $0 })
+        } else {
+            if type(of: Body.self) != type(of: Never.self) {
+                return body.deepMap(transform) + [transform(self)]
+            } else {
+                return [transform(self)]
+            }
+        }
+    }
+}
 
 // MARK: View modifiers
 
@@ -128,70 +195,7 @@ public extension TypeErasedView {
     }
 }
 
-
-// MARK: CustomMappable
-
-public protocol CustomMappable {
-    func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
-}
-
 extension View {
-    public func mapBody<T>(_ transform: (TypeErasedView) -> T) -> [T] {
-        guard type(of: Body.self) != type(of: Never.self) else {
-            return []
-        }
-        
-        if let customMappableBody = body as? CustomMappable {
-            
-            // This is where the recursion happens that makes composing TupleViews and ForEach views
-            // possible
-            return customMappableBody.customMap({
-                $0.map(transform)
-            }).flatMap({ $0 })
-        } else {
-            return [transform(body)]
-        }
-    }
-    
-    public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
-        if let customMappableSelf = self as? CustomMappable {
-            
-            // This is where the recursion happens that makes composing TupleViews and ForEach views
-            // possible
-            return customMappableSelf.customMap({
-                $0.map(transform)
-            }).flatMap({ $0 })
-        } else {
-            return [transform(self)]
-        }
-    }
-    
-    public func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T] {
-        return self.map {
-            $0[keyPath: keyPath]
-        }
-    }
-    
-    public func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
-        if let customMappableSelf = self as? CustomMappable {
-
-            return customMappableSelf.customMap({
-                $0.deepMap(transform)
-            }).flatMap({ $0 })
-        } else {
-            if type(of: Body.self) != type(of: Never.self) {
-                return body.deepMap(transform) + [transform(self)]
-            } else {
-                return [transform(self)]
-            }
-        }
-    }
-}
-
-
-// MARK: Debugging
-
-public extension View {
     func withDebugReference(_ action: (Self) -> ()) -> Self {
         action(self)
         return self

@@ -7,11 +7,12 @@
 
 import Foundation
 
-public protocol TypeErasedTupleView: CustomMappable {
+protocol TypeErasedTupleView: CustomMappable {
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
     func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
 }
 
+/// A View created from a swift tuple of View values.
 public struct TupleView<T>: View, TypeErasedTupleView {
     public typealias Body = Never
     

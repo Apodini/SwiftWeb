@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A view that switches between multiple child views using interactive user interface elements.
 public struct TabView<Content>: View where Content: View {
     let content: Content
     @State var selectionValue: Int = 0

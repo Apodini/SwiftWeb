@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// An environment-dependent color.
 public struct Color: View, GrowingAxesModifying {
     public typealias Body = Never
     

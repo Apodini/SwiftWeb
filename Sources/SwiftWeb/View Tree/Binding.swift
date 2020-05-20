@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A property wrapper type that can read and write a value owned by a source of truth.
 @propertyWrapper public struct Binding<Value> {
     private var getValue: () -> Value
     private var setValue: (Value) -> Void

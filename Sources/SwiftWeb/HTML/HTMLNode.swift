@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ A structure representing an HTML element with means to modify its CSS style as well as custom attributes.
+ */
 public enum HTMLNode {
     case raw(String)
     
@@ -28,6 +31,7 @@ public enum HTMLNode {
         customAttributes: [String: String?] = [:]
     )
     
+    /// Creates a string representation of the `HTMLNode`.
     public func string() -> String {
         switch self {
         case .raw(let string):
@@ -49,8 +53,8 @@ public enum HTMLNode {
         }
     }
     
-    static func cssTag(from styleDictionary: [CSSKey: CSSValue],
-                       forLayoutInAxis layoutAxis: LayoutAxis? = nil) -> String {
+    /// Creates a string representation of a set of CSS attributes.
+    static func cssTag(from styleDictionary: [CSSKey: CSSValue]) -> String {
         guard !styleDictionary.isEmpty else {
             return .init()
         }
@@ -63,6 +67,13 @@ public enum HTMLNode {
         return "style=\"\(cssString)\""
     }
     
+    /**
+    Returns an `HTMLNode` with an added CSS style attribute.
+     
+     - Parameters:
+         - key: The CSS key of the added attribute.
+         - value: The CSS value of the added attribute.
+    */
     public func withStyle(key: CSSKey, value newValue: CSSValue) -> Self {
         switch self {
         case .raw(_):
@@ -93,6 +104,13 @@ public enum HTMLNode {
         }
     }
     
+    /**
+     Returns an `HTMLNode` with an added custom HTML attribute.
+     
+     - Parameters:
+         - key: The `String ` key of the added attribute.
+         - value: The `String ` value of the added attribute.
+     */
     public func withCustomAttribute(key: String, value newValue: String? = nil) -> Self {
         switch self {
         case .div(let subnodes, let style, let customAttributes):
@@ -121,6 +139,7 @@ public enum HTMLNode {
         }
     }
     
+    /// An enumeration representing a CSS key.
     public enum CSSKey: String, CustomStringConvertible {
         case backgroundColor = "background-color"
         case flexGrow = "flex-grow"
@@ -162,6 +181,7 @@ public enum HTMLNode {
         }
     }
     
+    /// An enumeration representing a CSS value.
     public enum CSSValue: Equatable {
         case raw(String)
         case px(Double)
@@ -240,6 +260,9 @@ extension Dictionary where Key == String, Value == String? {
     }
 }
 
+/**
+ Returns a single `HTMLNode` representing the array: An empty `raw` node if the array is empty, the single element of the array or a `div` node with the elements of this array as subnodes.
+ */
 public extension Array where Element == HTMLNode {
     func joined() -> HTMLNode {
         if isEmpty {

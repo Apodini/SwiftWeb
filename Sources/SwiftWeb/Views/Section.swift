@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// An affordance for creating hierarchical view content.
 public struct Section<Parent, Content>: View where Parent: View, Content: View {
     let header: Parent
     let content: Content

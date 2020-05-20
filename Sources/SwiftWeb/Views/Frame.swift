@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Frame<Content>: View, GrowingAxesModifying where Content: View {
+struct Frame<Content>: View, GrowingAxesModifying where Content: View {
     public let body: Content
     
     let width: Double?

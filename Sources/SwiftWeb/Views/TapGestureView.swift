@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TapGestureView<Content>: View, ClickInputEventResponder where Content: View {
+struct TapGestureView<Content>: View, ClickInputEventResponder where Content: View {
     public var body: Content
     public var action: () -> Void
 
