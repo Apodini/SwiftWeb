@@ -7,7 +7,9 @@
 
 import Foundation
 
+/// The JavaScript client provided by SwiftWeb. Serve this script for the '/script.js' path on your HTTP server.
 public struct JavaScriptClient {
+    /// The script code as a `String`.
     public static var script: String {
         """
         console.log("connecting...");
