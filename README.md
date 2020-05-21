@@ -1,11 +1,11 @@
-<img align="left" alt="SwiftWeb logo" src="Images/swiftweb.png" width=100>
+<img align="left" alt="SwiftWeb logo" src="https://github.com/Apodini/SwiftWeb/raw/develop/Images/swiftweb.png" width=100>
 
 ### SwiftWeb
 **Run Your SwiftUI App on a Swift Server. Serve Many Clients with Your SwiftUI Web App.**
 
 ---
 
-<img align="right" alt="SwiftWeb logo" src="Images/swiftweb-architecture.png" width=300>
+<img align="right" alt="SwiftWeb logo" src="https://github.com/Apodini/SwiftWeb/raw/develop/Images/swiftweb-architecture.png" width=300>
 
 With **SwiftWeb**, you can easily provide a web interface to your existing SwiftUI app. SwiftWeb renders SwiftUI code to HTML and CSS and keeps a WebSocket connection to connected Browsers. User input events are sent to your Swift server which runs your application logic. Screen updates are sent back to connected clients.
 
@@ -25,7 +25,7 @@ Simply instantiate a server instance with a view instance:
 ```let swiftWebServer = SwiftWebServer(contentView: Text("Hello World!")```
 
 <p align="center">
-<img alt="Hello World Screenshot" src="Images/helloworld-screenshot.png" width=500>
+<img alt="Hello World Screenshot" src="https://github.com/Apodini/SwiftWeb/raw/develop/Images/helloworld-screenshot.png" width=500>
 </p>
 
 The JavaScript client will connect to the server instance using a WebSocket connection and load the current state of the interface.
