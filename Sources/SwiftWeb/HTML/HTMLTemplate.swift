@@ -7,7 +7,10 @@
 
 import Foundation
 
+/// The HTML template provided by SwiftWeb. Serve this with your HTTP server implementation.
 public struct HTMLTemplate {
+    /// Retrieve the template as a string. You can provide your custom content as an argument which will be replaced by the SwiftWeb
+    /// JavaScript client once a connection to the server is established.
     public static func withContent(_ content: String) -> String {
         return """
             <!DOCTYPE html>

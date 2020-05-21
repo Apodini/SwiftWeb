@@ -63,6 +63,7 @@ extension Never: View {
     public var body: Never { fatalError("Never Type has no body") }
 }
 
+/// The `EmptyView` is used by the `ViewBuilder` as a return value for empty blocks.
 public struct EmptyView: View {
     public typealias Body = Never
 }

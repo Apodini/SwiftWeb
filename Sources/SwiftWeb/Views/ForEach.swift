@@ -17,6 +17,8 @@ public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : Rand
         htmlOfSubnodes.joined()
     }
     
+    /// Creates an instance that uniquely identifies and creates views across updates based on the provided key path to the underlying
+    /// data’s identifier.
     public init(_ data: Data, id idKeyPath: KeyPath<Data.Element, ID>, content: @escaping (Data.Element) -> Content) {
         self.data = data
         self.idKeyPath = idKeyPath
@@ -29,6 +31,7 @@ public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : Rand
 }
 
 extension ForEach where Data.Element == ID {
+    /// Creates an instance that uniquely identifies and creates views across updates based on the identity of the underlying data.
     public init(_ data: Data, content: @escaping (Data.Element) -> Content) {
         self.init(data, id: \.self, content: content)
     }

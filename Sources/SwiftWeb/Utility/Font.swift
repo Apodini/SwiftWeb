@@ -13,16 +13,19 @@ public struct Font {
     let weight: Weight
     let design: Design
     
+    /// Specifies a system font to use, along with the style, weight, and any design parameters you want applied to the text.
     public static func system(size: Double,
                               weight: Weight = .regular,
                               design: Design = .default) -> Font {
         return Font(size: size, weight: weight, design: design)
     }
     
+    /// A font with the title text style.
     public static var title: Font {
         .system(size: 26)
     }
     
+    /// A font with the subheadline text style.
     public static var subheadline: Font {
         .system(size: 16)
     }

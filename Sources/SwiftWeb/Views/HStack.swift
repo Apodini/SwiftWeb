@@ -17,14 +17,16 @@ public struct HStack<Content>: Stack, GrowingAxesModifying where Content: View {
         .horizontal
     }
     
-    public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes growingAxesOfSubnodes: Set<GrowingLayoutAxis>)
-        -> Set<GrowingLayoutAxis> {
+    public func modifiedGrowingLayoutAxes(
+        forGrowingAxesOfSubnodes growingAxesOfSubnodes: Set<GrowingLayoutAxis>
+    ) -> Set<GrowingLayoutAxis> {
             // `.undetermined` means that there is a spacer among the subviews which is not
             // contained in another stack. This means that this horizontal stack view can grow among
             // its primary axis.
             Set(growingAxesOfSubnodes.map { $0 == .undetermined ? .horizontal : $0 })
     }
     
+    /// Creates an instance with the given spacing and vertical alignment.
     public init(alignment: HorizontalAlignment = .center,
                 spacing: Double? = nil,
                 @ViewBuilder buildSubviews: () -> Content) {

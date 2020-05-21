@@ -14,6 +14,7 @@ public struct Image: View {
     
     let name: String
 
+    /// Creates an `Image` with the specified file name / path.
     public init(_ name: String) {
         self.name = name
         isResizable = false
@@ -24,6 +25,7 @@ public struct Image: View {
         self.isResizable = isResizable
     }
 
+    /// Returns a resizable version of this image instance.
     public func resizable() -> Image {
         return Self(name, isResizable: true)
     }

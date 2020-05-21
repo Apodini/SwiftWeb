@@ -12,6 +12,7 @@ import Foundation
 public struct Form<Content>: View where Content: View {
     let content: Content
     
+    /// Initializes a `Form` with the provided content view.
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
