@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>View Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Protocol/View" class="dashAnchor"></a>
+
+    <a title="View Protocol Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          SwiftWeb Docs
+        </a>
+         (67% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/Apodini/SwiftWeb">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">SwiftWeb Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      View Protocol Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/State.html">State</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SwiftWebServer.html">SwiftWebServer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/Edge.html">Edge</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/Edge/Set.html">– Set</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/GrowingLayoutAxis.html">GrowingLayoutAxis</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/HTMLNode.html">HTMLNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/HTMLNode/CSSKey.html">– CSSKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/HTMLNode/CSSValue.html">– CSSValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/HorizontalAlignment.html">HorizontalAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/LayoutAxis.html">LayoutAxis</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/UIKeyboardType.html">UIKeyboardType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/VerticalAlignment.html">VerticalAlignment</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Never.html">Never</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Sequence.html">Sequence</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols.html#/s:8SwiftWeb16AnyPreferenceKeyP">AnyPreferenceKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ChangeInputEventResponder.html">ChangeInputEventResponder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ClickInputEventResponder.html">ClickInputEventResponder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/CustomMappable.html">CustomMappable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/GrowingAxesModifying.html">GrowingAxesModifying</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols.html#/s:8SwiftWeb11PickerStyleP">PickerStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PreferenceKey.html">PreferenceKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PreviewProvider.html">PreviewProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TypeErasedView.html">TypeErasedView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/View.html">View</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ViewModifier.html">ViewModifier</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/WebSocketSession.html">WebSocketSession</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AnyView.html">AnyView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Binding.html">Binding</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Button.html">Button</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Color.html">Color</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/EmptyView.html">EmptyView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Font.html">Font</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Font/Weight.html">– Weight</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Font/Design.html">– Design</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ForEach.html">ForEach</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Form.html">Form</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/HStack.html">HStack</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/HTMLTemplate.html">HTMLTemplate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Image.html">Image</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/List.html">List</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/NavigationBarItem.html">NavigationBarItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/NavigationBarItem/TitleDisplayMode.html">– TitleDisplayMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/NavigationView.html">NavigationView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Picker.html">Picker</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/SegmentedPickerStyle.html">SegmentedPickerStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Slider.html">Slider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Spacer.html">Spacer</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TabView.html">TabView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Text.html">Text</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TextField.html">TextField</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/TupleView.html">TupleView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VStack.html">VStack</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ViewBuilder.html">ViewBuilder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ZStack.html">ZStack</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>View</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">View</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/TypeErasedView.html">TypeErasedView</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A type that represents part of your app’s user interface and provides modifiers that you use to configure views.</p>
+
+<p>You create custom views by declaring types that conform to the <code>View</code> protocol. Implement the required <code>body</code> computed property to provide the content for your custom view.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewP4BodyQa"></a>
+                    <a name="//apple_ref/swift/Alias/Body" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewP4BodyQa">Body</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of the <code><a href="../Protocols/View.html#/s:8SwiftWeb4ViewP4body4BodyQzvp">body</a></code> property defining the subtree of <code>View</code>s of this <code>View</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">Body</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewP4body4BodyQzvp"></a>
+                    <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewP4body4BodyQzvp">body</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The body property is used to delegate the generation of html for a specific node to another view. It should be set for all view
+which enclose other views in order to allow the layout system to propagate properties properly through the tree.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt"><a href="../Protocols/View.html#/s:8SwiftWeb4ViewP4BodyQa">Body</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE4fontyQrAA4FontVF"></a>
+                    <a name="//apple_ref/swift/Method/font(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE4fontyQrAA4FontVF">font(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">font</span><span class="p">(</span><span class="n">_</span> <span class="nv">font</span><span class="p">:</span> <span class="kt"><a href="../Structs/Font.html">Font</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb14TypeErasedViewP10layoutAxisAA06LayoutG0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/layoutAxis" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb14TypeErasedViewP10layoutAxisAA06LayoutG0Ovp">layoutAxis</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">layoutAxis</span><span class="p">:</span> <span class="kt"><a href="../Enums/LayoutAxis.html">LayoutAxis</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb14TypeErasedViewP4html17forHTMLOfSubnodesAA8HTMLNodeOSayAGG_tF"></a>
+                    <a name="//apple_ref/swift/Method/html(forHTMLOfSubnodes:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb14TypeErasedViewP4html17forHTMLOfSubnodesAA8HTMLNodeOSayAGG_tF">html(forHTMLOfSubnodes:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">html</span><span class="p">(</span><span class="n">forHTMLOfSubnodes</span> <span class="nv">htmlOfSubnodes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Enums/HTMLNode.html">HTMLNode</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/HTMLNode.html">HTMLNode</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb14TypeErasedViewP7mapBodyySayqd__Gqd__AaB_pXElF"></a>
+                    <a name="//apple_ref/swift/Method/mapBody(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb14TypeErasedViewP7mapBodyySayqd__Gqd__AaB_pXElF">mapBody(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">mapBody</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Protocols/TypeErasedView.html">TypeErasedView</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb14TypeErasedViewP3mapySayqd__Gqd__AaB_pXElF"></a>
+                    <a name="//apple_ref/swift/Method/map(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb14TypeErasedViewP3mapySayqd__Gqd__AaB_pXElF">map(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">transform</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Protocols/TypeErasedView.html">TypeErasedView</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/View%20modifiers"></a>
+                <a name="//apple_ref/swift/Section/View modifiers" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/View%20modifiers"></a>
+                  <h3 class="section-name"><p>View modifiers</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE12cornerRadiusyQrSdF"></a>
+                    <a name="//apple_ref/swift/Method/cornerRadius(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE12cornerRadiusyQrSdF">cornerRadius(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">cornerRadius</span><span class="p">(</span><span class="n">_</span> <span class="nv">radius</span><span class="p">:</span> <span class="kt">Double</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE6shadow5color6radius1x1yQrAA5ColorV_S3dtF"></a>
+                    <a name="//apple_ref/swift/Method/shadow(color:radius:x:y:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE6shadow5color6radius1x1yQrAA5ColorV_S3dtF">shadow(color:<wbr>radius:<wbr>x:<wbr>y:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">shadow</span><span class="p">(</span><span class="nv">color</span><span class="p">:</span> <span class="kt"><a href="../Structs/Color.html">Color</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/Color.html">Color</a></span><span class="p">(</span><span class="nv">white</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="nf">opacity</span><span class="p">(</span><span class="mf">0.20</span><span class="p">),</span>
+            <span class="nv">radius</span><span class="p">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">40.0</span><span class="p">,</span>
+            <span class="nv">x</span><span class="p">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="nv">y</span><span class="p">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE7paddingyQrAA4EdgeO3SetV_SdSgtF"></a>
+                    <a name="//apple_ref/swift/Method/padding(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE7paddingyQrAA4EdgeO3SetV_SdSgtF">padding(_:<wbr>_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">padding</span><span class="p">(</span><span class="n">_</span> <span class="nv">edges</span><span class="p">:</span> <span class="kt"><a href="../Enums/Edge.html">Edge</a></span><span class="o">.</span><span class="kt">Set</span> <span class="o">=</span> <span class="o">.</span><span class="n">all</span><span class="p">,</span> <span class="n">_</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE7paddingyQrSdSgF"></a>
+                    <a name="//apple_ref/swift/Method/padding(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE7paddingyQrSdSgF">padding(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">padding</span><span class="p">(</span><span class="n">_</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE6border_5widthQrAA5ColorV_SdtF"></a>
+                    <a name="//apple_ref/swift/Method/border(_:width:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE6border_5widthQrAA5ColorV_SdtF">border(_:<wbr>width:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">border</span><span class="p">(</span><span class="n">_</span> <span class="nv">color</span><span class="p">:</span> <span class="kt"><a href="../Structs/Color.html">Color</a></span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE8disabledyQrSbF"></a>
+                    <a name="//apple_ref/swift/Method/disabled(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE8disabledyQrSbF">disabled(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">disabled</span><span class="p">(</span><span class="n">_</span> <span class="nv">disabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE15foregroundColoryQrAA0E0VSgF"></a>
+                    <a name="//apple_ref/swift/Method/foregroundColor(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE15foregroundColoryQrAA0E0VSgF">foregroundColor(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">foregroundColor</span><span class="p">(</span><span class="n">_</span> <span class="nv">color</span><span class="p">:</span> <span class="kt"><a href="../Structs/Color.html">Color</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE5frame5width6height8minWidth0G6HeightQrSdSg_A3ItF"></a>
+                    <a name="//apple_ref/swift/Method/frame(width:height:minWidth:minHeight:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE5frame5width6height8minWidth0G6HeightQrSdSg_A3ItF">frame(width:<wbr>height:<wbr>minWidth:<wbr>minHeight:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">frame</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+           <span class="nv">height</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+           <span class="nv">minWidth</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+           <span class="nv">minHeight</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE13globalOverlayyQrqd__yXEAaBRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/globalOverlay(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE13globalOverlayyQrqd__yXEAaBRd__lF">globalOverlay(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">globalOverlay</span><span class="o">&lt;</span><span class="kt">Overlay</span><span class="o">&gt;</span><span class="p">(</span><span class="kd"><a href="../Structs/ViewBuilder.html">@ViewBuilder</a></span> <span class="n">_</span> <span class="nv">overlay</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Overlay</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span> <span class="k">where</span> <span class="kt">Overlay</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE18navigationBarTitle_11displayModeQrSS_AA010NavigationE4ItemV0f7DisplayH0OtF"></a>
+                    <a name="//apple_ref/swift/Method/navigationBarTitle(_:displayMode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE18navigationBarTitle_11displayModeQrSS_AA010NavigationE4ItemV0f7DisplayH0OtF">navigationBarTitle(_:<wbr>displayMode:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">navigationBarTitle</span><span class="p">(</span><span class="n">_</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                        <span class="nv">displayMode</span><span class="p">:</span> <span class="kt"><a href="../Structs/NavigationBarItem.html">NavigationBarItem</a></span><span class="o">.</span><span class="kt">TitleDisplayMode</span> <span class="o">=</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE18navigationBarItems8trailingQrqd___tAaBRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/navigationBarItems(trailing:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE18navigationBarItems8trailingQrqd___tAaBRd__lF">navigationBarItems(trailing:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">navigationBarItems</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">trailing</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE18onPreferenceChange_7performQrqd__m_y5ValueQyd__ctAA0E3KeyRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/onPreferenceChange(_:perform:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE18onPreferenceChange_7performQrqd__m_y5ValueQyd__ctAA0E3KeyRd__lF">onPreferenceChange(_:<wbr>perform:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">onPreferenceChange</span><span class="o">&lt;</span><span class="kt">K</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">K</span><span class="o">.</span><span class="k">Type</span> <span class="o">=</span> <span class="kt">K</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
+                           <span class="n">perform</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">K</span><span class="o">.</span><span class="kt">Value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span> <span class="k">where</span> <span class="kt">K</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PreferenceKey.html">PreferenceKey</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE10preference3key5valueQrqd__m_5ValueQyd__tAA13PreferenceKeyRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/preference(key:value:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE10preference3key5valueQrqd__m_5ValueQyd__tAA13PreferenceKeyRd__lF">preference(key:<wbr>value:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">preference</span><span class="o">&lt;</span><span class="kt">K</span><span class="o">&gt;</span><span class="p">(</span><span class="n">key</span> <span class="nv">_</span><span class="p">:</span> <span class="kt">K</span><span class="o">.</span><span class="k">Type</span> <span class="o">=</span> <span class="kt">K</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">K</span><span class="o">.</span><span class="kt">Value</span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span> <span class="k">where</span> <span class="kt">K</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PreferenceKey.html">PreferenceKey</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE5sheet11isPresented7contentQrAA7BindingVySbG_qd__yXEtAaBRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/sheet(isPresented:content:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE5sheet11isPresented7contentQrAA7BindingVySbG_qd__yXEtAaBRd__lF">sheet(isPresented:<wbr>content:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">sheet</span><span class="o">&lt;</span><span class="kt">Content</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">isPresented</span><span class="p">:</span> <span class="kt"><a href="../Structs/Binding.html">Binding</a></span><span class="o">&lt;</span><span class="kt">Bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="kd"><a href="../Structs/ViewBuilder.html">@ViewBuilder</a></span> <span class="nv">content</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Content</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span> <span class="k">where</span> <span class="kt">Content</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE7tabItemyQrqd__yXEAaBRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/tabItem(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE7tabItemyQrqd__yXEAaBRd__lF">tabItem(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">tabItem</span><span class="o">&lt;</span><span class="kt">V</span><span class="o">&gt;</span><span class="p">(</span><span class="kd"><a href="../Structs/ViewBuilder.html">@ViewBuilder</a></span> <span class="n">_</span> <span class="nv">label</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span> <span class="k">where</span> <span class="kt">V</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE3tagyQrqd__SHRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/tag(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE3tagyQrqd__SHRd__lF">tag(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">tag</span><span class="o">&lt;</span><span class="kt">V</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">tag</span><span class="p">:</span> <span class="kt">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span> <span class="k">where</span> <span class="kt">V</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE12onTapGesture7performQryyc_tF"></a>
+                    <a name="//apple_ref/swift/Method/onTapGesture(perform:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE12onTapGesture7performQryyc_tF">onTapGesture(perform:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">onTapGesture</span><span class="p">(</span><span class="n">perform</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE12keyboardTypeyQrAA010UIKeyboardE0OF"></a>
+                    <a name="//apple_ref/swift/Method/keyboardType(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE12keyboardTypeyQrAA010UIKeyboardE0OF">keyboardType(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">keyboardType</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/UIKeyboardType.html">UIKeyboardType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8SwiftWeb4ViewPAAE10backgroundyQrqd__AaBRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/background(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8SwiftWeb4ViewPAAE10backgroundyQrqd__AaBRd__lF">background(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">background</span><span class="o">&lt;</span><span class="kt">Background</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">background</span><span class="p">:</span> <span class="kt">Background</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">some</span> <span class="kt">View</span> <span class="k">where</span> <span class="kt">Background</span> <span class="p">:</span> <span class="kt">View</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://github.com/Apodini" target="_blank" rel="external">Quirin Schweigert</a>. All rights reserved. (Last updated: 2020-05-21)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

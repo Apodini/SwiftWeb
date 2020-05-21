@@ -1,0 +1,817 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 14,
+      "symbol": "HTMLNode.raw(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 16,
+      "symbol": "HTMLNode.div(subNodes:style:customAttributes:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 22,
+      "symbol": "HTMLNode.img(path:style:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 27,
+      "symbol": "HTMLNode.input(placeholder:value:style:customAttributes:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 144,
+      "symbol": "HTMLNode.CSSKey.backgroundColor",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 145,
+      "symbol": "HTMLNode.CSSKey.flexGrow",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 146,
+      "symbol": "HTMLNode.CSSKey.display",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 147,
+      "symbol": "HTMLNode.CSSKey.flexDirection",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 148,
+      "symbol": "HTMLNode.CSSKey.width",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 149,
+      "symbol": "HTMLNode.CSSKey.height",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 150,
+      "symbol": "HTMLNode.CSSKey.color",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 151,
+      "symbol": "HTMLNode.CSSKey.justifyContent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 152,
+      "symbol": "HTMLNode.CSSKey.alignItems",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 153,
+      "symbol": "HTMLNode.CSSKey.fontSize",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 154,
+      "symbol": "HTMLNode.CSSKey.fontWeight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 155,
+      "symbol": "HTMLNode.CSSKey.flexBasis",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 156,
+      "symbol": "HTMLNode.CSSKey.flexShrink",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 157,
+      "symbol": "HTMLNode.CSSKey.alignSelf",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 158,
+      "symbol": "HTMLNode.CSSKey.marginLeft",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 159,
+      "symbol": "HTMLNode.CSSKey.position",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 160,
+      "symbol": "HTMLNode.CSSKey.borderRadius",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 161,
+      "symbol": "HTMLNode.CSSKey.boxShadow",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 162,
+      "symbol": "HTMLNode.CSSKey.padding",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 163,
+      "symbol": "HTMLNode.CSSKey.paddingLeft",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 164,
+      "symbol": "HTMLNode.CSSKey.paddingTop",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 165,
+      "symbol": "HTMLNode.CSSKey.paddingRight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 166,
+      "symbol": "HTMLNode.CSSKey.paddingBottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 167,
+      "symbol": "HTMLNode.CSSKey.border",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 168,
+      "symbol": "HTMLNode.CSSKey.overflow",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 169,
+      "symbol": "HTMLNode.CSSKey.minWidth",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 170,
+      "symbol": "HTMLNode.CSSKey.minHeight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 171,
+      "symbol": "HTMLNode.CSSKey.filter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 172,
+      "symbol": "HTMLNode.CSSKey.top",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 173,
+      "symbol": "HTMLNode.CSSKey.left",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 174,
+      "symbol": "HTMLNode.CSSKey.right",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 175,
+      "symbol": "HTMLNode.CSSKey.bottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 176,
+      "symbol": "HTMLNode.CSSKey.fontFamily",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 177,
+      "symbol": "HTMLNode.CSSKey.pointerEvents",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 186,
+      "symbol": "HTMLNode.CSSValue.raw(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 187,
+      "symbol": "HTMLNode.CSSValue.px(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 188,
+      "symbol": "HTMLNode.CSSValue.flex",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 189,
+      "symbol": "HTMLNode.CSSValue.row",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 190,
+      "symbol": "HTMLNode.CSSValue.column",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 191,
+      "symbol": "HTMLNode.CSSValue.center",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 192,
+      "symbol": "HTMLNode.CSSValue.flexStart",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 193,
+      "symbol": "HTMLNode.CSSValue.flexEnd",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 194,
+      "symbol": "HTMLNode.CSSValue.stretch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 195,
+      "symbol": "HTMLNode.CSSValue.int(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 196,
+      "symbol": "HTMLNode.CSSValue.zero",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 197,
+      "symbol": "HTMLNode.CSSValue.one",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 198,
+      "symbol": "HTMLNode.CSSValue.percent(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 199,
+      "symbol": "HTMLNode.CSSValue.color(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 200,
+      "symbol": "HTMLNode.CSSValue.initial",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 201,
+      "symbol": "HTMLNode.CSSValue.relative",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 202,
+      "symbol": "HTMLNode.CSSValue.absolute",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 203,
+      "symbol": "HTMLNode.CSSValue.shadow(offsetX:offsetY:radius:color:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 204,
+      "symbol": "HTMLNode.CSSValue.border(width:color:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 205,
+      "symbol": "HTMLNode.CSSValue.hidden",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 206,
+      "symbol": "HTMLNode.CSSValue.fixed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 207,
+      "symbol": "HTMLNode.CSSValue.auto",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 209,
+      "symbol": "HTMLNode.CSSValue.cssString",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/HTML/HTMLNode.swift",
+      "line": 243,
+      "symbol": "HTMLNode.div(style:buildSubnode:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/Font.swift",
+      "line": 35,
+      "symbol": "Font.Weight.thin",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/Font.swift",
+      "line": 36,
+      "symbol": "Font.Weight.regular",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/Font.swift",
+      "line": 37,
+      "symbol": "Font.Weight.medium",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/Font.swift",
+      "line": 38,
+      "symbol": "Font.Weight.semibold",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/Font.swift",
+      "line": 39,
+      "symbol": "Font.Weight.bold",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/Font.swift",
+      "line": 44,
+      "symbol": "Font.Design.default",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/Font.swift",
+      "line": 45,
+      "symbol": "Font.Design.rounded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/PreviewProvider.swift",
+      "line": 12,
+      "symbol": "PreviewProvider.Previews",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Utility/PreviewProvider.swift",
+      "line": 13,
+      "symbol": "PreviewProvider.previews",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/View Modifiers/FontModifier.swift",
+      "line": 32,
+      "symbol": "View.font(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/View.swift",
+      "line": 124,
+      "symbol": "View.cornerRadius(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/View.swift",
+      "line": 132,
+      "symbol": "View.shadow(color:radius:x:y:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/View.swift",
+      "line": 146,
+      "symbol": "View.padding(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/View.swift",
+      "line": 170,
+      "symbol": "View.padding(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/View.swift",
+      "line": 174,
+      "symbol": "View.border(_:width:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/View.swift",
+      "line": 186,
+      "symbol": "TypeErasedView.debugDescription",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/AnyView.swift",
+      "line": 41,
+      "symbol": "TypeErasedView.anyView()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Button.swift",
+      "line": 38,
+      "symbol": "View.disabled(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 14,
+      "symbol": "Color.clear",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 18,
+      "symbol": "Color.red",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 19,
+      "symbol": "Color.green",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 20,
+      "symbol": "Color.blue",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 21,
+      "symbol": "Color.systemBlue",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 22,
+      "symbol": "Color.gray",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 23,
+      "symbol": "Color.white",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 24,
+      "symbol": "Color.black",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Color.swift",
+      "line": 83,
+      "symbol": "View.foregroundColor(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Frame.swift",
+      "line": 67,
+      "symbol": "View.frame(width:height:minWidth:minHeight:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/GlobalOverlayView.swift",
+      "line": 32,
+      "symbol": "View.globalOverlay(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/NavigationView.swift",
+      "line": 17,
+      "symbol": "NavigationView.init(content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/NavigationView.swift",
+      "line": 95,
+      "symbol": "View.navigationBarTitle(_:displayMode:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/NavigationView.swift",
+      "line": 100,
+      "symbol": "View.navigationBarItems(trailing:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Picker.swift",
+      "line": 75,
+      "symbol": "SegmentedPickerStyle.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/PreferenceChangeListenerView.swift",
+      "line": 30,
+      "symbol": "View.onPreferenceChange(_:perform:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/PreferenceProvidingView.swift",
+      "line": 24,
+      "symbol": "View.preference(key:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Sheet.swift",
+      "line": 51,
+      "symbol": "View.sheet(isPresented:content:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/TabItem.swift",
+      "line": 20,
+      "symbol": "View.tabItem(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/TaggedView.swift",
+      "line": 20,
+      "symbol": "View.tag(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/TapGestureView.swift",
+      "line": 25,
+      "symbol": "View.onTapGesture(perform:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/Text.swift",
+      "line": 16,
+      "symbol": "Text.html",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/TextField.swift",
+      "line": 60,
+      "symbol": "View.keyboardType(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/TupleView.swift",
+      "line": 19,
+      "symbol": "TupleView.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/TupleView.swift",
+      "line": 21,
+      "symbol": "TupleView.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/VStack.swift",
+      "line": 24,
+      "symbol": "VStack.init(alignment:spacing:buildSubviews:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 23,
+      "symbol": "ViewBuilder.buildBlock(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 27,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 31,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 35,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 39,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 43,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 47,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 51,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ViewBuilder.swift",
+      "line": 55,
+      "symbol": "ViewBuilder.buildBlock(_:_:_:_:_:_:_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb/Sources/SwiftWeb/Views/ZStack.swift",
+      "line": 42,
+      "symbol": "View.background(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/runners/2.262.1/work/SwiftWeb/SwiftWeb"
+}
