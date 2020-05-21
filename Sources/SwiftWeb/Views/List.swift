@@ -11,10 +11,12 @@ import Foundation
 public struct List<Content>: View, GrowingAxesModifying where Content: View {
     var content: Content
 
+    /// Creates a list with the given content.
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
     
+    /// Creates a list that identifies its rows based on a key path to the identifier of the underlying data.
     public init<Data, ID, RowContent>(_ data: Data,
                                       id: KeyPath<Data.Element, ID>,
                                       rowContent: @escaping (Data.Element) -> RowContent)

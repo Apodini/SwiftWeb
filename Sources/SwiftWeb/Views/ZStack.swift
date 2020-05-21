@@ -32,6 +32,7 @@ public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
         return .div(subNodes: stackedSubnodes, style: [.position : .relative, .flexGrow: .one])
     }
     
+    /// Creates an instance with the given content
     public init(@ViewBuilder content: () -> Content) {
         body = content()
     }

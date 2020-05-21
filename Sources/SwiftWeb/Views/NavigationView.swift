@@ -107,8 +107,13 @@ public struct NavigationBarItem {
     
     /// A style for displaying the title of a navigation bar.
     public enum TitleDisplayMode: Int, Equatable {
+        /// Inherit the display mode from the previous navigation item.
         case automatic
+        
+        /// Display the title within the standard bounds of the navigation bar.
         case inline
+        
+        /// Display a large title within an expanded navigation bar.
         case large
     }
 }

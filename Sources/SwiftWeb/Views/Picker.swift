@@ -14,6 +14,7 @@ public struct Picker<SelectionValue, Content>: View
     let content: Content
     var selectionValue: Binding<SelectionValue>
     
+    /// Creates an instance that selects from content associated with `Selection` values.
     public init<S>(_ title: S,
             selection: Binding<SelectionValue>,
             @ViewBuilder content: () -> Content) where S: StringProtocol {
@@ -69,11 +70,13 @@ public struct Picker<SelectionValue, Content>: View
 /// A custom specification for the appearance and interaction of a `Picker`.
 public protocol PickerStyle { }
 
+/// A structure representing the segmented style of the `Picker`. This is currently the only supported style in SwiftWeb.
 public struct SegmentedPickerStyle: PickerStyle {
     public init() {}
 }
 
 public extension Picker {
+    /// Sets the style for pickers within this view.
     func pickerStyle<S>(_ style: S) -> some View where S : PickerStyle {
         guard style is SegmentedPickerStyle else {
             fatalError("picker style not implemented")

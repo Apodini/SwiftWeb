@@ -11,6 +11,7 @@ import Foundation
 public struct Spacer: View, GrowingAxesModifying {
     public typealias Body = Never
     
+    /// Initializes the `Spacer`.
     public init() { }
     
     public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>)

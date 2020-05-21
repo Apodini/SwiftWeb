@@ -12,6 +12,7 @@ public struct TabView<Content>: View where Content: View {
     let content: Content
     @State var selectionValue: Int = 0
     
+    /// Initializes the `TabView` with the provided content and selection value specifying the active tab.
     public init(selection: Int = 0, @ViewBuilder content: () -> Content) {
         self.content = content()
         self.selectionValue = selection

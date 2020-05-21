@@ -8,9 +8,11 @@
 
 import Foundation
 
+/// A control for selecting a value from a bounded linear range of values.
 public struct Slider: View, ChangeInputEventResponder, GrowingAxesModifying {
     let value: Binding<Double>
     
+    /// Creates an instance which controls the provided `Binding`.
     public init(value: Binding<Double>) {
         self.value = value
     }

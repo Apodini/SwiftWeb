@@ -15,8 +15,7 @@ import Foundation
         return EmptyView()
     }
 
-    /// Passes a single view written as a child view (e..g, `{ Text("Hello") }`) through
-    /// unmodified.
+    /// Passes a single view written as a child view (e..g, `{ Text("Hello") }`) through unmodified.
     public static func buildBlock<Content>(_ content: Content) -> Content where Content : View {
         return content
     }

@@ -13,6 +13,7 @@ public struct Section<Parent, Content>: View where Parent: View, Content: View {
     let header: Parent
     let content: Content
     
+    /// Initializes the `Section` with the supplied header and content views.
     public init(header: Parent, @ViewBuilder content: () -> Content) {
         self.header = header
         self.content = content()

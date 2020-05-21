@@ -15,6 +15,7 @@ public struct Text: View {
     let isBold: Bool
     public let html: HTMLNode = .raw("deprecated")
     
+    /// Creates a text view that displays a string literal without localization.
     public init(_ text: String) {
         self.text = text
         isBold = false
@@ -42,6 +43,7 @@ public struct Text: View {
 }
 
 public extension Text {
+    /// Applies a bold font weight to the text.
     func bold() -> Text {
         return Text(text, isBold: true)
     }

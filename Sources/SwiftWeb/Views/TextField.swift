@@ -22,11 +22,13 @@ public struct TextField: View, ChangeInputEventResponder {
         return .input(placeholder: title, value: text.wrappedValue, style: [.pointerEvents: .auto])
     }
     
+    /// Creates an instance with a title string and a binding for the editable value.
     public init<S>(_ title: S, text: Binding<String>) where S: StringProtocol {
         self.title = String(title)
         self.text = text
     }
     
+    /// Creates an instance which passes the value of this `TextField` through the provided `Formatter`.
     public init<S, T>(_ title: S, value: Binding<T>, formatter: Formatter) where S: StringProtocol {
         self.title = String(title)
         
