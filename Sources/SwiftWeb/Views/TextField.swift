@@ -50,6 +50,7 @@ public struct TextField: View, ChangeInputEventResponder {
 
 /// The type of keyboard to display for a given text-based view.
 public enum UIKeyboardType {
+    /// Specifies a keyboard with numbers and a decimal point.
     case decimalPad
 }
 

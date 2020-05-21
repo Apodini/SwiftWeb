@@ -260,10 +260,11 @@ extension Dictionary where Key == String, Value == String? {
     }
 }
 
-/**
- Returns a single `HTMLNode` representing the array: An empty `raw` node if the array is empty, the single element of the array or a `div` node with the elements of this array as subnodes.
- */
+/// Provides functionality for an `Array` of `HTMLNode`s.
 public extension Array where Element == HTMLNode {
+    
+    ///  Returns a single `HTMLNode` representing the array: An empty `raw` node if the array is empty, the single element of the
+    ///  array or a `div` node with the elements of this array as subnodes.
     func joined() -> HTMLNode {
         if isEmpty {
             print("joining empty html")

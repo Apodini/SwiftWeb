@@ -64,11 +64,11 @@ public extension View where Body == Never {
     var body: Never { fatalError("\(type(of: self)) has no body") }
 }
 
-/** Implement this protocol with your `View` to define the elements to which a transformation of this view is applied.
- 
- Use the `customMap(_:)` method to e.g. give access to multiple subviews which this view represents. This method is used to construct the view tree during runtime.
- */
+/// Implement this protocol with your `View` to define the elements to which a transformation of this view is applied.
 public protocol CustomMappable {
+    
+    /// Use the `customMap(_:)` method to e.g. give access to multiple subviews which this view represents. This method is used
+    /// to construct the view tree during runtime.
     func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
 }
 

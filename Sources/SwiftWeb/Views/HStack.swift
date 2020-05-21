@@ -50,8 +50,13 @@ public struct HStack<Content>: Stack, GrowingAxesModifying where Content: View {
 
 /// An alignment position along the horizontal axis.
 public enum VerticalAlignment {
+    /// A guide marking the vertical center of the view.
     case center
+    
+    /// A guide marking the top edge of the view.
     case top
+    
+    /// A guide marking the bottom edge of the view.
     case bottom
     
     var cssValue: HTMLNode.CSSValue {

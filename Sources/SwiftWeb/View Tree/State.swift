@@ -15,9 +15,11 @@ protocol TypeErasedState: class {
 /**
  A property wrapper type that can read and write a value managed by SwiftWeb.
  
- SwiftWeb manages the storage of any property you declare as a state. When the state value changes, the view invalidates its appearance and recomputes the body. Use the state as the single source of truth for a given view.
+ SwiftWeb manages the storage of any property you declare as a state. When the state value changes, the view invalidates its appearance
+ and recomputes the body. Use the state as the single source of truth for a given view.
  
- A State instance isn’t the value itself; it’s a means of reading and writing the value. To access a state’s underlying value, use its variable name, which returns the `wrappedValue` property value.
+ A State instance isn’t the value itself; it’s a means of reading and writing the value. To access a state’s underlying value, use its variable
+ name, which returns the `wrappedValue` property value.
  
  You should only access a state property from inside the view’s body, or from methods called by it.
  */
@@ -63,6 +65,7 @@ protocol TypeErasedState: class {
         self.stateStorageNode = nil
     }
     
+    /// Creates the state with an initial wrapped value.
     public init(wrappedValue: Value) {
         self.defaultValue = wrappedValue
     }

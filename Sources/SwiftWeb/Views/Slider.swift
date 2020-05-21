@@ -19,8 +19,9 @@ public struct Slider: View, ChangeInputEventResponder, GrowingAxesModifying {
         value.wrappedValue = Double(newValue) ?? 0
     }
     
-    public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>) -> Set<GrowingLayoutAxis> {
-        [.horizontal]
+    public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes: Set<GrowingLayoutAxis>)
+        -> Set<GrowingLayoutAxis> {
+            [.horizontal]
     }
     
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
