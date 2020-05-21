@@ -18,6 +18,7 @@ public struct Button<Label>: View where Label : View {
             .onTapGesture(perform: action)
     }
     
+    /// Creates an instance with a custom view as label.
     public init(action: @escaping () -> Void, @ViewBuilder label: () -> Label) {
         self.action = action
         self.label = label()
@@ -25,6 +26,7 @@ public struct Button<Label>: View where Label : View {
 }
 
 public extension Button where Label == Text {
+    /// Creates an instance with a string as label.
     init<S>(_ title: S, action: @escaping () -> Void) where S : StringProtocol {
         self = .init(action: action) {
             Text(String(title))

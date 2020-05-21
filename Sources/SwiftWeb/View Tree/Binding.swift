@@ -12,6 +12,7 @@ import Foundation
     private var getValue: () -> Value
     private var setValue: (Value) -> Void
     
+    /// The underlying value referenced by the binding variable.
     public var wrappedValue : Value {
         get {
             getValue()
@@ -22,10 +23,12 @@ import Foundation
         }
     }
     
+    /// A projection of the binding value that returns a binding.
     public var projectedValue: Self {
         return self
     }
     
+    /// Creates a binding with closures that read and write the binding value.
     public init(getValue: @escaping () -> Value, setValue: @escaping (Value) -> Void) {
         self.getValue = getValue
         self.setValue = setValue

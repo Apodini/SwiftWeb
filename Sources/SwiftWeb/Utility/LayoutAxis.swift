@@ -11,7 +11,10 @@ import Foundation
  Primary layout axis of a view. Used by the SwiftWeb layout system to translate `GrowingLayoutAxis`s  into CSS attributes at each level of the view hierarchy.
  */
 public enum LayoutAxis {
+    /// Indicates that a `View` lays out its children horizontally.
     case horizontal
+    
+    /// Indicates that a `View` lays out its children vertically.
     case vertical
 }
 

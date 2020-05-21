@@ -21,11 +21,18 @@ where Modifier: ViewModifier, Modifier.Content == Content {
     }
 }
 
+/// A modifier that you apply to a view or another view modifier, producing a different version of the original value.
 public protocol ViewModifier {
+    /// The type of view representing the body.
     associatedtype Body: View
+    
+    /// The content view type.
     associatedtype Content: View
     
+    /// Gets the current body of the caller.
     func body(content: Self.Content) -> Self.Body
+    
+    /// Specifies the transformation of HTML as implemented by this `ViewModifier`
     func html(forHTMLOfContent: HTMLNode) -> HTMLNode
 }
 
@@ -36,15 +43,9 @@ public extension ViewModifier {
 }
 
 public extension ViewModifier where Body == Content {
+    /// Returns `content` as `body`.
     func body(content: Self.Content) -> Self.Body {
         content
-    }
-}
-
-// do we need this? Why?
-public extension ViewModifier where Body == Never {
-    func body(content: Self.Content) -> Self.Body {
-        fatalError()
     }
 }
 

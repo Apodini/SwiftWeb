@@ -7,14 +7,23 @@
 
 import Foundation
 
+/// Type-erased `View` w.r.t. the `Body` associated type.
 public protocol TypeErasedView {
+    /// The primary layout axis of the view. This is used by the SwiftWeb layout system to generate CSS properties mimicking the
+    /// SwiftUI layout system. By default, all HTML elements in SwiftWeb are aligned in the `.vertical` axis.
     var layoutAxis: LayoutAxis { get }
+    
+    /// Defines the generation of HTML representing the view.
     func html(forHTMLOfSubnodes: [HTMLNode]) -> HTMLNode
     
+    /// Transforms this view with the supplied closure argument. Can be overridden by `View`s by implementing the
+    /// `CustomMappable` protocol in order to represent multiple subviews. This method is used by SwiftWeb for instantiating the
+    /// view tree during runtime.
     func map<T>(_ transform: (TypeErasedView) -> T) -> [T]
+    
+    /// Helper method which transforms the `body` of a view if the `Body` type is not equal to `Never`, returns an empty array
+    /// otherwise.
     func mapBody<T>(_ transform: (TypeErasedView) -> T) -> [T]
-    func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T]
-    func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
 }
 
 /**
@@ -23,13 +32,11 @@ public protocol TypeErasedView {
  You create custom views by declaring types that conform to the `View` protocol. Implement the required `body` computed property to provide the content for your custom view.
  */
 public protocol View: TypeErasedView {
+    /// The type of the `body` property defining the subtree of `View`s of this `View`.
     associatedtype Body: View
     
-    /** The body property is used to delegate the generation of html for a
-     specific node to another view. It should be set for all view which
-     enclose other views in order to allow the layout system to propagate
-     properties properly through the tree.
-     */
+    /// The body property is used to delegate the generation of html for a specific node to another view. It should be set for all view
+    /// which enclose other views in order to allow the layout system to propagate properties properly through the tree.
     var body: Body { get }
 }
 
@@ -106,21 +113,6 @@ extension View {
     public func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T] {
         return self.map {
             $0[keyPath: keyPath]
-        }
-    }
-    
-    public func deepMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
-        if let customMappableSelf = self as? CustomMappable {
-            
-            return customMappableSelf.customMap({
-                $0.deepMap(transform)
-            }).flatMap({ $0 })
-        } else {
-            if type(of: Body.self) != type(of: Never.self) {
-                return body.deepMap(transform) + [transform(self)]
-            } else {
-                return [transform(self)]
-            }
         }
     }
 }

@@ -13,8 +13,14 @@ import Foundation
  A view with multiple children automatically combines its values for a given preference into a single value visible to its ancestors.
  */
 public protocol PreferenceKey: AnyPreferenceKey {
+    /// The type of value produced by this preference.
     associatedtype Value
+    
+    /// The default value of the preference.
     static var defaultValue: Self.Value { get }
+    
+    /// Combines a sequence of values by modifying the previously-accumulated value with the result of a closure that provides the
+    /// next value.
     static func reduce(value: inout Self.Value, nextValue: () -> Self.Value)
 }
 

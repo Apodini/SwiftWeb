@@ -13,18 +13,22 @@ import Foundation
  An AnyView allows changing the type of view used in a given view hierarchy.
  */
 public struct AnyView: View, CustomMappable {
+    /// The `Never` type indicates that this view doesn't define its subviews via the `body` property.
     public typealias Body = Never
     let containedView: TypeErasedView
     
+    /// The implementation of this method delegates to the `content` view.
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         containedView.html(forHTMLOfSubnodes: htmlOfSubnodes)
     }
     
-    init<Content>(content: Content) where Content: View {
+    /// Instantiates an `AnyView` by wrapping `content`.
+    public init<Content>(content: Content) where Content: View {
         containedView = content
     }
     
-    init(content: TypeErasedView) {
+    /// Instantiates an `AnyView` by wrapping `content`.
+    public init(content: TypeErasedView) {
         containedView = content
     }
     
