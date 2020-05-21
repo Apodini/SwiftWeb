@@ -47,15 +47,18 @@ public struct Color: View, GrowingAxesModifying {
         ])
     }
 
+    /// Initializes a color with the supplied values for the red, green and blue components as well as the opacity.
     public init(red: Double, green: Double, blue: Double, opacity: Double) {
         color = (red: Int(red * 255), green: Int(green * 255), blue: Int(blue * 255), opacity: opacity)
         clear = false
     }
     
+    /// Initializes a color with the supplied values for the red, green and blue components.
     public init(red: Double, green: Double, blue: Double) {
         self.init(red: red, green: green, blue: blue, opacity: 1.0)
     }
     
+    /// Initialized a grayscale `Color` with the supplied brightness.
     public init(white: Double) {
         self.init(red: white, green: white, blue: white)
     }
@@ -70,6 +73,7 @@ public struct Color: View, GrowingAxesModifying {
         clear = false
     }
     
+    /// Returns this color with the supplied opacity value.
     public func opacity(_ opacity: Double) -> Color {
         return Color(red: color.red, green: color.green, blue: color.blue, opacity: opacity)
     }
