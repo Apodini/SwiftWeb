@@ -13,17 +13,8 @@ class StateStorageNode {
     public var onChange: (() -> Void)?
 
     func setProperty(value: Any, forKey key: String) {
-//        let oldValue = state[key]
         state[key] = value
-        
-//        if let oldValue = oldValue,
-//           let oldValueEquatable = oldValue as? Equatable,
-//           let valueEquatable = value as? Equatable,
-//           oldValueEquatable == valueEquatable {
-//            return
-//        } else {
-            onChange?()
-//        }
+        onChange?()
     }
     
     func getProperty(forKey key: String) -> Any? {

@@ -15,7 +15,6 @@ extension ViewNode: CustomStringConvertible {
             descriptionOfThisNode.append(" \"\(text.text)\"")
         }
         
-//        descriptionOfThisNode.append(" n-title: \"\(findPreferenceValue(forKey: NavigationBarTitleKey.self))\"")
         descriptionOfThisNode.append(" \(stateStorageNode.viewInstanceID.uuidString)")
         
         if subnodes.isEmpty {
