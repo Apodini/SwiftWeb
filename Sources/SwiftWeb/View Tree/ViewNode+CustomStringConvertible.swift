@@ -22,7 +22,7 @@ extension ViewNode: CustomStringConvertible {
         } else {
             return """
             <ViewNode: \(descriptionOfThisNode)>
-            \(subnodes.map({ $0.description }).joined(separator: "\n").blockIndented())
+            \(subnodes.map { $0.description } .joined(separator: "\n").blockIndented())
             </ViewNode>
             """
         }
@@ -40,11 +40,11 @@ extension ViewNode: CustomStringConvertible {
 
 extension String {
     func blockIndented() -> String {
-        return self
+        self
             .split(separator: "\n")
             .map {
                 "   \($0)"
-        }
-        .joined(separator: "\n")
+            }
+            .joined(separator: "\n")
     }
 }

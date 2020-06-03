@@ -8,9 +8,9 @@
 import Foundation
 
 class StateStorageNode {
-    public let viewInstanceID = UUID()
-    public var state: [String: Any] = [:]
-    public var onChange: (() -> Void)?
+    let viewInstanceID = UUID()
+    var state: [String: Any] = [:]
+    var onChange: (() -> Void)?
 
     func setProperty(value: Any, forKey key: String) {
         state[key] = value

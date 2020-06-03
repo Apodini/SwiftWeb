@@ -21,9 +21,9 @@ extension Stack {
             if !spacedNodes.isEmpty {
                 switch axis {
                 case .horizontal:
-                    spacedNodes.append(.div(subNodes: [], style: [.width : .px(spacing)]))
+                    spacedNodes.append(.div(subNodes: [], style: [.width: .px(spacing)]))
                 case .vertical:
-                    spacedNodes.append(.div(subNodes: [], style: [.height : .px(spacing)]))
+                    spacedNodes.append(.div(subNodes: [], style: [.height: .px(spacing)]))
                 }
             }
 

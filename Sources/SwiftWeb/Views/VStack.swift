@@ -39,7 +39,7 @@ public struct VStack<Content>: Stack, GrowingAxesModifying where Content: View {
         return .div(subNodes: htmlOfSpacedSubnodes, style: [
             .display: .flex,
             .flexDirection: .column,
-            .alignItems: horizontalAlignment.cssValue,
+            .alignItems: horizontalAlignment.cssValue
         ])
     }
 }

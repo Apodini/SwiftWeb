@@ -19,7 +19,7 @@ public struct TextField: View, ChangeInputEventResponder {
     }
     
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
-        return .input(placeholder: title, value: text.wrappedValue, style: [.pointerEvents: .auto])
+        .input(placeholder: title, value: text.wrappedValue, style: [.pointerEvents: .auto])
     }
     
     /// Creates an instance with a title string and a binding for the editable value.
@@ -34,9 +34,9 @@ public struct TextField: View, ChangeInputEventResponder {
         
         self.text = Binding(getValue: {
             formatter.string(for: value.wrappedValue) ?? ""
-        }, setValue: { (newText) in
-            var parsedAnyObject: AnyObject? = nil
-            var errorString: NSString? = nil
+        }, setValue: { newText in
+            var parsedAnyObject: AnyObject?
+            var errorString: NSString?
             
             formatter.getObjectValue(&parsedAnyObject, for: newText, errorDescription: &errorString)
             
@@ -58,6 +58,6 @@ public enum UIKeyboardType {
 
 public extension View {
     func keyboardType(_ type: UIKeyboardType) -> some View {
-        return self
+        self
     }
 }

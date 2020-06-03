@@ -45,6 +45,6 @@ public struct Text: View {
 public extension Text {
     /// Applies a bold font weight to the text.
     func bold() -> Text {
-        return Text(text, isBold: true)
+        Text(text, isBold: true)
     }
 }

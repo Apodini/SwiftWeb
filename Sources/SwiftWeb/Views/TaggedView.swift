@@ -12,12 +12,12 @@ protocol TypeErasedTaggedView {
 }
 
 struct TaggedView<Body>: View, TypeErasedTaggedView where Body: View {
-    public let tag: Any?
-    public let body: Body
+    let tag: Any?
+    let body: Body
 }
 
 public extension View {
-    func tag<V>(_ tag: V) -> some View where V : Hashable {
-        return TaggedView(tag: tag, body: self)
+    func tag<V>(_ tag: V) -> some View where V: Hashable {
+        TaggedView(tag: tag, body: self)
     }
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 class ViewNode {
-    public var view: TypeErasedView
-    public let stateStorageNode: StateStorageNode
-    public var subnodes: [ViewNode]
+    var view: TypeErasedView
+    let stateStorageNode: StateStorageNode
+    var subnodes: [ViewNode]
     var isValid = true
 
     init(forView view: TypeErasedView, reconciling oldViewNode: ViewNode? = nil) {
@@ -44,7 +44,7 @@ class ViewNode {
             .map(\.growingLayoutAxes)
             .reduce(Set<GrowingLayoutAxis>()) { accumulator, growthAxes in
                 accumulator.union(growthAxes)
-        }
+            }
         
         if let growingAxesModifyingView = view as? GrowingAxesModifying {
             return growingAxesModifyingView
@@ -59,12 +59,12 @@ class ViewNode {
      of rendered HTML of the subcomponents so that composite views can compose it. While rendering, keep track of the growing axes
      of the view which can be determined by `View ` by implementing the protocol `GrowingLayoutAxesModifying`.
      */
-    public func render() -> HTMLNode {
-        return executeInStateContext { view in
+    func render() -> HTMLNode {
+        executeInStateContext { view in
             let htmlOfSubnodes = subnodes.map { subnode in
-                return Self.applyGrowingProperties(toHTMLNode: subnode.render(),
-                                                   forGrowingLayoutAxes: subnode.growingLayoutAxes,
-                                                   inLayoutAxis: view.layoutAxis)
+                Self.applyGrowingProperties(toHTMLNode: subnode.render(),
+                                            forGrowingLayoutAxes: subnode.growingLayoutAxes,
+                                            inLayoutAxis: view.layoutAxis)
             }
             
             var html = view.html(forHTMLOfSubnodes: htmlOfSubnodes)
@@ -87,7 +87,7 @@ class ViewNode {
         }
     }
     
-    public func handle(inputEvent: InputEvent) {
+    func handle(inputEvent: InputEvent) {
         executeInStateContext { view in
             switch inputEvent {
             case .click(let id):
@@ -95,7 +95,7 @@ class ViewNode {
                    let clickInputEventResponder = view as? ClickInputEventResponder {
                     clickInputEventResponder.onClickInputEvent()
                 }
-            case .change(let id, let newValue):
+            case let .change(id, newValue):
                 if id == stateStorageNode.viewInstanceID,
                     let changeInputEventResponder = view as? ChangeInputEventResponder {
                     changeInputEventResponder.onChangeInputEvent(newValue: newValue)
@@ -113,7 +113,7 @@ class ViewNode {
         }
     }
     
-    public func executeInStateContext<T>(_ transaction: (TypeErasedView) -> T) -> T {
+    func executeInStateContext<T>(_ transaction: (TypeErasedView) -> T) -> T {
         let viewMirror = Mirror(reflecting: view)
         
         // This ties all `@State` properties of the view to the `StateStorageNode` associated with
@@ -145,8 +145,8 @@ class ViewNode {
             
             // for now, if the number of subviews matches, we match pairs at the same indices
             if oldSubnodes.count == newSubviews.count {
-                return zip(newSubviews, oldSubnodes).map { (newSubview, oldSubnode) in
-                    return ViewNode(forView: newSubview, reconciling: oldSubnode)
+                return zip(newSubviews, oldSubnodes).map { newSubview, oldSubnode in
+                    ViewNode(forView: newSubview, reconciling: oldSubnode)
                 }
             } else {
                 return newSubviews.map { subview in
@@ -165,7 +165,6 @@ class ViewNode {
                                        inLayoutAxis parentLayoutAxis: LayoutAxis) -> HTMLNode {
         growingLayoutAxes.reduce(htmlNode) { html, growthAxis in
             switch (growthAxis, parentLayoutAxis) {
-                
             // For aligned axis of the layout direction of the parent node and this node the html
             // node can grow along the primary axis.
             case (.horizontal, .horizontal), (.vertical, .vertical):
@@ -184,7 +183,8 @@ class ViewNode {
     
     func findPreferenceValue<P>(forKey preferenceKey: P.Type) -> P.Value? where P: PreferenceKey {
         let preferenceValueOfSubviews: P.Value? = subnodes.reduce(nil) {
-            (accumulatorValue, subnode) -> P.Value? in
+            accumulatorValue, subnode -> P.Value? in
+
             let preferenceValueOfSubnode = subnode.findPreferenceValue(forKey: preferenceKey)
             
             // do we need to combine preference values because both accumulator and

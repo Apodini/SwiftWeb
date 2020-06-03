@@ -8,19 +8,17 @@
 import Foundation
 
 struct PreferenceChangeListenerView<Body, Key>: View, PreferenceChangeListener
-where Body: View, Key: PreferenceKey {    
+where Body: View, Key: PreferenceKey {
     let preferenceKeyType: AnyPreferenceKey.Type = Key.self
     let onPreferenceChangeClosure: (Key.Value) -> Void
     
-    public var body: Body
+    var body: Body
     
-    func onPreferenceChange(preferenceValue: Any?) {
-        
-    }
+    func onPreferenceChange(preferenceValue: Any?) { }
     
-    public init(body: Body,
-                preferenceKey: Key.Type,
-                onPreferenceChangeClosure: @escaping (Key.Value) -> Void) {
+    init(body: Body,
+         preferenceKey: Key.Type,
+         onPreferenceChangeClosure: @escaping (Key.Value) -> Void) {
         self.body = body
         self.onPreferenceChangeClosure = onPreferenceChangeClosure
     }
@@ -29,9 +27,9 @@ where Body: View, Key: PreferenceKey {
 public extension View {
         func onPreferenceChange<K>(_ key: K.Type = K.self,
                                    perform action: @escaping (K.Value) -> Void)
-            -> some View where K : PreferenceKey { //, K.Value : Equatable
-                return PreferenceChangeListenerView(body: self,
-                                                    preferenceKey: key,
-                                                    onPreferenceChangeClosure: action)
+            -> some View where K: PreferenceKey {
+                PreferenceChangeListenerView(body: self,
+                                             preferenceKey: key,
+                                             onPreferenceChangeClosure: action)
         }
 }

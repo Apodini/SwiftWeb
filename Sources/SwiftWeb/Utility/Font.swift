@@ -17,7 +17,7 @@ public struct Font {
     public static func system(size: Double,
                               weight: Weight = .regular,
                               design: Design = .default) -> Font {
-        return Font(size: size, weight: weight, design: design)
+        Font(size: size, weight: weight, design: design)
     }
     
     /// A font with the title text style.
@@ -40,7 +40,7 @@ public struct Font {
     }
     
     /// A design to use for fonts.
-    public enum Design : Hashable {
+    public enum Design: Hashable {
         case `default`
         case rounded
     }

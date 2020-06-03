@@ -12,13 +12,13 @@ public struct Color: View, GrowingAxesModifying {
     public typealias Body = Never
     
     public static var clear: Self {
-        return Self()
+        Self()
     }
     
     public static let red = Color(red: 1.0, green: 0.0, blue: 0.0)
     public static let green = Color(red: 0.0, green: 1.0, blue: 0.0)
     public static let blue = Color(red: 0.0, green: 0.0, blue: 1.0)
-    public static let systemBlue = Color(red:0.01, green: 0.48, blue: 1.00)
+    public static let systemBlue = Color(red: 0.01, green: 0.48, blue: 1.00)
     public static let gray = Color(red: 0.5, green: 0.5, blue: 0.5)
     public static let white = Color(red: 1.0, green: 1.0, blue: 1.0)
     public static let black = Color(red: 0.0, green: 0.0, blue: 0.0)
@@ -41,7 +41,7 @@ public struct Color: View, GrowingAxesModifying {
     
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         .div(style: [
-            .backgroundColor : .color(self),
+            .backgroundColor: .color(self),
             .alignSelf: .stretch,
             .flexGrow: .one
         ])
@@ -75,7 +75,7 @@ public struct Color: View, GrowingAxesModifying {
     
     /// Returns this color with the supplied opacity value.
     public func opacity(_ opacity: Double) -> Color {
-        return Color(red: color.red, green: color.green, blue: color.blue, opacity: opacity)
+        Color(red: color.red, green: color.green, blue: color.blue, opacity: opacity)
     }
 }
 
@@ -83,7 +83,7 @@ public extension View {
     func foregroundColor(_ color: Color?) -> some View {
         let newColor: Color = color ?? .clear
         
-        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier { html in
             html.withStyle(key: .color, value: .color(newColor))
         })
     }

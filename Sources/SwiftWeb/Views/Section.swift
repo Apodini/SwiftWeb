@@ -23,7 +23,7 @@ public struct Section<Parent, Content>: View where Parent: View, Content: View {
         VStack(alignment: .leading) {
             header
                 .font(.system(size: 14))
-                .foregroundColor(Color(red:0.43, green:0.43, blue:0.45))
+                .foregroundColor(Color(red: 0.43, green: 0.43, blue: 0.45))
                 .padding(.leading, 31)
                 .padding(.top, 23)
                 .padding(.bottom, 6)

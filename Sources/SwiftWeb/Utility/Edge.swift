@@ -30,24 +30,24 @@ public enum Edge: Int8, CaseIterable {
         }
 
         /// All edges.
-        public static let all:         Self = [.bottom, .top, .leading, .trailing]
+        public static let all: Self = [.bottom, .top, .leading, .trailing]
         
         /// The bottom edge.
-        public static let bottom:      Self = .init(rawValue: 1 << Edge.bottom.rawValue)
+        public static let bottom: Self = .init(rawValue: 1 << Edge.bottom.rawValue)
         
         /// Horizontal edges.
-        public static let horizontal:  Self = [.leading, .trailing]
+        public static let horizontal: Self = [.leading, .trailing]
         
         /// The leading edge.
-        public static let leading:     Self = .init(rawValue: 1 << Edge.leading.rawValue)
+        public static let leading: Self = .init(rawValue: 1 << Edge.leading.rawValue)
         
         /// The top edge.
-        public static let top:         Self = .init(rawValue: 1 << Edge.top.rawValue)
+        public static let top: Self = .init(rawValue: 1 << Edge.top.rawValue)
         
         /// The trailing edge.
-        public static let trailing:    Self = .init(rawValue: 1 << Edge.trailing.rawValue)
+        public static let trailing: Self = .init(rawValue: 1 << Edge.trailing.rawValue)
         
         /// Vertical edges.
-        public static let vertical:    Self = [.top, .bottom]
+        public static let vertical: Self = [.top, .bottom]
     }
 }

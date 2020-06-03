@@ -12,10 +12,10 @@ where FixedContent: View, OverlayContent: View {
     let fixedContent: FixedContent
     let overlayContent: OverlayContent
     
-    public var body: some View {
+    var body: some View {
         TupleView((
             fixedContent,
-            ModifiedContent(content: overlayContent, modifier: HTMLTransformingViewModifier() { html in
+            ModifiedContent(content: overlayContent, modifier: HTMLTransformingViewModifier { html in
                 html
                     .withStyle(key: .position, value: .fixed)
                     .withStyle(key: .top, value: .zero)
@@ -30,6 +30,6 @@ where FixedContent: View, OverlayContent: View {
 
 public extension View {
     func globalOverlay<Overlay>(@ViewBuilder _ overlay: () -> Overlay) -> some View where Overlay: View {
-        return GlobalOverlayView(fixedContent: self, overlayContent: overlay())
+        GlobalOverlayView(fixedContent: self, overlayContent: overlay())
     }
 }

@@ -30,7 +30,7 @@ public class SwiftWebServer {
         
         do {
             inputEvent = try JSONDecoder().decode(InputEvent.self, from: data)
-        } catch let error {
+        } catch {
             print("error decoding received input event: \(error)")
             return
         }
@@ -57,8 +57,6 @@ public class SwiftWebServer {
 
 /// Represents a session of the WebSocket server you provide to a client browser.
 public protocol WebSocketSession {
-    
     /// Sends a message to the respective WebSocket client.
     func write(text: String)
 }
-

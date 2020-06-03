@@ -53,7 +53,7 @@ public struct NavigationView<Content>: View where Content: View {
                 Spacer()
             }
             .frame(height: 50)
-            .background(Color(red:0.98, green:0.98, blue:0.99))
+            .background(Color(red: 0.98, green: 0.98, blue: 0.99))
             
             Color(white: 0.73)
                 .frame(height: 0.5)
@@ -83,7 +83,7 @@ struct NavigationBarTitleKey: PreferenceKey {
 }
 
 struct TrailingNavigationBarItemsKey: PreferenceKey {
-    static var defaultValue: TypeErasedView? = nil
+    static var defaultValue: TypeErasedView?
     
     static func reduce(value: inout TypeErasedView?,
                        nextValue: () -> TypeErasedView?) {
@@ -97,14 +97,13 @@ public extension View {
         self.preference(key: NavigationBarTitleKey.self, value: (title, displayMode))
     }
     
-    func navigationBarItems<T>(trailing: T) -> some View where T : View {
+    func navigationBarItems<T>(trailing: T) -> some View where T: View {
         self//.preference(key: TrailingNavigationBarItemsKey.self, value: trailing)
     }
 }
 
 /// A configuration for a navigation bar that represents a view at the top of a navigation stack.
 public struct NavigationBarItem {
-    
     /// A style for displaying the title of a navigation bar.
     public enum TitleDisplayMode: Int, Equatable {
         /// Inherit the display mode from the previous navigation item.

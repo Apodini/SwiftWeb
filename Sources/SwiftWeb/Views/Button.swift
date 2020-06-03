@@ -8,7 +8,7 @@
 import Foundation
 
 /// A control that performs an action when triggered.
-public struct Button<Label>: View where Label : View {
+public struct Button<Label>: View where Label: View {
     let action: () -> Void
     let label: Label
     
@@ -27,7 +27,7 @@ public struct Button<Label>: View where Label : View {
 
 public extension Button where Label == Text {
     /// Creates an instance with a string as label.
-    init<S>(_ title: S, action: @escaping () -> Void) where S : StringProtocol {
+    init<S>(_ title: S, action: @escaping () -> Void) where S: StringProtocol {
         self = .init(action: action) {
             Text(String(title))
         }

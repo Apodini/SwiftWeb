@@ -12,7 +12,7 @@ where StaticContent: View, ModalContent: View {
     
     @Binding var isPresented: Bool
     
-    public var body: some View {
+    var body: some View {
         if !isPresented {
             return staticContent.anyView()
         } else {
@@ -32,7 +32,9 @@ where StaticContent: View, ModalContent: View {
                                 .frame(width: 618.0)
                                 .cornerRadius(10.0)
                                 .shadow(color: Color(white: 0.0).opacity(0.25),
-                                        radius: 129.0, x: 0.0, y: 2.0)
+                                        radius: 129.0,
+                                        x: 0.0,
+                                        y: 2.0)
                                 .onTapGesture { }
 
                             Spacer()

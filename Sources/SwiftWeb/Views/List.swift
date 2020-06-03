@@ -21,9 +21,9 @@ public struct List<Content>: View, GrowingAxesModifying where Content: View {
                                       id: KeyPath<Data.Element, ID>,
                                       rowContent: @escaping (Data.Element) -> RowContent)
         where Content == ForEach<Data, ID, HStack<RowContent>>,
-              Data : RandomAccessCollection,
-              ID : Hashable, RowContent : View {
-        
+              Data: RandomAccessCollection,
+              ID: Hashable,
+              RowContent: View {
         content = ForEach(data, id: id) { element in
             HStack(alignment: .center) {
                 rowContent(element)
@@ -39,7 +39,7 @@ public struct List<Content>: View, GrowingAxesModifying where Content: View {
         let separator: HTMLNode = .div(style: [
             .height: .px(1),
             .backgroundColor: .color(Color(white: 0.85)),
-            .width: .percent(100),
+            .width: .percent(100)
         ])
         
         var subnodesWithSeparators: [HTMLNode] = []
@@ -53,13 +53,13 @@ public struct List<Content>: View, GrowingAxesModifying where Content: View {
             .paddingLeft: .px(64),
             .display: .flex,
             .flexDirection: .column,
-            .alignItems: .stretch,
+            .alignItems: .stretch
         ]) {
             .div(subNodes: subnodesWithSeparators, style: [
                 .display: .flex,
                 .flexDirection: .column,
                 .alignItems: .flexStart,
-                .justifyContent: .center,
+                .justifyContent: .center
             ])
         }
     }

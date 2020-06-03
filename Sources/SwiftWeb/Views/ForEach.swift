@@ -8,7 +8,8 @@
 import Foundation
 
 /// The collection of underlying identified data that SwiftWeb uses to create views dynamically.
-public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : RandomAccessCollection, Content: View { // ID : Hashable
+public struct ForEach<Data, ID, Content>: View, CustomMappable
+where Data: RandomAccessCollection, Content: View {
     let data: Data
     let idKeyPath: KeyPath<Data.Element, ID>
     let content: (Data.Element) -> Content
@@ -26,7 +27,7 @@ public struct ForEach<Data, ID, Content>: View, CustomMappable where Data : Rand
     }
     
     public func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
-        return data.map(content).map(transform)
+        data.map(content).map(transform)
     }
 }
 

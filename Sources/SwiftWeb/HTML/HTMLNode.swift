@@ -36,17 +36,17 @@ public enum HTMLNode {
         switch self {
         case .raw(let string):
             return string
-        case .div(let subNodes, let style, let customAttributes):
+        case let .div(subNodes, style, customAttributes):
             return """
                 <div \(Self.cssTag(from: style)) \(customAttributes.htmlAttributesString)>
-                    \(subNodes.map({ $0.string()}).joined())
+                    \(subNodes.map { $0.string() } .joined())
                 </div>
                 """
-        case .img(let path, let style):
+        case let .img(path, style):
             return """
                 <img src="/static/\(path)" \(Self.cssTag(from: style))/>
                 """
-        case .input(let placeholder, let value, let style, let customAttributes):
+        case let .input(placeholder, value, style, customAttributes):
             return """
                 <input placeholder="\(placeholder)" value="\(value)" \(Self.cssTag(from: style)) \(customAttributes.htmlAttributesString)/>
                 """
@@ -60,7 +60,7 @@ public enum HTMLNode {
         }
         
         let cssString = styleDictionary
-            .compactMap { (key, value) in "\(key): \(value.cssString);" }
+            .compactMap { key, value in "\(key): \(value.cssString);" }
             .sorted()
             .joined(separator: " ")
         
@@ -76,9 +76,9 @@ public enum HTMLNode {
     */
     public func withStyle(key: CSSKey, value newValue: CSSValue) -> Self {
         switch self {
-        case .raw(_):
+        case .raw:
             return self
-        case .div(let subnodes, let style, let customAttributes):
+        case let .div(subnodes, style, customAttributes):
             var newStyle = style
             newStyle[key] = newValue
             return .div(
@@ -87,12 +87,12 @@ public enum HTMLNode {
                 customAttributes: customAttributes
             )
             
-        case .img(let path, let style):
+        case let .img(path, style):
             var newStyle = style
             newStyle[key] = newValue
             return .img(path: path, style: newStyle)
             
-        case .input(let placeholder, let value, let style, let customAttributes):
+        case let .input(placeholder, value, style, customAttributes):
             var newStyle = style
             newStyle[key] = newValue
             return .input(
@@ -113,7 +113,7 @@ public enum HTMLNode {
      */
     public func withCustomAttribute(key: String, value newValue: String? = nil) -> Self {
         switch self {
-        case .div(let subnodes, let style, let customAttributes):
+        case let .div(subnodes, style, customAttributes):
             var newAttributes = customAttributes
             newAttributes[key] = newValue
             
@@ -123,7 +123,7 @@ public enum HTMLNode {
                 customAttributes: newAttributes
             )
             
-        case .input(let placeholder, let value, let style, let customAttributes):
+        case let .input(placeholder, value, style, customAttributes):
             var newAttributes = customAttributes
             newAttributes[key] = newValue
             
@@ -226,9 +226,9 @@ public enum HTMLNode {
                 return "flex-start"
             case .flexEnd:
                 return "flex-end"
-            case .shadow(let offsetX, let offsetY, let radius, let color):
+            case let .shadow(offsetX, offsetY, radius, color):
                 return "\(offsetX)px \(offsetY)px \(radius)px \(color.cssString)"
-            case .border(let width, let color):
+            case let .border(width, color):
                 return "\(width)px solid \(color.cssString)"
             default:
                 return String(describing: self)
@@ -236,12 +236,12 @@ public enum HTMLNode {
         }
         
         public static func == (lhs: HTMLNode.CSSValue, rhs: HTMLNode.CSSValue) -> Bool {
-            return lhs.cssString == rhs.cssString
+            lhs.cssString == rhs.cssString
         }
     }
 
     public static func div(style: [CSSKey: CSSValue] = [:], buildSubnode: () -> HTMLNode) -> Self {
-        return .div(subNodes: [buildSubnode()], style: style)
+        .div(subNodes: [buildSubnode()], style: style)
     }
 }
 
@@ -262,7 +262,6 @@ extension Dictionary where Key == String, Value == String? {
 
 /// Provides functionality for an `Array` of `HTMLNode`s.
 public extension Array where Element == HTMLNode {
-    
     ///  Returns a single `HTMLNode` representing the array: An empty `raw` node if the array is empty, the single element of the
     ///  array or a `div` node with the elements of this array as subnodes.
     func joined() -> HTMLNode {

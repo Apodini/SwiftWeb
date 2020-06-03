@@ -8,21 +8,21 @@
 import Foundation
 
 struct TapGestureView<Content>: View, ClickInputEventResponder where Content: View {
-    public var body: Content
-    public var action: () -> Void
+    var body: Content
+    var action: () -> Void
 
-    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+    func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
         htmlOfSubnodes
             .joined()
     }
     
-    public func onClickInputEvent() {
+    func onClickInputEvent() {
         action()
     }
 }
 
 public extension View {
     func onTapGesture(perform action: @escaping () -> Void) -> some View {
-        return TapGestureView(body: self, action: action)
+        TapGestureView(body: self, action: action)
     }
 }

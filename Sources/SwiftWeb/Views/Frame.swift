@@ -8,41 +8,43 @@
 import Foundation
 
 struct Frame<Content>: View, GrowingAxesModifying where Content: View {
-    public let body: Content
+    let body: Content
     
     let width: Double?
     let height: Double?
     let minWidth: Double?
     let minHeight: Double?
 
-    public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
-        return .div(
+    // swiftlint:disable force_unwrapping
+    func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
+        .div(
             subNodes: [
                 htmlOfSubnodes.joined()
                     .withStyle(key: .flexGrow, value: .one)
                     .withStyle(key: .alignSelf, value: .stretch)
             ],
             style: [
-                .width : width != nil ? .px(width!) : .initial,
-                .height : height != nil ? .px(height!) : .initial,
-                .minWidth : minWidth != nil ? .px(minWidth!) : .initial,
-                .minHeight : minHeight != nil ? .px(minHeight!) : .initial,
+                .width: width != nil ? .px(width!) : .initial,
+                .height: height != nil ? .px(height!) : .initial,
+                .minWidth: minWidth != nil ? .px(minWidth!) : .initial,
+                .minHeight: minHeight != nil ? .px(minHeight!) : .initial
             ]
         )
     }
+    // swiftlint:enable force_unwrapping
     
     // Fixing the width and / or height of a View removes its possibility to grow in the respective
     // axis.
-    public func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes growingAxesOfSubnodes: Set<GrowingLayoutAxis>) -> Set<GrowingLayoutAxis> {
+    func modifiedGrowingLayoutAxes(forGrowingAxesOfSubnodes growingAxesOfSubnodes: Set<GrowingLayoutAxis>) -> Set<GrowingLayoutAxis> {
         Set<GrowingLayoutAxis>(growingAxesOfSubnodes.compactMap { axis in
             switch (axis: axis, width: width, height: height) {
-            case (axis: .horizontal, width: .some(_), height: _):
+            case (axis: .horizontal, width: .some, height: _):
                 return nil
-            case (axis: .vertical, width: _, height: .some(_)):
+            case (axis: .vertical, width: _, height: .some):
                 return nil
-            case (axis: .undetermined, width: .some(_), height: _):
+            case (axis: .undetermined, width: .some, height: _):
                 return .vertical
-            case (axis: .undetermined, width: _, height: .some(_)):
+            case (axis: .undetermined, width: _, height: .some):
                 return .vertical
             default:
                 return axis
@@ -50,11 +52,11 @@ struct Frame<Content>: View, GrowingAxesModifying where Content: View {
         })
     }
 
-    public init(framedView: Content,
-                width: Double? = nil,
-                height: Double? = nil,
-                minWidth: Double? = nil,
-                minHeight: Double? = nil) {
+    init(framedView: Content,
+         width: Double? = nil,
+         height: Double? = nil,
+         minWidth: Double? = nil,
+         minHeight: Double? = nil) {
         body = framedView
         self.width = width
         self.height = height
@@ -68,7 +70,7 @@ public extension View {
                height: Double? = nil,
                minWidth: Double? = nil,
                minHeight: Double? = nil) -> some View {
-        return Frame(framedView: self, width: width, height: height, minWidth: minWidth, minHeight: minHeight)
+        Frame(framedView: self, width: width, height: height, minWidth: minWidth, minHeight: minHeight)
     }
 }
 

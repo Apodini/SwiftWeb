@@ -30,9 +30,7 @@ public struct TabView<Content>: View where Content: View {
             HStack(spacing: 136.0) {
                 Spacer()
 
-                ForEach(Array(content.map(\.self).enumerated())) {
-                    (index, tab) -> AnyView in
-                    
+                ForEach(Array(content.map(\.self).enumerated())) { index, tab -> AnyView in
                     let tabItem = tab as? TypeErasedTabItem
                     
                     let text = tabItem?.text ?? Text(String(describing: index))
@@ -50,9 +48,11 @@ public struct TabView<Content>: View where Content: View {
                         stack.systemBlueFilter().anyView()
                         : stack.systemGrayFilter().anyView()
                     
-                    return tabItemView.onTapGesture {
-                        self.selectionValue = index
-                    }.anyView()
+                    return tabItemView
+                        .onTapGesture {
+                            self.selectionValue = index
+                        }
+                    .anyView()
                 }
                 
                 Spacer()

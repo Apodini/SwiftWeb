@@ -33,12 +33,12 @@ public struct AnyView: View, CustomMappable {
     }
     
     public func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T] {
-        return [transform(containedView)]
+        [transform(containedView)]
     }
 }
 
 public extension TypeErasedView {
     func anyView() -> AnyView {
-        return AnyView(content: self)
+        AnyView(content: self)
     }
 }

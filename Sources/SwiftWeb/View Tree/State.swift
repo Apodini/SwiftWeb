@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol TypeErasedState: class {
+protocol TypeErasedState: AnyObject {
     func connect(to stateStorageNode: StateStorageNode, withPropertyName propertyName: String)
     func disconnect()
 }
@@ -26,8 +26,8 @@ protocol TypeErasedState: class {
 @propertyWrapper public class State<Value>: TypeErasedState {
     let defaultValue: Value
     
-    private var propertyName: String? = nil
-    private var stateStorageNode: StateStorageNode? = nil
+    private var propertyName: String?
+    private var stateStorageNode: StateStorageNode?
     
     /// The underlying value referenced by the state variable.
     public var wrappedValue: Value {
@@ -51,7 +51,7 @@ protocol TypeErasedState: class {
     }
     
     func connect(to stateStorageNode: StateStorageNode,
-                        withPropertyName propertyName: String) {
+                 withPropertyName propertyName: String) {
         self.propertyName = propertyName
         self.stateStorageNode = stateStorageNode
         
@@ -72,12 +72,12 @@ protocol TypeErasedState: class {
     
     /// Returns the `binding` property of the `State` instance.
     public var projectedValue: Binding<Value> {
-        return binding
+        binding
     }
 
     /// A binding to the state value.
     public var binding: Binding<Value> {
-        return Binding(
+        Binding(
             getValue: { self.wrappedValue },
             setValue: { self.wrappedValue = $0 }
         )

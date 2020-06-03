@@ -23,13 +23,13 @@ public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
                 .width: .percent(100),
                 .height: .percent(100),
                 .display: .flex,
-                .flexDirection: .column,
+                .flexDirection: .column
             ]) {
                 node
             }
         }
         
-        return .div(subNodes: stackedSubnodes, style: [.position : .relative, .flexGrow: .one])
+        return .div(subNodes: stackedSubnodes, style: [.position: .relative, .flexGrow: .one])
     }
     
     /// Creates an instance with the given content
@@ -41,12 +41,12 @@ public struct ZStack<Content>: Stack, GrowingAxesModifying where Content: View {
 public extension View {
     func background<Background>(_ background: Background) -> some View where Background: View {
         if let backgroundColor = background as? Color {
-            return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+            return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier { html in
                 html.withStyle(
                     key: .backgroundColor,
                     value: .color(backgroundColor)
                 )
-                }).anyView()
+            }).anyView()
         } else {
             return ZStack {
                 background

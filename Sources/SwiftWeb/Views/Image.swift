@@ -27,7 +27,7 @@ public struct Image: View {
 
     /// Returns a resizable version of this image instance.
     public func resizable() -> Image {
-        return Self(name, isResizable: true)
+        Self(name, isResizable: true)
     }
     
     public func html(forHTMLOfSubnodes htmlOfSubnodes: [HTMLNode]) -> HTMLNode {
@@ -36,7 +36,7 @@ public struct Image: View {
                 .img(path: name)
             }
         } else {
-            return .div(style: [.alignItems : .center, .justifyContent: .center]) {
+            return .div(style: [.alignItems: .center, .justifyContent: .center]) {
                 .img(path: name, style: [.width: .percent(100), .height: .percent(100)])
             }
         }

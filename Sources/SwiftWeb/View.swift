@@ -46,7 +46,7 @@ public extension View {
     }
     
     var body: some View {
-        return EmptyView()
+        EmptyView()
     }
 }
 
@@ -74,7 +74,6 @@ public extension View where Body == Never {
 
 /// Implement this protocol with your `View` to define the elements to which a transformation of this view is applied.
 public protocol CustomMappable {
-    
     /// Use the `customMap(_:)` method to e.g. give access to multiple subviews which this view represents. This method is used
     /// to construct the view tree during runtime.
     func customMap<T>(_ transform: (TypeErasedView) -> T) -> [T]
@@ -87,12 +86,15 @@ extension View {
         }
         
         if let customMappableBody = body as? CustomMappable {
-            
             // This is where the recursion happens that makes composing TupleViews and ForEach views
             // possible
-            return customMappableBody.customMap({
-                $0.map(transform)
-            }).flatMap({ $0 })
+            return customMappableBody
+                .customMap {
+                    $0.map(transform)
+                }
+                .flatMap {
+                    $0
+                }
         } else {
             return [transform(body)]
         }
@@ -100,19 +102,23 @@ extension View {
     
     public func map<T>(_ transform: (TypeErasedView) -> T) -> [T] {
         if let customMappableSelf = self as? CustomMappable {
-            
             // This is where the recursion happens that makes composing TupleViews and ForEach views
             // possible
-            return customMappableSelf.customMap({
-                $0.map(transform)
-            }).flatMap({ $0 })
+            return customMappableSelf
+                .customMap {
+                    $0.map(transform)
+                }
+                .flatMap {
+                    $0
+                }
         } else {
             return [transform(self)]
         }
     }
     
+    /// Default implementation of `map(_:)` which 
     public func map<T>(_ keyPath: KeyPath<TypeErasedView, T>) -> [T] {
-        return self.map {
+        self.map {
             $0[keyPath: keyPath]
         }
     }
@@ -121,20 +127,22 @@ extension View {
 // MARK: View modifiers
 
 public extension View {
+    /// Clips the view to its bounding frame, with the specified corner radius.
     func cornerRadius(_ radius: Double) -> some View {
-        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+        ModifiedContent(content: self, modifier: HTMLTransformingViewModifier { html in
             html
                 .withStyle(key: .borderRadius, value: .px(radius))
                 .withStyle(key: .overflow, value: .hidden)
         })
     }
     
+    /// Adds a shadow to the view.
     func shadow(color: Color = Color(white: 0.0).opacity(0.20),
                 radius: Double = 40.0,
                 x: Double = 0.0,
                 y: Double = 2.0
     ) -> some View {
-        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+        ModifiedContent(content: self, modifier: HTMLTransformingViewModifier { html in
             html.withStyle(key: .boxShadow,
                            value: .shadow(offsetX: x,
                                           offsetY: y,
@@ -143,6 +151,7 @@ public extension View {
         })
     }
     
+    /// Pads the view using the specified edge insets.
     func padding(_ edges: Edge.Set = .all, _ length: Double? = nil) -> some View {
         let length = length ?? 10.0
         
@@ -150,29 +159,33 @@ public extension View {
             (.paddingTop, .top),
             (.paddingLeft, .leading),
             (.paddingRight, .trailing),
-            (.paddingBottom, .bottom),
+            (.paddingBottom, .bottom)
         ]
         
-        let paddingStyle = Dictionary(uniqueKeysWithValues: paddingPropertyMapping.compactMap({
+        let paddingStyle = Dictionary(uniqueKeysWithValues: paddingPropertyMapping.compactMap {
             edges.contains($0.edgeSet) ? ($0.cssKey, HTMLNode.CSSValue.px(length)) : nil
-        }))
+        })
         
-        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier { html in
             .div(
-                subNodes: [html
-                    .withStyle(key: .flexGrow, value: .one)
-                    .withStyle(key: .alignSelf, value: .stretch)],
+                subNodes: [
+                    html
+                        .withStyle(key: .flexGrow, value: .one)
+                        .withStyle(key: .alignSelf, value: .stretch)
+                ],
                 style: paddingStyle
             )
         })
     }
     
+    /// Pads the view using the specified length.
     func padding(_ length: Double? = nil) -> some View {
         padding(.all, length)
     }
     
+    /// Adds a border to the view with the specified style and width.
     func border(_ color: Color, width: Double = 1) -> some View {
-        return ModifiedContent(content: self, modifier: HTMLTransformingViewModifier() { html in
+        ModifiedContent(content: self, modifier: HTMLTransformingViewModifier { html in
             html.withStyle(key: .border,
                            value: .border(width: width, color: color))
         })
@@ -183,13 +196,14 @@ public extension View {
 // MARK: View description
     
 public extension TypeErasedView {
+    /// Description of this view instance.
     var debugDescription: String {
         String(describing: Self.self)
     }
 }
 
 extension View {
-    func withDebugReference(_ action: (Self) -> ()) -> Self {
+    func withDebugReference(_ action: (Self) -> Void) -> Self {
         action(self)
         return self
     }

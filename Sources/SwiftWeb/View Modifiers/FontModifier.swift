@@ -30,6 +30,6 @@ struct FontModifier<Content>: ViewModifier where Content: View {
 
 extension View {
     public func font(_ font: Font) -> some View {
-        return ModifiedContent(content: self, modifier: FontModifier(font: font))
+        ModifiedContent(content: self, modifier: FontModifier(font: font))
     }
 }

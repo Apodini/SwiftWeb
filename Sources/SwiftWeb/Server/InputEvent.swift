@@ -39,7 +39,7 @@ extension InputEvent: Codable {
             
             try associatedValuesContainer.encode(id, forKey: .id)
             
-        case .change(let id, let value):
+        case let .change(id, value):
             var associatedValuesContainer = container.nestedContainer(
                 keyedBy: AssociatedValuesCodingKeys.self,
                 forKey: .change
@@ -62,7 +62,6 @@ extension InputEvent: Codable {
             let id = try clickAssociatedValuesContainer.decode(UUID.self, forKey: .id)
             
             self = .click(id: id)
-            
         } else if values.contains(.change) {
             let clickAssociatedValuesContainer = try values.nestedContainer(
                 keyedBy: AssociatedValuesCodingKeys.self,

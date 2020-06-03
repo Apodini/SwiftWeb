@@ -12,11 +12,11 @@ whitelist_rules:
     # Delegate protocols should be class-only so they can be weakly referenced.
   - closing_brace
     # Closing brace with closing parenthesis should not have any whitespaces in the middle.
-  - closure_body_length
+#  - closure_body_length
     # Closure bodies should not span too many lines.
   - closure_end_indentation
     # Closure end should have the same indentation as the line that started it.
-  - closure_parameter_position
+#  - closure_parameter_position
     # Closure parameters should be on the same line as opening brace.
   - closure_spacing
     # Closure expressions should have a single space inside each brace.
@@ -40,7 +40,7 @@ whitelist_rules:
     # Prefer contains over range(of:) != nil and range(of:) == nil
   - control_statement
     # if, for, guard, switch, while, and catch statements shouldn't unnecessarily wrap their conditionals or arguments in parentheses.
-  - convenience_type
+#  - convenience_type
     # Types used for hosting only static members should be implemented as a caseless enum to avoid instantiation.
   - cyclomatic_complexity
     # Complexity of function bodies should be limited.
@@ -91,7 +91,7 @@ whitelist_rules:
     # Force tries should be avoided.
   - force_unwrapping
     # Force unwrapping should be avoided.
-  - function_body_length
+#  - function_body_length
     # Functions bodies should not span too many lines.
     # See function_body_length below for the exact configuration.
   - function_parameter_count
@@ -147,7 +147,7 @@ whitelist_rules:
     # Ensure definitions have a lower access control level than their enclosing parent
   - mark
     # MARK comment should be in valid format. e.g. '// MARK: ...' or '// MARK: - ...'
-  - missing_docs
+#  - missing_docs
     # Declarations should be documented.
   - modifier_order
     # Modifier order should be consistent.
@@ -246,7 +246,7 @@ whitelist_rules:
     # Case statements should vertically align with their enclosing switch statement, or indented if configured otherwise.
   - syntactic_sugar
     # Shorthand syntactic sugar should be used, i.e. [Int] instead of Array.
-  - todo
+#  - todo
     # TODOs and FIXMEs should be resolved.
   - toggle_bool
     # Prefer someBool.toggle() over someBool = !someBool.
@@ -345,10 +345,13 @@ identifier_name:
     - id
     - ok
     - or
+    - x
+    - y
+    - px
 
 large_tuple: # Tuples shouldn't have too many members. Create a custom type instead.
-  - 2 # warning - default: 2
-  - 2 # error - default: 3
+  - 4 # warning - default: 2
+  - 5 # error - default: 3
 
 line_length: # Lines should not span too many characters.
   warning: 150 # default: 120
